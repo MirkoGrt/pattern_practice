@@ -25,7 +25,6 @@ class Ear extends BodyPart {
 
     public function hearSomething() {
         echo "<p>" . "Ear: I'm hear some music" . "</p>";
-        //$this->changed('ear');
     }
 }
 
@@ -40,7 +39,6 @@ class Eie extends BodyPart {
 
     public function seeSomething() {
         echo "<p>" . "Eie: I'm see Picasso" . "</p>";
-        //$this->changed('eie');
     }
 
 }
@@ -55,12 +53,10 @@ class Hand extends BodyPart {
 
     public function takeMyHand () {
         echo "<p>" . "Hand: I'm take your hand" . "</p>";
-        //$this->changed('hand');
     }
 
     public function hit () {
         echo "<p>" . "Hand: APPERCOT!!!" . "</p>";
-        $this->changed('hand');
     }
 }
 
