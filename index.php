@@ -1,5 +1,4 @@
 <?php
-    require_once 'connect.php';
     require_once 'patterns/facade.php';
     require_once 'patterns/mediator.php';
     require_once 'patterns/singleton.php';
@@ -15,15 +14,6 @@
     <body>
         <header></header>
         <main>
-            <div class="db-connect lesson-block">
-                <h3>Connection to DB and fetching data</h3>
-                <p class="description">
-                    Connecting to "dev_220" DB.
-                </p>
-                <?php
-                    selectCmsBlocks($connect, 1);
-                ?>
-            </div>
             <div class="facade-pattern lesson-block">
                 <h3>Ski Facade <span>(structural)</span><em>/patterns/facade.php</em></h3>
                 <p class="description">
