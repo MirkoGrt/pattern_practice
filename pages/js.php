@@ -31,6 +31,35 @@
                     $('.person').append(dump);
                 </script>
             </div>
+            <div class="js-prototype lesson-block">
+                <h3>JS Type Juggling <span></span><em></em></h3>
+                <p class="description">
+                    <strong>String(x), x.toString()</strong> - return number as a string. Can convert boolean.
+                    <a href="http://www.w3schools.com/js/js_type_conversion.asp" title="W3Scholl (c)" target="_blank">More . . .</a> <br />
+                </p>
+                <p class="small-description">
+                    First we have created the "var x = 1000;" Than convert it to string using "String(x)".
+                    Second we have created the "var z = false;" and convert it to string.
+                </p>
+                <p class="juggling"></p>
+                <script type="text/javascript">
+                    var x = 1000;
+                    var type = typeof x;
+                    $('.juggling').append(x,' - ', type, '<br />');
+
+                    var y = String(x);
+                    type = typeof y;
+                    $('.juggling').append(x,' - ', type, '<br />');
+
+                    var z = false;
+                    type = typeof z;
+                    $('.juggling').append('false',' - ', type, '<br />');
+
+                    var c = String(z);
+                    type = typeof c;
+                    $('.juggling').append('false',' - ', type, '<br />');
+                </script>
+            </div>
         </main>
         <?php require_once '../skeleton/footer.php'; ?>
     </body>
