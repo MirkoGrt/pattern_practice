@@ -2,7 +2,8 @@
     <nav>
         <ul>
             <li><a href="main.php" title="Main Page">Main</a></li>
-            <li><a href="test.php" title="Test Page">Test</a></li>
+            <li><a href="js.php" title="JS Page">JS Practice</a></li>
+            <li><a href="php.php" title="PHP Page">PHP Practice</a></li>
             <li class="has-dropdown">
                 <a href="#">Patterns</a>
                 <ul class="dropdown-menu">
