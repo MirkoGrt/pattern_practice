@@ -60,6 +60,25 @@
                     $('.juggling').append('false',' - ', type, '<br />');
                 </script>
             </div>
+            <div class="js-drawing lesson-block">
+                <h3>JS Drawing <span></span><em></em></h3>
+                <p class="description">
+
+                </p>
+                <p class="small-description">
+
+                </p>
+                <canvas id="canvas1" width="200" height="200"></canvas>
+
+                <script id="script1" type="text/javascript">
+                    function sketchProc(processing) {
+                        processing.ellipse(56, 46, 55, 55);
+                    }
+
+                    var canvas = document.getElementById("canvas1");
+                    var p = new Processing(canvas, sketchProc);
+                </script>
+            </div>
         </main>
         <?php require_once '../skeleton/footer.php'; ?>
     </body>
