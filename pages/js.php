@@ -68,15 +68,22 @@
                 <p class="small-description">
 
                 </p>
-                <canvas id="canvas1" width="200" height="200"></canvas>
+                <canvas id="canvas1" width="100" height="100"></canvas>
+                <canvas id="canvas2" width="400" height="400"></canvas>
 
                 <script id="script1" type="text/javascript">
                     function sketchProc(processing) {
                         processing.ellipse(56, 46, 55, 55);
                     }
+                    function draw(processing) {
+                    	processing.rect(10, 20, 100, 200);
+                    }
 
                     var canvas = document.getElementById("canvas1");
+                    var canvas2 = document.getElementById("canvas2");
                     var p = new Processing(canvas, sketchProc);
+                	var d = new Processing(canvas2, draw);
+
                 </script>
             </div>
         </main>
