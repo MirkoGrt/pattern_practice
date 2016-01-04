@@ -2,18 +2,6 @@
     <?php require_once '../skeleton/head.php'; ?>
     <body>
         <?php require_once '../skeleton/header.php'; ?>
-        <script>
-            function arrayToDiv (array, div) {
-                var divHtml="";
-                jQuery.each(array, function(i, val) {
-                    divHtml += val + " - ";
-                    if (i == array.length - 1) {
-                        divHtml += "<br />";
-                    }
-                });
-                div.append(divHtml);
-            }
-        </script>
         <main>
             <h1>JS Page</h1>
             <div class="js-prototype lesson-block">
@@ -96,6 +84,59 @@
                     var p = new Processing(canvas, sketchProc);
                     var d = new Processing(canvas2, draw);
 
+                </script>
+            </div>
+            <div class="js-simple-animation lesson-block">
+                <h3>JS Simple Animation <span></span><em></em></h3>
+                <p class="description">
+                    Here we follow the tutorial on Khan Academy about JS Animation.
+                </p>
+                <p class="small-description">
+                    We have the .gif picture and change it left position to move right. <strong>We use the date to
+                    compute distance instead of interval</strong>. If the picture is near right window
+                    border we move it to left and so on.
+                </p>
+                <div class="animated-image" id="banana_wrapper" >
+                    <img id="banana_dance" src="../banana.gif" alt="Dancing Banana">
+                </div>
+                <button id="start_dance" onclick="walk()">Start Walking</button>
+                <script type="text/javascript">
+
+                    var banana = document.getElementById("banana_dance");
+                    var bananaWrapper = document.getElementById("banana_wrapper");
+                    var stopPosition = bananaWrapper.offsetWidth - banana.offsetWidth;
+
+                    var walk = function () {
+                        var start;
+                        function right () {
+                            var current = new Date().getTime();
+                            var secondsElapsed = ((current - start) / 1000);
+                            var newLeft = secondsElapsed * 200;
+
+                            if (newLeft < stopPosition) {
+                                banana.style.left = newLeft + "px";
+                                window.requestAnimationFrame(right);
+                            } else {
+                                start = new Date().getTime();
+                                left();
+                            }
+                        }
+
+                        function left () {
+                            var current = new Date().getTime();
+                            var secondsElapsed = ((start - current) / 1000);
+                            var newLeft = secondsElapsed * 200;
+                            var absoluteLeft = Math.abs(newLeft);
+                            if (absoluteLeft < stopPosition) {
+                                banana.style.left = stopPosition + newLeft + "px";
+                                window.requestAnimationFrame(left);
+                            } else {
+                                start = new Date().getTime();
+                                right();
+                            }
+                        }
+                        left();
+                    }
                 </script>
             </div>
             <div class="js-merge-sorting lesson-block">

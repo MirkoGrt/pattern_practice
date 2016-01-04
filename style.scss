@@ -63,3 +63,15 @@ h3 span {
 .small-description {
     color: coral;
 }
+
+.animated-image {
+    height: 200px;
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+    img {
+        width: 150px;
+        position: absolute;
+        left: 0px;
+    }
+}
