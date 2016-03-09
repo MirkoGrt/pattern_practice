@@ -4,6 +4,71 @@
         <?php require_once '../skeleton/header.php'; ?>
         <main>
             <h1>JS Page</h1>
+            <div class="js-caesar-cipher lesson-block">
+                <h3>JS Caesar Cipher Developing <span></span><em></em></h3>
+                <p class="description">
+                    There is the simplest cipher.
+                    <a href="https://www.khanacademy.org/computing/computer-science/cryptography/ciphers/a/shift-cipher">More ...</a>
+                </p>
+                <p class="small-description">
+                    1) There we have the array with all English letters. <br>
+                    2) Then we assign new object like "LETTER" => "NUMBER". <br>
+                    3) The next step is to transform message to array with numbers from the alphabet order. <br>
+                    4) Then we need to add key value to every number letter in our message array and get
+                    absolute value by MOD 26 in our case<br>
+                    5) Getting encrypted message. Transform numeric encrypted message to letters array. <br>
+                </p>
+                <form class="caesar-chiper-form">
+                    <input type="text" name="message-to-encrypt" placeholder="enter the message">
+                    <input type="number" name="key-to-encrypt" placeholder="enter the key">
+                    <input type="submit" class="btn-encrypt">
+                    <input type="text" name="encrypted-message">
+                </form>
+                <script type="text/javascript">
+
+                    var alphabet = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'];
+
+                    $('.caesar-chiper-form').on('submit', function (e) {
+                        e.preventDefault();
+
+                        var keyToEncrypt = Number($('input[name="key-to-encrypt"]').val());
+                        var message =  $('input[name="message-to-encrypt"]').val().replace(/\s+/g, '');
+
+                        /* Making numeric alphabet like LETTER => NUMBER */
+                        var alphabetNumeric = new Object();
+                        for (var $i = 0; $i < alphabet.length; $i++) {
+                            var letter = alphabet[$i];
+                            alphabetNumeric[letter] = $i;
+                        }
+
+                        /* Transform message to array with NUMBERs */
+                        var messageNumeric = new Array();
+                        for (var $j = 0; $j < message.length; $j++) {
+                            var messageLetter = message[$j];
+                            messageNumeric[$j] = alphabetNumeric[messageLetter];
+                        }
+
+                        /* Making array with message numeric values + key */
+                        var encryptedMessageNumeric = new Array();
+                        for (var $k = 0; $k < messageNumeric.length; $k++) {
+                            encryptedMessageNumeric[$k] = (messageNumeric[$k] + keyToEncrypt) % alphabet.length;
+                        }
+
+                        /* Getting encrypted message. Transform numeric encrypted message to letters array */
+                        var encryptedMessage = new Array();
+                        for (var $m = 0; $m < encryptedMessageNumeric.length; $m++) {
+                            for (var key in alphabetNumeric) {
+                                if (encryptedMessageNumeric[$m] == alphabetNumeric[key]) {
+                                    encryptedMessage[$m] = key;
+                                }
+                            }
+                        }
+                        var stringWithoutComma = encryptedMessage.toString().replace(/,/g, '');
+
+                        $('input[name="encrypted-message"]').val(stringWithoutComma);
+                    });
+                </script>
+            </div>
             <div class="js-prototype lesson-block">
                 <h3>JS Prototype <span></span><em>../main.js -> function person</em></h3>
                 <p class="description">
