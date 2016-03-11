@@ -1,3 +1,4 @@
+<!doctype html>
 <?php
     require_once '../patterns/mediator.php';
     require_once '../patterns/templateMethod.php';
@@ -6,7 +7,7 @@
     <?php require_once '../skeleton/head.php'; ?>
     <body>
         <?php require_once '../skeleton/header.php'; ?>
-        <main>
+        <main class="android-content mdl-layout__content">
             <div class="mediator-pattern lesson-block">
                 <h3>Body Mediator <span>(behavioral)</span><em>/patterns/mediator.php</em></h3>
                 <p class="description">

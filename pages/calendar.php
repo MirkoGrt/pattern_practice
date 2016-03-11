@@ -1,8 +1,9 @@
+<!doctype html>
 <html>
     <?php require_once '../skeleton/head.php'; ?>
     <body>
         <?php require_once '../skeleton/header.php'; ?>
-        <main>
+        <main class="android-content mdl-layout__content">
             <h1>Calendar development</h1>
             <p>The DB for this structure is in the folder "DbConnection" (practice_calendar.sql)</p>
             <script type="text/javascript">
@@ -118,26 +119,26 @@
             </table>
             <hr>
             <form name="event-form" method="post">
-                <table border="1">
-                    <tr>
-                        <td>Title</td>
-                        <td>
-                            <input type="text" name="event-title" />
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Detail</td>
-                        <td>
-                            <textarea name="event-details" cols="20" rows="3"></textarea>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td colspan="2">
-                            <input type="submit" value="Add Event" />
-                        </td>
-                    </tr>
-                </table>
-            </form>
+            <table border="1">
+                <tr>
+                    <td>Title</td>
+                    <td>
+                        <input type="text" name="event-title" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>Detail</td>
+                    <td>
+                        <textarea name="event-details" cols="20" rows="3"></textarea>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <input type="submit" value="Add Event" />
+                    </td>
+                </tr>
+            </table>
+        </form>
         </main>
         <?php require_once '../skeleton/footer.php'; ?>
     </body>

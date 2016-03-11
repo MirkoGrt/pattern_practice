@@ -1,8 +1,9 @@
+<!doctype html>
 <html lang="en">
     <?php require_once '../skeleton/head.php'; ?>
     <body>
         <?php require_once '../skeleton/header.php'; ?>
-        <main>
+        <main class="android-content mdl-layout__content">
             <h1>JS Page</h1>
             <div class="js-caesar-cipher lesson-block">
                 <h3>JS Caesar Cipher Developing <span></span><em></em></h3>

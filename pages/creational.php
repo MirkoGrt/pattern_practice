@@ -1,3 +1,4 @@
+<!doctype html>
 <?php
     require_once '../patterns/singleton.php';
     require_once '../patterns/builder.php';
@@ -6,7 +7,7 @@
     <?php require_once '../skeleton/head.php'; ?>
     <body>
         <?php require_once '../skeleton/header.php'; ?>
-        <main>
+        <main class="android-content mdl-layout__content">
             <div class="singleton-pattern lesson-block">
                 <h3>Book Singleton <span>(creational)</span><em>/patterns/singleton.php</em></h3>
                 <p class="description">

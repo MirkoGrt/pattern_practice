@@ -1,3 +1,4 @@
+<!doctype html>
 <?php
     require_once '../patterns/facade.php';
     require_once '../patterns/decorator.php';
@@ -6,7 +7,7 @@
     <?php require_once '../skeleton/head.php'; ?>
     <body>
         <?php require_once '../skeleton/header.php'; ?>
-        <main>
+        <main class="android-content mdl-layout__content">
             <h1>Structural patterns</h1>
             <div class="facade-pattern lesson-block">
                 <h3>Ski Facade <span>(structural)</span><em>/patterns/facade.php</em></h3>
