@@ -12,7 +12,7 @@
 
     <!--MDL-->
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    <link rel="stylesheet" href="https://code.getmdl.io/1.1.2/material.purple-green.min.css">
+    <link rel="stylesheet" href="https://code.getmdl.io/1.1.2/material.brown-orange.min.css">
     <script defer src="https://code.getmdl.io/1.1.2/material.min.js"></script>
 
     <!--Android Template styles-->
