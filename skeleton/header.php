@@ -13,6 +13,7 @@
                     <li><a href="creational.php" title="Creational">Creational</a></li>
                 </ul>
             </li>
+            <li><a href="calendar.php" title="SQL Page">CALENDAR</a></li>
         </ul>
     </nav>
 </header>

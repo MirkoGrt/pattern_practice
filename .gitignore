@@ -1,3 +1,5 @@
 .idea/
 .sass-cache/
 style.css.map
+
+DbConnection/connection.php
