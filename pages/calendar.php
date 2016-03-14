@@ -9,6 +9,7 @@
                 <div class="mdl-cell--8-col">
                     <h3>Calendar development</h3>
                     <p>The DB for this structure is in the folder "DbConnection" (practice_calendar.sql)</p>
+                    <p>You need to make your own MySQL connection in the <strong>"DbConnection/connection.php"</strong> file</p>
                     <script type="text/javascript">
                         function goPrevMonth (month, year) {
                             if (month == 1) {
@@ -121,8 +122,12 @@
                                 $day = "0" . $day;
                             }
                         ?>
-                            <td align='center' class='mdl-data-table__cell--non-numeric <?php echo ($currentTimeStamp == $dayTimeStamp && $month == date('n')) ? 'cell-active-data' : ''; ?>'>
-                                <button type='button' class='mdl-button show-dialog'>
+                            <td align='center'
+                                class='mdl-data-table__cell--non-numeric <?php echo ($currentTimeStamp == $dayTimeStamp && $month == date('n')) ? 'cell-active-data' : ''; ?>'>
+                                <button type='button'
+                                        id="dialog_btn_<?php echo $i; ?>"
+                                        data-current_date="<?php echo $dayTimeStamp; ?>"
+                                        class='mdl-button show-dialog'>
                                     <?php echo $i; ?>
                                 </button>
                             </td>
@@ -133,7 +138,9 @@
                     <dialog class="mdl-dialog">
                         <h4 class="mdl-dialog__title">Some Event?</h4>
                         <div class="mdl-dialog__content">
+                            <p class="event-date"></p>
                             <form name="event-form" method="post">
+                                <input type="hidden" name="event-timestamp" value="" />
                                 <div class="mdl-textfield mdl-js-textfield">
                                     <input class="mdl-textfield__input" name="event-title" type="text">
                                     <label class="mdl-textfield__label" for="event-title">Title...</label>
@@ -142,7 +149,6 @@
                                     <textarea class="mdl-textfield__input" type="text" name="event-details" rows= "3"></textarea>
                                     <label class="mdl-textfield__label" for="event-details">Event details...</label>
                                 </div>
-
                             </form>
                         </div>
                         <div class="mdl-dialog__actions">
@@ -151,14 +157,28 @@
                         </div>
                     </dialog>
                     <script>
+                        /* Function to transfer event data to dialog popup */
+                        function transferEventData (button) {
+
+                            /* Getting current date to show in dialog paragraf */
+                            var currentDateTimeStamp = button.data('current_date');
+                            var currentDate = new Date(currentDateTimeStamp * 1000);
+
+                            /* Transfer current timestamp to dialog hidden field */
+                            $('input[name="event-timestamp"]').val(currentDateTimeStamp);
+
+                            $('dialog .event-date').text(currentDate.getDate() + '/' + (currentDate.getMonth() + 1) + '/' +currentDate.getFullYear());
+                        }
+
                         /* MDL dialog */
                         var dialog = document.querySelector('dialog');
                         if (! dialog.showModal) {
                             dialogPolyfill.registerDialog(dialog);
                         }
-                        /* hack default dialog behavior*/
+                        /* hack default dialog behavior (now it is opening on class name) */
                         $('.show-dialog').on('click', function () {
                             dialog.showModal();
+                            transferEventData($(this));
                         });
                         dialog.querySelector('.close').addEventListener('click', function() {
                             dialog.close();
