@@ -67,43 +67,45 @@
 
                     // Counter for the loop
                     $counter = 0;
+
                     ?>
 
                     <table class="mdl-data-table mdl-js-data-table">
                         <thead>
-                        <tr>
-                            <td class="mdl-data-table__cell--non-numeric">
-                                <button class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored" onclick="goPrevMonth(<?php echo $month . ',' . $year; ?>)">
-                                    <i class="material-icons">skip_previous</i>
-                                </button>
-                            </td class="mdl-data-table__cell--non-numeric">
-                            <td colspan="5">
-                                <?php echo $currentMonth . " / " . $year; ?>
-                            </td>
-                            <td class="mdl-data-table__cell--non-numeric">
-                                <button class="mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored" onclick="goNextMonth(<?php echo $month . ',' . $year; ?>)">
-                                    <i class="material-icons">skip_next</i>
-                                </button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <th class="mdl-data-table__cell--non-numeric">Sun</th>
-                            <th class="mdl-data-table__cell--non-numeric">Mon</th>
-                            <th class="mdl-data-table__cell--non-numeric">Tue</th>
-                            <th class="mdl-data-table__cell--non-numeric">Wed</th>
-                            <th class="mdl-data-table__cell--non-numeric">Thu</th>
-                            <th class="mdl-data-table__cell--non-numeric">Fri</th>
-                            <th class="mdl-data-table__cell--non-numeric">Sat</th>
-                        </tr>
+                            <tr>
+                                <td class="mdl-data-table__cell--non-numeric">
+                                    <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--fab mdl-button--mini-fab mdl-button--colored" onclick="goPrevMonth(<?php echo $month . ',' . $year; ?>)">
+                                        <i class="material-icons">skip_previous</i>
+                                    </button>
+                                </td class="mdl-data-table__cell--non-numeric">
+                                <td colspan="5">
+                                    <?php echo $currentMonth . " / " . $year; ?>
+                                </td>
+                                <td class="mdl-data-table__cell--non-numeric">
+                                    <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--fab mdl-button--mini-fab mdl-button--colored" onclick="goNextMonth(<?php echo $month . ',' . $year; ?>)">
+                                        <i class="material-icons">skip_next</i>
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th class="mdl-data-table__cell--non-numeric">Sun</th>
+                                <th class="mdl-data-table__cell--non-numeric">Mon</th>
+                                <th class="mdl-data-table__cell--non-numeric">Tue</th>
+                                <th class="mdl-data-table__cell--non-numeric">Wed</th>
+                                <th class="mdl-data-table__cell--non-numeric">Thu</th>
+                                <th class="mdl-data-table__cell--non-numeric">Fri</th>
+                                <th class="mdl-data-table__cell--non-numeric">Sat</th>
+                            </tr>
                         </thead>
                         <tbody>
                         <?php
-                        for ($i = 1; $i < $numDays + 1; $i++, $counter++) {
+                        for ($i = 1; $i < $numDays + 1; $i++, $counter++):
                             if ($counter % 7 == 0) {
                                 echo "<tr>";
                             }
                             // Timestamp for each day in month
                             $dayTimeStamp = strtotime("{$year}-{$month}-{$i}");
+
                             if ($i == 1) {
                                 // First day in month
                                 $firstDay = date('w', $dayTimeStamp);
@@ -118,13 +120,13 @@
                             if (strlen($day) <= 1) {
                                 $day = "0" . $day;
                             }
-                            echo "<td align='center' class='mdl-data-table__cell--non-numeric'>
-                                    <button type='button' class='mdl-button show-dialog'>
-                                        {$i}
-                                    </button>
-                                  </td>";
-                        }
                         ?>
+                            <td align='center' class='mdl-data-table__cell--non-numeric <?php echo ($currentTimeStamp == $dayTimeStamp && $month == date('n')) ? 'cell-active-data' : ''; ?>'>
+                                <button type='button' class='mdl-button show-dialog'>
+                                    <?php echo $i; ?>
+                                </button>
+                            </td>
+                        <?php endfor; ?>
                         </tbody>
                     </table>
 
