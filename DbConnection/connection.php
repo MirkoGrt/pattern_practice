@@ -3,6 +3,11 @@
     $userName = 'root';
     $password = 'root';
 
+    $db_connection = mysqli_connect($hostName, $userName, $password);
 
-    mysqli_connect($hostName, $userName, $password) or die('ERROR with connection to MYSQL server . . .');
+    $db_connection or die('ERROR with connection to MYSQL server . . .<hr />');
+
+    /* Writing connection variable to session to use on whole site */
+    session_start();
+    $_SESSION['db_connection'] = $db_connection;
 ?>

@@ -152,11 +152,32 @@
                             </form>
                         </div>
                         <div class="mdl-dialog__actions">
-                            <button type="button" class="mdl-button">Add Event</button>
+                            <button type="button" onclick="saveEvent()" class="mdl-button">Add Event</button>
                             <button type="button" class="mdl-button close">Close</button>
                         </div>
                     </dialog>
                     <script>
+                        /* Function to save event to DB via aJax */
+                        function saveEvent () {
+                            var eventTimestamp = $('dialog input[name="event-timestamp"]').val();
+                            var eventTitle = $('dialog input[name="event-title"]').val();
+                            var eventDetails = $('dialog textarea[name="event-details"]').val();
+
+                            var data = 'timestamp=' + eventTimestamp + '&title=' + eventTitle + '&details=' + eventDetails;
+                            var url = "calendar/date_event_handler.php";
+                            $.ajax({
+                                url: url,
+                                type: "POST",
+                                data: data,
+                                success: function (response) {
+                                    console.log(response);
+                                },
+                                error: function (response) {
+                                    console.log(response);
+                                }
+                            });
+                        }
+
                         /* Function to transfer event data to dialog popup */
                         function transferEventData (button) {
 
