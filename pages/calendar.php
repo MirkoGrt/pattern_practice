@@ -144,21 +144,32 @@
                                 <div class="mdl-textfield mdl-js-textfield">
                                     <input class="mdl-textfield__input" name="event-title" type="text">
                                     <label class="mdl-textfield__label" for="event-title">Title...</label>
+                                    <span class="mdl-textfield__error">This is the required field!</span>
                                 </div>
                                 <div class="mdl-textfield mdl-js-textfield">
                                     <textarea class="mdl-textfield__input" type="text" name="event-details" rows= "3"></textarea>
                                     <label class="mdl-textfield__label" for="event-details">Event details...</label>
+                                    <span class="mdl-textfield__error">This is the required field!</span>
                                 </div>
                             </form>
+                            <div id="event-adding-progress" class="mdl-progress mdl-js-progress mdl-progress__indeterminate"></div>
                         </div>
                         <div class="mdl-dialog__actions">
                             <button type="button" onclick="saveEvent()" class="mdl-button">Add Event</button>
                             <button type="button" class="mdl-button close">Close</button>
                         </div>
                     </dialog>
+
+                    <div id="event-snackbar-success" class="mdl-js-snackbar mdl-snackbar">
+                        <div class="mdl-snackbar__text"></div>
+                        <button class="mdl-snackbar__action" type="button"></button>
+                    </div>
+
                     <script>
                         /* Function to save event to DB via aJax */
                         function saveEvent () {
+                            $('#event-adding-progress').css('display', 'block');
+
                             var eventTimestamp = $('dialog input[name="event-timestamp"]').val();
                             var eventTitle = $('dialog input[name="event-title"]').val();
                             var eventDetails = $('dialog textarea[name="event-details"]').val();
@@ -170,10 +181,12 @@
                                 type: "POST",
                                 data: data,
                                 success: function (response) {
-                                    console.log(response);
+                                    showMdlSnackbar(response, 'success');
+                                    $('#event-adding-progress').css('display', 'none');
                                 },
                                 error: function (response) {
-                                    console.log(response);
+                                    showMdlSnackbar(response, 'error');
+                                    $('#event-adding-progress').css('display', 'none');
                                 }
                             });
                         }
@@ -204,6 +217,20 @@
                         dialog.querySelector('.close').addEventListener('click', function() {
                             dialog.close();
                         });
+
+                        /* MDL snackbar. Showing when event is added */
+                        function showMdlSnackbar (response, type) {
+                            'use strict';
+                            window['counter'] = 0;
+                            var snackbarContainer = document.querySelector('#event-snackbar-success');
+                            var data = {message: response};
+                            if (type == 'error') {
+                                snackbarContainer.style.backgroundColor = 'red';
+                            } else if (type == 'success') {
+                                snackbarContainer.style.backgroundColor = '#A2CD5A';
+                            }
+                            snackbarContainer.MaterialSnackbar.showSnackbar(data);
+                        }
                     </script>
                 </div>
                 <div class="mdl-cell--2-col"></div>
