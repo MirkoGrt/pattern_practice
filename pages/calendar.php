@@ -175,7 +175,7 @@
                     </div>
 
                     <script>
-                        /* Custom function to validate base MDL form */
+                        /* Function to custom validate BASE MDL form */
                         function validate (field, min, max, setRequired) {
 
                             var mdlErrorMessage = field.siblings('.mdl-textfield__error');
@@ -209,6 +209,12 @@
                             }
                         }
 
+                        /* Function to clean event form after save the event */
+                        function cleanEventForm () {
+                            $('#event-form').trigger('reset');
+                            $('#event-form .mdl-textfield').removeClass('is-dirty');
+                        }
+
                         /* Function to save event to DB via aJax */
                         function saveEvent () {
                             $('#event-adding-progress').css('display', 'block');
@@ -226,10 +232,12 @@
                                     data: data,
                                     success: function (response) {
                                         showMdlSnackbar(response, 'success');
+                                        cleanEventForm();
                                         $('#event-adding-progress').css('display', 'none');
                                     },
                                     error: function (response) {
                                         showMdlSnackbar(response, 'error');
+                                        cleanEventForm();
                                         $('#event-adding-progress').css('display', 'none');
                                     }
                                 });
