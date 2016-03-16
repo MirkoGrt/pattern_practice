@@ -8,8 +8,17 @@
                 <div class="mdl-cell--2-col"></div>
                 <div class="mdl-cell--8-col">
                     <h3>Calendar development</h3>
-                    <p>The DB for this structure is in the folder "DbConnection" (practice_calendar.sql)</p>
-                    <p>You need to make your own MySQL connection in the <strong>"DbConnection/connection.php"</strong> file</p>
+                    <p>
+                        The DB for this structure is in the folder "DbConnection" (practice_calendar.sql)
+                    </p>
+                    <p>
+                        You need to make your own MySQL connection in the
+                        <strong>"DbConnection/connection.php"</strong> file.
+                    </p>
+                    <p>
+                        To make the events work please install the "practice_calendar" DB and do the custom connection.
+                        Event handler file is located in the <strong>"pages/calendar"</strong> folder.
+                    </p>
                     <script type="text/javascript">
                         function goPrevMonth (month, year) {
                             if (month == 1) {
@@ -139,17 +148,17 @@
                         <h4 class="mdl-dialog__title">Some Event?</h4>
                         <div class="mdl-dialog__content">
                             <p class="event-date"></p>
-                            <form name="event-form" method="post">
+                            <form id="event-form" method="post">
                                 <input type="hidden" name="event-timestamp" value="" />
                                 <div class="mdl-textfield mdl-js-textfield">
                                     <input class="mdl-textfield__input" name="event-title" type="text">
                                     <label class="mdl-textfield__label" for="event-title">Title...</label>
-                                    <span class="mdl-textfield__error">This is the required field!</span>
+                                    <span class="mdl-textfield__error"></span>
                                 </div>
                                 <div class="mdl-textfield mdl-js-textfield">
                                     <textarea class="mdl-textfield__input" type="text" name="event-details" rows= "3"></textarea>
                                     <label class="mdl-textfield__label" for="event-details">Event details...</label>
-                                    <span class="mdl-textfield__error">This is the required field!</span>
+                                    <span class="mdl-textfield__error"></span>
                                 </div>
                             </form>
                             <div id="event-adding-progress" class="mdl-progress mdl-js-progress mdl-progress__indeterminate"></div>
@@ -166,29 +175,65 @@
                     </div>
 
                     <script>
+                        /* Custom function to validate base MDL form */
+                        function validate (field, min, max, setRequired) {
+
+                            var mdlErrorMessage = field.siblings('.mdl-textfield__error');
+
+                            if (setRequired && field.val() == 0) {
+                                mdlErrorMessage.text('This is the required field!').css('visibility', 'visible');
+                                return false;
+                            }
+                             else if (field.val() > max) {
+                                mdlErrorMessage.text('The maximum is ' + max + ' characters!').css('visibility', 'visible');
+                                return false;
+                            } else if (field.val() < min) {
+                                mdlErrorMessage.text('The minimum is ' + min + ' characters!').css('visibility', 'visible');
+                                return false;
+                            } else {
+                                mdlErrorMessage.text('').css('visibility', 'hidden');
+                                return true;
+                            }
+                        }
+
+                        /* Function to validate event form before saving */
+                        function validateEventForm () {
+                            var eventTitle = $('#event-form input[name="event-title"]');
+                            var eventDetails = $('#event-form textarea[name="event-details"]');
+
+                            var titleValidation = validate(eventTitle, 0, 20, true);
+                            var detailsValidation = validate(eventDetails, 0, 100, true);
+
+                            if (titleValidation && detailsValidation) {
+                                return true;
+                            }
+                        }
+
                         /* Function to save event to DB via aJax */
                         function saveEvent () {
                             $('#event-adding-progress').css('display', 'block');
 
-                            var eventTimestamp = $('dialog input[name="event-timestamp"]').val();
-                            var eventTitle = $('dialog input[name="event-title"]').val();
-                            var eventDetails = $('dialog textarea[name="event-details"]').val();
+                            if (validateEventForm()) {
+                                var eventTimestamp = $('dialog input[name="event-timestamp"]').val();
+                                var eventTitle = $('dialog input[name="event-title"]').val();
+                                var eventDetails = $('dialog textarea[name="event-details"]').val();
 
-                            var data = 'timestamp=' + eventTimestamp + '&title=' + eventTitle + '&details=' + eventDetails;
-                            var url = "calendar/date_event_handler.php";
-                            $.ajax({
-                                url: url,
-                                type: "POST",
-                                data: data,
-                                success: function (response) {
-                                    showMdlSnackbar(response, 'success');
-                                    $('#event-adding-progress').css('display', 'none');
-                                },
-                                error: function (response) {
-                                    showMdlSnackbar(response, 'error');
-                                    $('#event-adding-progress').css('display', 'none');
-                                }
-                            });
+                                var data = 'timestamp=' + eventTimestamp + '&title=' + eventTitle + '&details=' + eventDetails;
+                                var url = "calendar/date_event_handler.php";
+                                $.ajax({
+                                    url: url,
+                                    type: "POST",
+                                    data: data,
+                                    success: function (response) {
+                                        showMdlSnackbar(response, 'success');
+                                        $('#event-adding-progress').css('display', 'none');
+                                    },
+                                    error: function (response) {
+                                        showMdlSnackbar(response, 'error');
+                                        $('#event-adding-progress').css('display', 'none');
+                                    }
+                                });
+                            }
                         }
 
                         /* Function to transfer event data to dialog popup */
