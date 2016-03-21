@@ -1,9 +1,8 @@
 <?php
-    $hostName = 'localhost';
     $userName = 'root';
     $password = 'root';
 
-    $db_connection = mysqli_connect($hostName, $userName, $password);
+    $db_connection = new PDO('mysql:host=localhost; dbname=practice_calendar; charset=utf8mb4', $userName, $password);
 
     $db_connection or die('ERROR with connection to MYSQL server . . .<hr />');
 

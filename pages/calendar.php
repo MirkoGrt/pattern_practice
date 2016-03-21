@@ -82,17 +82,13 @@
                     /* Getting all events timestamp from events table */
                     @include '../DbConnection/connection.php';
 
-                    mysqli_select_db($_SESSION['db_connection'], 'practice_calendar') or die('ERROR with selecting DB . . . <hr />');
-
                     $insertQuery = 'SELECT eventDate FROM events';
                     $allEvents = array();
-                    $result = mysqli_query($_SESSION['db_connection'], $insertQuery);
 
-                    if (mysqli_num_rows($result) > 0) {
-                        while($row = mysqli_fetch_assoc($result)) {
-                            $allEvents[] = $row["eventDate"];
-                        }
+                    foreach($_SESSION['db_connection']->query($insertQuery) as $row) {
+                        $allEvents[] = $row["eventDate"];
                     }
+
                     mysqli_close($_SESSION['db_connection']);
                     /*---------------------------------------------------------*/
                     ?>
