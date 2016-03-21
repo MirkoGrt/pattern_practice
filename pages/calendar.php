@@ -3,17 +3,28 @@
     <?php require_once '../skeleton/head.php'; ?>
     <body>
         <?php require_once '../skeleton/header.php'; ?>
+
+        <?php
+            // Requiring the file with Calendar class definition
+            require 'calendar/date_event_handler.php';
+
+            // Definition the Calendar class
+            $calendar = new Calendar();
+
+            // Getting all events timestamps (array)
+            $allEvents = $calendar->getEventsTimestamp();
+        ?>
         <main class="android-content mdl-layout__content">
             <div class="mdl-grid">
                 <div class="mdl-cell--2-col"></div>
                 <div class="mdl-cell--8-col">
                     <h3>Calendar development</h3>
                     <p>
-                        The DB for this structure is in the folder "DbConnection" (practice_calendar.sql)
+                        The DB for this structure is in the folder "DbDumps" (practice_calendar.sql)
                     </p>
                     <p>
                         You need to make your own MySQL connection in the
-                        <strong>"DbConnection/connection.php"</strong> file.
+                        <strong>"pages/calendar/date_event_handler.php"->initDbConnection method </strong>.
                     </p>
                     <p>
                         To make the events work please install the "practice_calendar" DB and do the custom connection.
@@ -78,19 +89,6 @@
                     // Counter for the loop
                     $counter = 0;
 
-                    /* @todo REFACTOR this code */
-                    /* Getting all events timestamp from events table */
-                    @include '../DbConnection/connection.php';
-
-                    $insertQuery = 'SELECT eventDate FROM events';
-                    $allEvents = array();
-
-                    foreach($_SESSION['db_connection']->query($insertQuery) as $row) {
-                        $allEvents[] = $row["eventDate"];
-                    }
-
-                    mysqli_close($_SESSION['db_connection']);
-                    /*---------------------------------------------------------*/
                     ?>
 
                     <table class="mdl-data-table main-calendar-table mdl-js-data-table">
