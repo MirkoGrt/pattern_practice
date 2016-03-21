@@ -78,9 +78,26 @@
                     // Counter for the loop
                     $counter = 0;
 
+                    /* @todo REFACTOR this code */
+                    /* Getting all events timestamp from events table */
+                    @include '../DbConnection/connection.php';
+
+                    mysqli_select_db($_SESSION['db_connection'], 'practice_calendar') or die('ERROR with selecting DB . . . <hr />');
+
+                    $insertQuery = 'SELECT eventDate FROM events';
+                    $allEvents = array();
+                    $result = mysqli_query($_SESSION['db_connection'], $insertQuery);
+
+                    if (mysqli_num_rows($result) > 0) {
+                        while($row = mysqli_fetch_assoc($result)) {
+                            $allEvents[] = $row["eventDate"];
+                        }
+                    }
+                    mysqli_close($_SESSION['db_connection']);
+                    /*---------------------------------------------------------*/
                     ?>
 
-                    <table class="mdl-data-table mdl-js-data-table">
+                    <table class="mdl-data-table main-calendar-table mdl-js-data-table">
                         <thead>
                             <tr>
                                 <td class="mdl-data-table__cell--non-numeric">
@@ -132,13 +149,36 @@
                             }
                         ?>
                             <td align='center'
-                                class='mdl-data-table__cell--non-numeric <?php echo ($currentTimeStamp == $dayTimeStamp && $month == date('n')) ? 'cell-active-data' : ''; ?>'>
+
+                                class='events-cell mdl-data-table__cell--non-numeric <?php echo ($currentTimeStamp == $dayTimeStamp && $month == date('n')) ? 'cell-active-data' : ''; ?>'>
                                 <button type='button'
                                         id="dialog_btn_<?php echo $i; ?>"
                                         data-current_date="<?php echo $dayTimeStamp; ?>"
+                                        title="Add Event"
                                         class='mdl-button show-dialog'>
                                     <?php echo $i; ?>
                                 </button>
+                                <?php if (in_array($dayTimeStamp, $allEvents)): ?>
+                                    <button class="mdl-button show-events-btn mdl-js-button mdl-button--icon mdl-button--colored"
+                                            onclick="togleEventCard('card-event-<?php echo $i; ?>')"
+                                            title="EVENTS HERE!">
+                                        <i class="material-icons">date_range</i>
+                                    </button>
+                                    <div class="day-card-event  mdl-card mdl-shadow--2dp" id="card-event-<?php echo $i; ?>">
+                                        <div class="mdl-card__title mdl-card--expand">
+                                            <h4 class="event-title">Default</h4>
+                                            <p class="event-details">Default</p>
+                                        </div>
+                                        <div class="mdl-card__actions mdl-card--border">
+                                            <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect"
+                                                onclick="togleEventCard('card-event-<?php echo $i; ?>')">
+                                                CLOSE
+                                            </a>
+                                            <div class="mdl-layout-spacer"></div>
+                                            <i class="material-icons">event</i>
+                                        </div>
+                                    </div>
+                                <?php endif; ?>
                             </td>
                         <?php endfor; ?>
                         </tbody>
@@ -213,6 +253,8 @@
                         function cleanEventForm () {
                             $('#event-form').trigger('reset');
                             $('#event-form .mdl-textfield').removeClass('is-dirty');
+                            $('#event-form .mdl-textfield__error').css('visibility', 'hidden');
+                            $('#event-adding-progress').css('display', 'none');
                         }
 
                         /* Function to save event to DB via aJax */
@@ -257,6 +299,11 @@
                             $('dialog .event-date').text(currentDate.getDate() + '/' + (currentDate.getMonth() + 1) + '/' +currentDate.getFullYear());
                         }
 
+                        /* Function to togle ('block', 'none') card with events */
+                        function togleEventCard (card) {
+                            $('#' + card).toggle('display');
+                        }
+
                         /* MDL dialog */
                         var dialog = document.querySelector('dialog');
                         if (! dialog.showModal) {
@@ -265,10 +312,12 @@
                         /* hack default dialog behavior (now it is opening on class name) */
                         $('.show-dialog').on('click', function () {
                             dialog.showModal();
+                            cleanEventForm();
                             transferEventData($(this));
                         });
                         dialog.querySelector('.close').addEventListener('click', function() {
                             dialog.close();
+                            cleanEventForm();
                         });
 
                         /* MDL snackbar. Showing when event is added */

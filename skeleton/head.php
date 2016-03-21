@@ -3,7 +3,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link rel="stylesheet" href="../style.css" />
     <title>Patterns and Practice</title>
     <link rel="shortcut icon" href="../bird.png" />
     <script type="text/javascript" src="../js/jquery-2.1.4.js"></script>
@@ -17,4 +16,6 @@
 
     <!--Android Template styles-->
     <link rel="stylesheet" href="../android-template-styles.css">
+
+    <link rel="stylesheet" href="../style.css" />
 </head>

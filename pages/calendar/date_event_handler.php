@@ -14,6 +14,9 @@
 
     /* Running the query */
     $result = mysqli_query($_SESSION['db_connection'], $insertQuery);
+
+    mysqli_close($_SESSION['db_connection']);
+
     if ($result) {
         echo json_encode("Success! Event added!");
     } else {

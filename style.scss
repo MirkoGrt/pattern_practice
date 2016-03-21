@@ -1,8 +1,35 @@
+/*===== MIXINS =====*/
+    @mixin size ($width, $height: $width) {
+        width: $width;
+        height: $height;
+    }
+    @mixin position ($position, $values) {
+        position: $position;
+        $offsets: (
+                top:    nth($values, 1),
+                right:  nth($values, 2),
+                bottom: nth($values, 3),
+                left:   nth($values, 4),
+        );
+        @each $offset, $value in $offsets {
+            @if ($value != null) {
+                #{$offset}: $value;
+            }
+        }
+    }
+    @mixin prefixer ($property, $value, $prefixes: webkit moz ms o) {
+        @each $prefix in $prefixes {
+            #{"-" + $prefix + "-" + $property}: $value;
+        }
+        #{$property}: $value;
+    }
+/*=================*/
+
 .lesson-block {
+    @include prefixer(border-radius, 5px);
     margin-bottom: 10px;
     padding: 10px;
     border: 2px solid #6d6d6d;
-    border-radius: 5px;
     canvas {
         border: 1px solid black;
     }
@@ -21,22 +48,67 @@ h3 span {
     color: coral;
 }
 .animated-image {
-    height: 200px;
-    width: 100%;
+    @include size(100%, 200px);
     overflow: hidden;
     position: relative;
     img {
+        @include position(absolute, null null null 0px);
         width: 150px;
-        position: absolute;
-        left: 0px;
     }
 }
 
 /* ====== CALENDAR ====== */
-.cell-active-data {
-    background-color: darken(#ffffff, 10);
-}
-#event-adding-progress {
-    display: none;
-}
-
+    .main-calendar-table {
+        .cell-active-data {
+            background-color: darken(#ffffff, 10);
+        }
+        .show-events-btn {
+            @include position(absolute, 2px 2px null null);
+            &:hover {
+                background: none;
+            }
+        }
+    }
+    #event-adding-progress {
+        display: none;
+    }
+    /*----- Event card -----*/
+    .day-card-event {
+        @include position(absolute, null null null 0);
+        display: none;
+        &.mdl-card {
+            @include size(256px, auto);
+            min-height: 0;
+            background: #3E4EB8;
+        }
+        > {
+            .mdl-card__actions {
+                border-color: rgba(255, 255, 255, 0.2);
+            }
+            .mdl-card__title {
+                display: block;
+                > h4 {
+                    margin-top: 0;
+                }
+            }
+            .mdl-card__actions {
+                display: flex;
+                box-sizing: border-box;
+                align-items: center;
+                > .material-icons {
+                    padding-right: 10px;
+                }
+            }
+            .mdl-card__title {
+                color: #fff;
+            }
+            .mdl-card__actions {
+                color: #fff;
+                > .mdl-button {
+                    color: #fff;
+                }
+            }
+        }
+    }
+    /*----------------------*/
+/* =================== */
