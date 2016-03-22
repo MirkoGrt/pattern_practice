@@ -6,7 +6,7 @@
 
         <?php
             // Requiring the file with Calendar class definition
-            require 'calendar/date_event_handler.php';
+            require 'calendar/Calendar.php';
 
             // Definition the Calendar class
             $calendar = new Calendar();
@@ -24,11 +24,11 @@
                     </p>
                     <p>
                         You need to make your own MySQL connection in the
-                        <strong>"pages/calendar/date_event_handler.php"->initDbConnection method </strong>.
+                        <strong>"pages/calendar/calendar.php"->initDbConnection method </strong>.
                     </p>
                     <p>
                         To make the events work please install the "practice_calendar" DB and do the custom connection.
-                        Event handler file is located in the <strong>"pages/calendar"</strong> folder.
+                        Event handler (Calendar class) file is located in the <strong>"pages/calendar"</strong> folder.
                     </p>
                     <script type="text/javascript">
                         function goPrevMonth (month, year) {
@@ -261,12 +261,15 @@
                                 var eventDetails = $('dialog textarea[name="event-details"]').val();
 
                                 var data = 'timestamp=' + eventTimestamp + '&title=' + eventTitle + '&details=' + eventDetails;
-                                var url = "calendar/date_event_handler.php";
+
+                                /* We need the 'action' parameter for router definition */
+                                var url = '/pattern_practice/pages/calendar/Calendar.php?action=addEvent';
                                 $.ajax({
                                     url: url,
                                     type: "POST",
                                     data: data,
                                     success: function (response) {
+                                        console.log(response);
                                         showMdlSnackbar(response, 'success');
                                         cleanEventForm();
                                         $('#event-adding-progress').css('display', 'none');
