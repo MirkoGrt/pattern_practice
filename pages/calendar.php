@@ -160,8 +160,12 @@
                                     </button>
                                     <div class="day-card-event  mdl-card mdl-shadow--2dp" id="card-event-<?php echo $i; ?>">
                                         <div class="mdl-card__title mdl-card--expand">
-                                            <h4 class="event-title">Default</h4>
-                                            <p class="event-details">Default</p>
+                                            <h4 class="event-title">
+                                                <?php echo $calendar->getEventTitle($dayTimeStamp); ?>
+                                            </h4>
+                                            <p class="event-details">
+                                                <?php echo $calendar->getEventDetails($dayTimeStamp); ?>
+                                            </p>
                                         </div>
                                         <div class="mdl-card__actions mdl-card--border">
                                             <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect"
@@ -296,7 +300,7 @@
                             $('dialog .event-date').text(currentDate.getDate() + '/' + (currentDate.getMonth() + 1) + '/' +currentDate.getFullYear());
                         }
 
-                        /* Function to togle ('block', 'none') card with events */
+                        /* Function to togle "display" ('block', 'none') on card with events */
                         function togleEventCard (card) {
                             $('#' + card).toggle('display');
                         }
