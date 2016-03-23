@@ -30,12 +30,19 @@ class Calendar {
         $eventTitle = $_POST['title'];
         $eventDetails = $_POST['details'];
 
-        /* MySQL insert query */
-        $insertQuery = 'INSERT INTO events (title, detail, eventDate, dateAdded)
-                VALUES ("'. $eventTitle .'", "'. $eventDetails .'", "'. $eventTimestamp .'", NOW())';
+        /* MySQL insert query. PDO prepared query */
+        $insertQuery = $PDO_Connection->prepare(
+            'INSERT INTO events (title, detail, eventDate, dateAdded)
+                VALUES (:eventTitle, :eventDetails, :eventTimestamp, NOW())'
+        );
+
+        /* Binding params */
+        $insertQuery->bindParam(':eventTitle', $eventTitle);
+        $insertQuery->bindParam(':eventDetails', $eventDetails);
+        $insertQuery->bindParam(':eventTimestamp', $eventTimestamp);
 
         /* Running and checking the query */
-        if ($PDO_Connection->exec($insertQuery)) {
+        if ($insertQuery->execute()) {
             echo json_encode("Success! Event added!");
         } else {
             echo json_encode("Error with adding the event!");
@@ -68,30 +75,35 @@ class Calendar {
      */
     public function getEventTitle ($dayTimestamp) {
         $PDO_Connection = $this->initDbConnection();
-        $insertQuery = 'SELECT title FROM events WHERE eventDate = ' . $dayTimestamp;
 
-        foreach ($PDO_Connection->query($insertQuery) as $row) {
-            $eventTitle = $row["title"];
-        }
+        $insertQuery = $PDO_Connection->prepare(
+            'SELECT title FROM events WHERE eventDate = :eventDayTimestamp'
+        );
+        $insertQuery->bindParam(':eventDayTimestamp', $dayTimestamp);
+        $insertQuery->execute();
 
-        return $eventTitle;
+        $eventTitle = $insertQuery->fetch();
+
+        return $eventTitle['title'];
     }
 
     /**
      * @param $dayTimestamp
      * @return mixed
-     *
-     * Return event details by event timestamp
      */
     public function getEventDetails ($dayTimestamp) {
         $PDO_Connection = $this->initDbConnection();
-        $insertQuery = 'SELECT detail FROM events WHERE eventDate = ' . $dayTimestamp;
 
-        foreach ($PDO_Connection->query($insertQuery) as $row) {
-            $eventDetail = $row["detail"];
-        }
+        $insertQuery = $PDO_Connection->prepare(
+            'SELECT detail FROM events WHERE eventDate = :eventDayTimestamp'
+        );
 
-        return $eventDetail;
+        $insertQuery->bindParam(':eventDayTimestamp', $dayTimestamp);
+        $insertQuery->execute();
+
+        $eventDetail = $insertQuery->fetch();
+
+        return $eventDetail['detail'];
     }
 }
 
