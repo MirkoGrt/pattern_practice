@@ -41,9 +41,10 @@ class Calendar {
         $insertQuery->bindParam(':eventDetails', $eventDetails);
         $insertQuery->bindParam(':eventTimestamp', $eventTimestamp);
 
+
         /* Running and checking the query */
         if ($insertQuery->execute()) {
-            echo json_encode("Success! Event added!");
+            echo json_encode('Success! Event is added');
         } else {
             echo json_encode("Error with adding the event!");
         }
@@ -90,6 +91,8 @@ class Calendar {
     /**
      * @param $dayTimestamp
      * @return mixed
+     *
+     * Return event details by event timestamp
      */
     public function getEventDetails ($dayTimestamp) {
         $PDO_Connection = $this->initDbConnection();
@@ -106,103 +109,3 @@ class Calendar {
         return $eventDetail['detail'];
     }
 }
-
-/*
- * @todo
- *
- * REFACTOR the Dispatcher pattern
-*/
-
-class Request {
-
-    private $method;
-    private $path;
-
-    function __construct() {
-        $this->method = $_SERVER['REQUEST_METHOD'];
-
-        /* get 'action' parameter from url. Route = action */
-        $this->path = $_REQUEST['action'];
-    }
-
-    function getMethod() {
-        return $this->method;
-    }
-
-    function getPath() {
-        return $this->path;
-    }
-
-}
-
-class Router {
-
-    private $routes = [
-        'get' => [],
-        'post' => []
-    ];
-
-    function get($pattern, callable $handler) {
-        $this->routes['get'][$pattern] = $handler;
-        return $this;
-    }
-
-    function post($pattern, callable $handler) {
-        $this->routes['post'][$pattern] = $handler;
-        return $this;
-    }
-
-    function match(Request $request) {
-        $method = strtolower($request->getMethod());
-        if (!isset($this->routes[$method])) {
-            return false;
-        }
-
-        $path = $request->getPath();
-        foreach ($this->routes[$method] as $pattern => $handler) {
-            if ($pattern === $path) {
-                return $handler;
-            }
-        }
-
-        return false;
-    }
-
-}
-
-class Dispatcher {
-
-    private $router;
-
-    function __construct(Router $router) {
-        $this->router = $router;
-    }
-
-    function handle(Request $request) {
-        $handler = $this->router->match($request);
-        if (!$handler) {
-            return;
-        }
-        $className = $handler[0];
-        $methodName = $handler[1];
-
-        $handleClassObject = new $className();
-        $handleClassObject->$methodName();
-    }
-}
-
-$router = new Router();
-
-/*
-    Adding the new 'route'  First parameter is the action from url, the second is handler
-*/
-$router->post('addEvent', ['Calendar', 'addEvent']);
-
-$dispatcher = new Dispatcher($router);
-
-/*
-    Handling the current route. If match - run:
-    $handler[0](Class Name)->$handler[1](Method name)
-*/
-$dispatcher->handle(new Request());
-

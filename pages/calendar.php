@@ -5,9 +5,6 @@
         <?php require_once '../skeleton/header.php'; ?>
 
         <?php
-            // Requiring the file with Calendar class definition
-            require 'calendar/Calendar.php';
-
             // Definition the Calendar class
             $calendar = new Calendar();
 
@@ -24,7 +21,7 @@
                     </p>
                     <p>
                         You need to make your own MySQL connection in the
-                        <strong>"pages/calendar/calendar.php"->initDbConnection method </strong>.
+                        <strong>"lib/Calendar.php"->initDbConnection method </strong>.
                     </p>
                     <p>
                         To make the events work please install the "practice_calendar" DB and do the custom connection.
@@ -267,13 +264,12 @@
                                 var data = 'timestamp=' + eventTimestamp + '&title=' + eventTitle + '&details=' + eventDetails;
 
                                 /* We need the 'action' parameter for router definition */
-                                var url = '/pattern_practice/pages/calendar/Calendar.php?action=addEvent';
+                                var url = 'ajax_form_handler.php?action=addEvent';
                                 $.ajax({
                                     url: url,
                                     type: "POST",
                                     data: data,
                                     success: function (response) {
-                                        console.log(response);
                                         showMdlSnackbar(response, 'success');
                                         cleanEventForm();
                                         $('#event-adding-progress').css('display', 'none');
