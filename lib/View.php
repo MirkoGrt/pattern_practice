@@ -11,6 +11,11 @@ class View {
     protected $viewPath = 'pages/';
     protected $layoutPath = 'pages/';
 
+    /**
+     * @param $filePath
+     * @param array $variables
+     * @return string
+     */
     public function render ($filePath, array $variables = []) {
         extract($variables);
         $fullPath = $this->viewPath . $filePath;
@@ -21,11 +26,10 @@ class View {
             $content = ob_get_contents();
             ob_end_clean();
             if (file_exists($this->getLayoutPath())) {
-
                 ob_start();
                 include $this->getLayoutPath();
                 $renderedView = ob_get_contents();
-                    ob_get_clean();
+                ob_get_clean();
             } else {
                 echo 'Layout File not exists!';
             }
