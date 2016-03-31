@@ -17,16 +17,22 @@ class Dispatcher {
 
     /**
      * @param Request $request
+     * @throws Exception
      */
     function handle(Request $request) {
         $handler = $this->router->match($request);
         if (!$handler) {
-            return;
+            echo 'Router don\'t match the handle';
         }
         $className = $handler[0];
         $methodName = $handler[1];
 
         $handleClassObject = new $className();
-        $handleClassObject->$methodName();
+
+        if (method_exists($handleClassObject, $methodName)) {
+            $handleClassObject->$methodName();
+        } else {
+            echo 'Handle class don\'t has handle method';
+        }
     }
 }

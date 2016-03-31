@@ -41,6 +41,11 @@ class Router {
         }
 
         $path = $request->getPath();
+
+        if (!$path) {
+            $path = 'show-main-page';
+        }
+
         foreach ($this->routes[$method] as $pattern => $handler) {
             if ($pattern === $path) {
                 return $handler;

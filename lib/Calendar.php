@@ -3,7 +3,7 @@
 /**
  * Class Calendar
  */
-class Calendar {
+class Calendar extends BaseController {
 
     /**
      * @return PDO
@@ -107,5 +107,13 @@ class Calendar {
         $eventDetail = $insertQuery->fetch();
 
         return $eventDetail['detail'];
+    }
+
+    /**
+     * Return all calendar page with template.
+     */
+    public function showCalendar() {
+        $result = $this->render('calendar.php', []);
+        echo $result;
     }
 }
