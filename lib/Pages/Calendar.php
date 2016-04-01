@@ -1,18 +1,21 @@
 <?php
 
+namespace Pages;
+use \mvc as Mvc;
+
 /**
  * Class Calendar
  */
-class Calendar extends BaseController {
+class Calendar extends Mvc\BaseController {
 
     /**
-     * @return PDO
+     * @return \PDO
      */
     public function initDbConnection () {
         $userName = 'root';
         $password = 'root';
 
-        $calendar_connection = new PDO('mysql:host=localhost; dbname=practice_calendar; charset=utf8mb4', $userName, $password);
+        $calendar_connection = new \PDO('mysql:host=localhost; dbname=practice_calendar; charset=utf8mb4', $userName, $password);
 
         $calendar_connection or die('ERROR with connection to MYSQL server . . .<hr />');
 

@@ -2,21 +2,24 @@
 
     require_once 'bootsrap.php';
 
-    $router = new Router();
+    $router = new \Routing\Router();
 
     /*
         Adding the new 'route'  First parameter is the action from url, the second is handler
     */
-    $router->post('addEvent', ['Calendar', 'addEvent']);
-    $router->get('show-calendar', ['Calendar', 'showCalendar']);
-    $router->get('show-main-page', ['MainPageController', 'showMainPage']);
-    $router->get('show-js-page', ['JsPageController', 'showJsPage']);
+    $router->post('addEvent', ['\Pages\Calendar', 'addEvent']);
+    $router->get('show-calendar', ['\Pages\Calendar', 'showCalendar']);
+    $router->get('show-main-page', ['\Pages\MainPageController', 'showMainPage']);
+    $router->get('show-js-page', ['\Pages\JsPageController', 'showJsPage']);
 
-    $dispatcher = new Dispatcher($router);
-
-    /*
-        Handling the current route. If match - run:
-        $handler[0](Class Name)->$handler[1](Method name)
-    */
-    $dispatcher->handle(new Request());
+    try {
+        $dispatcher = new \Routing\Dispatcher($router);
+        /*
+            Handling the current route. If match - run:
+            $handler[0](Class Name)->$handler[1](Method name)
+        */
+        $dispatcher->handle(new \Routing\Request());
+    } catch (Exception $e) {
+        echo $e->getMessage();
+    }
 

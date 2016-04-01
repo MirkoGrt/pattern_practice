@@ -1,5 +1,7 @@
 <?php
 
+namespace mvc;
+
 class BaseController {
 
     protected $view;

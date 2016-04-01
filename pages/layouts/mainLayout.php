@@ -19,10 +19,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Patterns and Practice</title>
+    <title>ANGRY PRACTICE</title>
     <link rel="shortcut icon" href="/images/bird.png" />
+
+    <!--JS Libs-->
     <script type="text/javascript" src="/js/jquery-2.1.4.js"></script>
     <script type="text/javascript" src="/js/processing.js"></script>
+
+    <!--Custom JS-->
     <script type="text/javascript" src="/js/main.js"></script>
 
     <!--MDL-->
@@ -33,6 +37,7 @@
     <!--Android Template styles-->
     <link rel="stylesheet" href="/styles/android-template-styles.css">
 
+    <!--Custom Styles-->
     <link rel="stylesheet" href="/styles/style.css" />
 </head>
 <body>
@@ -57,8 +62,6 @@
                 <nav class="android-navigation mdl-navigation">
                     <a class="mdl-navigation__link mdl-typography--text-uppercase" href="?action=show-main-page">Main</a>
                     <a class="mdl-navigation__link mdl-typography--text-uppercase" href="?action=show-js-page">JS</a>
-                    <a class="mdl-navigation__link mdl-typography--text-uppercase" href="?action=show-php-page">PHP</a>
-                    <a class="mdl-navigation__link mdl-typography--text-uppercase" href="?action=show-sql-page">SQL</a>
                     <a class="mdl-navigation__link mdl-typography--text-uppercase" href="?action=show-calendar">Calendar</a>
                 </nav>
             </div>
@@ -78,7 +81,7 @@
     </header>
     <div class="android-drawer mdl-layout__drawer">
         <span class="mdl-layout-title">
-          <img class="android-logo-image" src="../images/android-logo-white.png">
+          <img class="android-logo-image" src="/images/android-logo-white.png">
         </span>
         <nav class="mdl-navigation">
             <a class="mdl-navigation__link" href="behavioral.php">Behavioral</a>

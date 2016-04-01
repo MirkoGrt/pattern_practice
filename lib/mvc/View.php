@@ -1,5 +1,7 @@
 <?php
 
+namespace mvc;
+
 /**
  * Created by PhpStorm.
  * User: user3
@@ -9,7 +11,7 @@
 class View {
 
     protected $viewPath = 'pages/';
-    protected $layoutPath = 'pages/';
+    protected $layoutPath = 'pages/layouts/';
 
     /**
      * @param $filePath

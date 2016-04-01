@@ -158,7 +158,7 @@
             border we move it to left and so on.
         </p>
         <div class="animated-image" id="banana_wrapper" >
-            <img id="banana_dance" src="../banana.gif" alt="Dancing Banana">
+            <img id="banana_dance" src="/images/banana.gif" alt="Dancing Banana">
         </div>
         <button id="start_dance" onclick="walk()">Start Walking</button>
         <script type="text/javascript">

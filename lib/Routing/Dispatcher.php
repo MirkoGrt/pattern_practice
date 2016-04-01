@@ -1,5 +1,7 @@
 <?php
 
+namespace Routing;
+
 /**
  * Class Dispatcher
  */
@@ -17,12 +19,12 @@ class Dispatcher {
 
     /**
      * @param Request $request
-     * @throws Exception
+     * @throws \Exception
      */
     function handle(Request $request) {
         $handler = $this->router->match($request);
         if (!$handler) {
-            echo 'Router don\'t match the handle';
+            throw new \Exception('Router don\'t match the handle');
         }
         $className = $handler[0];
         $methodName = $handler[1];
@@ -32,7 +34,7 @@ class Dispatcher {
         if (method_exists($handleClassObject, $methodName)) {
             $handleClassObject->$methodName();
         } else {
-            echo 'Handle class don\'t has handle method';
+            throw new \Exception('Handle class don\'t has handle method');
         }
     }
 }
