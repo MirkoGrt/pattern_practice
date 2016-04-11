@@ -56,9 +56,40 @@ class Calendar extends Mvc\BaseController {
     /**
      * @return array
      *
-     * (all events timestamp from events table)
+     * return all events data from the table
      */
-    public function getEventsTimestamp () {
+    public function getAllEventsData () {
+        $PDO_Connection = $this->initDbConnection();
+
+        $insertQuery = 'SELECT title, detail, eventDate FROM events';
+        $allEventsData = array();
+
+        foreach ($PDO_Connection->query($insertQuery) as $row) {
+            $eventData = array();
+            $eventData['title'] = $row["title"];
+            $eventData['detail'] = $row["detail"];
+            $allEventsData[$row["eventDate"]][] = $eventData;
+        }
+
+        return $allEventsData;
+    }
+
+    /**
+     * @param $dayTimestamp
+     * @return mixed
+     *
+     * return the array with all events info in current day
+     */
+    public function getEventData ($dayTimestamp) {
+        $allEventsData = $this->getAllEventsData();
+        return $allEventsData[$dayTimestamp];
+    }
+
+    /**
+     * @return array
+     * get all timestamp in array to check if current day has events
+     */
+    public function getAllEventsTimestamp () {
         $PDO_Connection = $this->initDbConnection();
 
         $insertQuery = 'SELECT eventDate FROM events';
@@ -71,46 +102,6 @@ class Calendar extends Mvc\BaseController {
         return $allEvents;
     }
 
-    /**
-     * @param $dayTimestamp
-     * @return mixed
-     *
-     * Return event title by event timestamp
-     */
-    public function getEventTitle ($dayTimestamp) {
-        $PDO_Connection = $this->initDbConnection();
-
-        $insertQuery = $PDO_Connection->prepare(
-            'SELECT title FROM events WHERE eventDate = :eventDayTimestamp'
-        );
-        $insertQuery->bindParam(':eventDayTimestamp', $dayTimestamp);
-        $insertQuery->execute();
-
-        $eventTitle = $insertQuery->fetch();
-
-        return $eventTitle['title'];
-    }
-
-    /**
-     * @param $dayTimestamp
-     * @return mixed
-     *
-     * Return event details by event timestamp
-     */
-    public function getEventDetails ($dayTimestamp) {
-        $PDO_Connection = $this->initDbConnection();
-
-        $insertQuery = $PDO_Connection->prepare(
-            'SELECT detail FROM events WHERE eventDate = :eventDayTimestamp'
-        );
-
-        $insertQuery->bindParam(':eventDayTimestamp', $dayTimestamp);
-        $insertQuery->execute();
-
-        $eventDetail = $insertQuery->fetch();
-
-        return $eventDetail['detail'];
-    }
 
     /**
      * Return all calendar page with template.

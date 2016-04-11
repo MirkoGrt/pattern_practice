@@ -1,9 +1,8 @@
 <?php
     // Definition the Calendar class
     $calendar = new \Pages\Calendar();
+    $allEvents = $calendar->getAllEventsTimestamp();
 
-    // Getting all events timestamps (array)
-    $allEvents = $calendar->getEventsTimestamp();
 ?>
 <main class="android-content mdl-layout__content">
     <div class="mdl-grid">
@@ -32,7 +31,7 @@
                     if (monthString.length <= 1) {
                         monthString = "0" + month + "";
                     }
-                    document.location.href = "<?php $_SERVER['PHP_SELF']; ?>?month=" + monthString + "&year=" + year;
+                    document.location.href = "&month=" + monthString + "&year=" + year;
                 }
 
                 function goNextMonth (month, year) {
@@ -45,7 +44,7 @@
                     if (monthString.length <= 1) {
                         monthString = "0" + month + "";
                     }
-                    document.location.href = "<?php $_SERVER['PHP_SELF']; ?>?month=" + monthString + "&year=" + year;
+                    document.location.href = "&month=" + monthString + "&year=" + year;
                 }
             </script>
             <?php
@@ -144,29 +143,41 @@
                             <?php echo $i; ?>
                         </button>
                         <?php if (in_array($dayTimeStamp, $allEvents)): ?>
-                            <button class="mdl-button show-events-btn mdl-js-button mdl-button--icon mdl-button--colored"
-                                    onclick="togleEventCard('card-event-<?php echo $i; ?>')"
+                            <button id="events-menu-dropdown-<?php echo $i; ?>"
+                                    class="mdl-button mdl-js-button mdl-button--icon mdl-button--colored show-events-btn"
                                     title="EVENTS HERE!">
                                 <i class="material-icons">date_range</i>
                             </button>
-                            <div class="day-card-event  mdl-card mdl-shadow--2dp" id="card-event-<?php echo $i; ?>">
-                                <div class="mdl-card__title mdl-card--expand">
-                                    <h4 class="event-title">
-                                        <?php echo $calendar->getEventTitle($dayTimeStamp); ?>
-                                    </h4>
-                                    <p class="event-details">
-                                        <?php echo $calendar->getEventDetails($dayTimeStamp); ?>
-                                    </p>
-                                </div>
-                                <div class="mdl-card__actions mdl-card--border">
-                                    <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect"
-                                        onclick="togleEventCard('card-event-<?php echo $i; ?>')">
-                                        CLOSE
-                                    </a>
-                                    <div class="mdl-layout-spacer"></div>
-                                    <i class="material-icons">event</i>
-                                </div>
-                            </div>
+                            <ul class="mdl-menu day-events-list mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect"
+                                for="events-menu-dropdown-<?php echo $i; ?>">
+                                <?php
+                                    $eventData = $calendar->getEventData($dayTimeStamp);
+                                    $x = 0;
+                                    foreach ($eventData as $event):
+                                ?>
+                                <li class="mdl-list__item mdl-list__item--three-line">
+                                    <span class="mdl-list__item-primary-content">
+                                        <i class="material-icons day-event-icon">alarm</i>
+                                        <span><?php echo $event['title']; ?></span>
+                                        <span class="mdl-list__item-text-body">
+                                            <?php echo $event['detail']; ?>
+                                        </span>
+                                    </span>
+                                    <span class="mdl-list__item-secondary-content">
+                                        <span class="mdl-list__item-secondary-info">Active</span>
+                                        <span class="mdl-list__item-secondary-action">
+                                            <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="list-switch-<?php echo $i . $x; ?>">
+                                                <input type="checkbox"
+                                                       id="list-switch-<?php echo $i . $x; ?>"
+                                                       class="mdl-switch__input event-status-toggle-checkbox"
+                                                       checked
+                                                       onchange="dontCloseMenu('events-menu-dropdown-<?php echo $i; ?>')" />
+                                            </label>
+                                        </span>
+                                    </span>
+                                </li>
+                                <?php $x++; endforeach; ?>
+                            </ul>
                         <?php endif; ?>
                     </td>
                 <?php endfor; ?>
@@ -290,11 +301,6 @@
                     $('dialog .event-date').text(currentDate.getDate() + '/' + (currentDate.getMonth() + 1) + '/' +currentDate.getFullYear());
                 }
 
-                /* Function to togle "display" ('block', 'none') on card with events */
-                function togleEventCard (card) {
-                    $('#' + card).toggle('display');
-                }
-
                 /* MDL dialog */
                 var dialog = document.querySelector('dialog');
                 if (! dialog.showModal) {
@@ -310,6 +316,14 @@
                     dialog.close();
                     cleanEventForm();
                 });
+
+                /* Hacking the standard event menu behavior (don't need to close when clicking on checkbox inside it) */
+                function dontCloseMenu (menu) {
+                    var theMenu = $('.mdl-menu[for=' + menu + ']');
+                    theMenu.parent('.mdl-menu__container').addClass('is-visible');
+                    theMenu.css('clip', 'rect(0px 430.688px 456px 0px)');
+                }
+
 
                 /* MDL snackbar. Showing when event is added */
                 function showMdlSnackbar (response, type) {

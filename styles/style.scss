@@ -64,52 +64,29 @@ h3 span {
         }
         .show-events-btn {
             @include position(absolute, 2px 2px null null);
-            &:hover {
-                background: none;
-            }
         }
     }
     #event-adding-progress {
         display: none;
     }
-    /*----- Event card -----*/
-    .day-card-event {
-        @include position(absolute, null null null 0);
-        display: none;
-        &.mdl-card {
-            @include size(256px, auto);
-            min-height: 0;
-            background: #3E4EB8;
-        }
-        > {
-            .mdl-card__actions {
-                border-color: rgba(255, 255, 255, 0.2);
+    /*------ Day events list ------*/
+        .day-events-list {
+            min-width: 300px;
+            max-width: 700px;
+            .mdl-list__item {
+                overflow: visible;
             }
-            .mdl-card__title {
-                display: block;
-                > h4 {
-                    margin-top: 0;
-                    white-space: normal;
-                }
+            .mdl-list__item-text-body {
+                min-width: 350px;
+                max-width: 650px;
+                white-space: normal;
             }
-            .mdl-card__actions {
-                display: flex;
-                box-sizing: border-box;
-                align-items: center;
-                > .material-icons {
-                    padding-right: 10px;
-                }
-            }
-            .mdl-card__title {
-                color: #fff;
-            }
-            .mdl-card__actions {
-                color: #fff;
-                > .mdl-button {
-                    color: #fff;
-                }
+            .day-event-icon {
+                float: left;
+                margin-right: 16px;
+                font-size: 48px;
+                color: rgb(121,85,72);
             }
         }
-    }
-    /*----------------------*/
+    /*------ --------------- ------*/
 /* =================== */
