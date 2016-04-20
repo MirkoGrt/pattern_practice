@@ -5,8 +5,6 @@
             <h3>Main Page</h3>
             <h5>How it works?</h5>
             <p>
-                UML Diagram (31-03-2016)
-                <img src="/images/uml_diagram_31_03_2016.png" alt="">
                 <hr>
                 <u>Autoloader</u> <br>
                 The one entry point on site is the index.php file. In this file bootstrap.php is included.
@@ -25,6 +23,8 @@
                 the dispatcher handling the current route. Dispatcher run [0] element of this array as class, and
                 [1] element as method.
                 <hr>
+                <img src="/images/diagram_routing_20-04-16.png" alt="Routing diagram">
+                <hr>
                 <u>MVC</u> <br>
                 As we see from UML diagram there is 'BaseController' class. In this file the 'View' object is created.
                 All view controllers need extends BaseController to run the 'render' method. 'Render' method is located
@@ -35,6 +35,13 @@
                 Every view file must have its own controller file. Every controller must have the method that render
                 its view file. We run this method by URL via routing.
                 <hr>
+                <img src="/images/diagram_mvc_20-04-16.png" alt="MVC diagram">
+                <hr>
+                <u>Pages</u> <br>
+                Pages Controllers to render pages views and do some functionality on its views
+                <hr>
+                <img src="/images/diagram_pages_20-04-16.png" alt="Pages diagram">
+                <hr />
             </p>
             <h5>How to add new page?</h5>
             <p>

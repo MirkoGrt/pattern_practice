@@ -14,12 +14,20 @@
             </p>
             <p>
                 You need to make your own MySQL connection in the
-                <strong>"lib/Calendar.php"->initDbConnection method </strong>.
+                <strong>"lib/Pages/Calendar.php"->initDbConnection method </strong>.
             </p>
             <p>
                 To make the events work please install the "practice_calendar" DB and do the custom connection.
-                Event handler (Calendar class) file is located in the <strong>"pages/calendar"</strong> folder.
+                Event handler (Calendar class) file is located in the <strong>"lib/Pages/calendar"</strong> folder.
             </p>
+            <p>Features</p>
+            <ul>
+                <li>Adding events</li>
+                <li>Event status</li>
+                <li>Deleting events</li>
+                <li></li>
+                <li></li>
+            </ul>
             <script type="text/javascript">
                 function goPrevMonth (month, year) {
                     if (month == 1) {
@@ -81,7 +89,7 @@
 
             ?>
 
-            <table class="mdl-data-table main-calendar-table mdl-js-data-table">
+            <table class="mdl-data-table main-calendar-table mdl-js-data-table element-hidden">
                 <thead>
                     <tr>
                         <td class="mdl-data-table__cell--non-numeric">
@@ -155,7 +163,7 @@
                                     $x = 0;
                                     foreach ($eventData as $event):
                                 ?>
-                                <li class="mdl-list__item mdl-list__item--three-line">
+                                <li class="mdl-list__item mdl-list__item--three-line" id="event_<?php echo $event['id']; ?>">
                                     <span class="mdl-list__item-primary-content">
                                         <i class="material-icons day-event-icon">alarm</i>
                                         <span><?php echo $event['title']; ?></span>
@@ -163,15 +171,26 @@
                                             <?php echo $event['detail']; ?>
                                         </span>
                                     </span>
+                                    <button class="mdl-button mdl-js-button mdl-button--colored mdl-button--icon"
+                                            title="Delete Event"
+                                            onclick="deleteEvent(<?php echo $event['id']; ?>)">
+                                        <i class="material-icons">delete_forever</i>
+                                    </button>
                                     <span class="mdl-list__item-secondary-content">
-                                        <span class="mdl-list__item-secondary-info">Active</span>
+                                        <span class="mdl-list__item-secondary-info"
+                                              id="event-status-<?php echo $i . $x; ?>"
+                                              style="color: <?php echo $event['status'] == '1' ? 'green' : 'red'; ?>">
+                                            <?php echo $event['status'] == '1' ? 'Active' : 'Not active'; ?>
+                                        </span>
                                         <span class="mdl-list__item-secondary-action">
                                             <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="list-switch-<?php echo $i . $x; ?>">
                                                 <input type="checkbox"
                                                        id="list-switch-<?php echo $i . $x; ?>"
                                                        class="mdl-switch__input event-status-toggle-checkbox"
-                                                       checked
-                                                       onchange="dontCloseMenu('events-menu-dropdown-<?php echo $i; ?>')" />
+                                                       <?php
+                                                            echo $event['status'] == '1' ? 'checked' : '';
+                                                       ?>
+                                                       onchange="changeEventStatus('event-status-<?php echo $i . $x; ?>', this, <?php echo $event['id']; ?>)" />
                                             </label>
                                         </span>
                                     </span>
@@ -301,7 +320,7 @@
                     $('dialog .event-date').text(currentDate.getDate() + '/' + (currentDate.getMonth() + 1) + '/' +currentDate.getFullYear());
                 }
 
-                /* MDL dialog */
+                /* MDL dialog (Add event form) */
                 var dialog = document.querySelector('dialog');
                 if (! dialog.showModal) {
                     dialogPolyfill.registerDialog(dialog);
@@ -317,13 +336,65 @@
                     cleanEventForm();
                 });
 
-                /* Hacking the standard event menu behavior (don't need to close when clicking on checkbox inside it) */
-                function dontCloseMenu (menu) {
-                    var theMenu = $('.mdl-menu[for=' + menu + ']');
-                    theMenu.parent('.mdl-menu__container').addClass('is-visible');
-                    theMenu.css('clip', 'rect(0px 430.688px 456px 0px)');
+                /* Function to change event status (active / not active) via checkbox in mdl menu */
+                function changeEventStatus (label, checkbox, eventId) {
+
+                    if (checkbox.checked) {
+                        $('#' + label).css('color', 'green').text('Active');
+                    } else {
+                        $('#' + label).css('color', 'red').text('Not Active');
+                    }
+
+                    var data = 'id=' + eventId;
+
+                    /* We need the 'action' parameter for router definition */
+                    var url = '?action=changeEventStatus';
+                    $.ajax({
+                        url: url,
+                        type: "POST",
+                        data: data,
+                        success: function (response) {
+                            console.log(response);
+                        },
+                        error: function (response) {
+                            console.log(response);
+                        }
+                    });
                 }
 
+                /* Function to delete event via delete button in mdl menu */
+                function deleteEvent (eventId) {
+                    var data = 'id=' + eventId;
+                    var deletedEvent = $('#event_' + eventId);
+
+                    /* We need the 'action' parameter for router definition */
+                    var url = '?action=deleteEvent';
+                    $.ajax({
+                        url: url,
+                        type: "POST",
+                        data: data,
+                        success: function (response) {
+                            console.log(response);
+                            deletedEvent.remove();
+                        },
+                        error: function (response) {
+                            console.log(response);
+                        }
+                    });
+                }
+
+                /* Hack the default events menu behavior. Set events table 'overflow: hidden' and when
+                  * the menu is open it need to be "overflow: visible" */
+                /* @todo
+                *   REFACTOR THIS
+                * */
+                $(".show-events-btn").on('click', function () {
+                    $(this).next().addClass("isVisible").trigger("mdl-menu-toggle");
+                });
+
+                $('.main-calendar-table').on('mdl-menu-toggle', function () {
+                    $('.main-calendar-table').toggleClass('element-hidden');
+                });
 
                 /* MDL snackbar. Showing when event is added */
                 function showMdlSnackbar (response, type) {

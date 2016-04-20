@@ -35,8 +35,8 @@ class Calendar extends Mvc\BaseController {
 
         /* MySQL insert query. PDO prepared query */
         $insertQuery = $PDO_Connection->prepare(
-            'INSERT INTO events (title, detail, eventDate, dateAdded)
-                VALUES (:eventTitle, :eventDetails, :eventTimestamp, NOW())'
+            'INSERT INTO events (title, detail, eventDate, dateAdded, eventStatus)
+                VALUES (:eventTitle, :eventDetails, :eventTimestamp, NOW(), 1)'
         );
 
         /* Binding params */
@@ -54,6 +54,48 @@ class Calendar extends Mvc\BaseController {
     }
 
     /**
+     * Function to toggle event status (0/1)
+     */
+    public function changeEventStatus () {
+        $PDO_Connection = $this->initDbConnection();
+        $eventId = $_POST['id'];
+
+        $insertQuery = $PDO_Connection->prepare(
+            'UPDATE events
+              SET eventStatus = !eventStatus
+              WHERE id = :eventId'
+        );
+
+        $insertQuery->bindParam(':eventId', $eventId);
+
+        if ($insertQuery->execute()) {
+            echo json_encode('Success! Status is changed');
+        } else {
+            echo json_encode("Error with changing the status!");
+        }
+    }
+
+    /**
+     * Function to delete event from DB
+     */
+    public function deleteEvent () {
+        $PDO_Connection = $this->initDbConnection();
+        $eventId = $_POST['id'];
+
+        $insertQuery = $PDO_Connection->prepare(
+            'DELETE FROM events WHERE id = :eventId'
+        );
+
+        $insertQuery->bindParam(':eventId', $eventId);
+
+        if ($insertQuery->execute()) {
+            echo json_encode('Success! Event deleted');
+        } else {
+            echo json_encode("Error with deleting the event!");
+        }
+    }
+
+    /**
      * @return array
      *
      * return all events data from the table
@@ -61,13 +103,15 @@ class Calendar extends Mvc\BaseController {
     public function getAllEventsData () {
         $PDO_Connection = $this->initDbConnection();
 
-        $insertQuery = 'SELECT title, detail, eventDate FROM events';
+        $insertQuery = 'SELECT id, title, detail, eventStatus, eventDate FROM events';
         $allEventsData = array();
 
         foreach ($PDO_Connection->query($insertQuery) as $row) {
             $eventData = array();
             $eventData['title'] = $row["title"];
             $eventData['detail'] = $row["detail"];
+            $eventData['id'] = $row["id"];
+            $eventData['status'] = $row["eventStatus"];
             $allEventsData[$row["eventDate"]][] = $eventData;
         }
 
