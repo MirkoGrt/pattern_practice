@@ -14,7 +14,7 @@
             </p>
             <p>
                 You need to make your own MySQL connection in the
-                <strong>"lib/Pages/Calendar.php"->initDbConnection method </strong>.
+                <strong>"lib/DbWork/DbConnection.php"->initDbConnection method </strong>.
             </p>
             <p>
                 To make the events work please install the "practice_calendar" DB and do the custom connection.

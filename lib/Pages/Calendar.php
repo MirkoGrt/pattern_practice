@@ -2,6 +2,7 @@
 
 namespace Pages;
 use \mvc as Mvc;
+use \DbWork;
 
 /**
  * Class Calendar
@@ -9,24 +10,18 @@ use \mvc as Mvc;
 class Calendar extends Mvc\BaseController {
 
     /**
-     * @return \PDO
+     * @return DbWork\DbConnection
+     * function to get DB Connection from DbConnection class
      */
-    public function initDbConnection () {
-        $userName = 'root';
-        $password = 'root';
-
-        $calendar_connection = new \PDO('mysql:host=localhost; dbname=practice_calendar; charset=utf8mb4', $userName, $password);
-
-        $calendar_connection or die('ERROR with connection to MYSQL server . . .<hr />');
-
-        return $calendar_connection;
+    public function getDataBase () {
+        return new DbWork\DbConnection();
     }
 
     /**
      * Adding event to events table
      */
     public function addEvent() {
-        $PDO_Connection = $this->initDbConnection();
+        $PDO_Connection = $this->getDataBase()->initDbConnection();
 
         /* Getting post data */
         $eventTimestamp = $_POST['timestamp'];
@@ -57,7 +52,7 @@ class Calendar extends Mvc\BaseController {
      * Function to toggle event status (0/1)
      */
     public function changeEventStatus () {
-        $PDO_Connection = $this->initDbConnection();
+        $PDO_Connection = $this->getDataBase()->initDbConnection();
         $eventId = $_POST['id'];
 
         $insertQuery = $PDO_Connection->prepare(
@@ -79,7 +74,7 @@ class Calendar extends Mvc\BaseController {
      * Function to delete event from DB
      */
     public function deleteEvent () {
-        $PDO_Connection = $this->initDbConnection();
+        $PDO_Connection = $this->getDataBase()->initDbConnection();
         $eventId = $_POST['id'];
 
         $insertQuery = $PDO_Connection->prepare(
@@ -101,7 +96,7 @@ class Calendar extends Mvc\BaseController {
      * return all events data from the table
      */
     public function getAllEventsData () {
-        $PDO_Connection = $this->initDbConnection();
+        $PDO_Connection = $this->getDataBase()->initDbConnection();
 
         $insertQuery = 'SELECT id, title, detail, eventStatus, eventDate FROM events';
         $allEventsData = array();
@@ -134,7 +129,7 @@ class Calendar extends Mvc\BaseController {
      * get all timestamp in array to check if current day has events
      */
     public function getAllEventsTimestamp () {
-        $PDO_Connection = $this->initDbConnection();
+        $PDO_Connection = $this->getDataBase()->initDbConnection();
 
         $insertQuery = 'SELECT eventDate FROM events';
         $allEvents = array();
