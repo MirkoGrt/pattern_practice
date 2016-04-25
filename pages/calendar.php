@@ -6,28 +6,58 @@
 ?>
 <main class="android-content mdl-layout__content">
     <div class="mdl-grid">
-        <div class="mdl-cell--2-col"></div>
-        <div class="mdl-cell--8-col">
-            <h3>Calendar development</h3>
-            <p>
-                The DB for this structure is in the folder "DbDumps" (practice_calendar.sql)
-            </p>
-            <p>
-                You need to make your own MySQL connection in the
-                <strong>"lib/DbWork/DbConnection.php"->initDbConnection method </strong>.
-            </p>
-            <p>
-                To make the events work please install the "practice_calendar" DB and do the custom connection.
-                Event handler (Calendar class) file is located in the <strong>"lib/Pages/calendar"</strong> folder.
-            </p>
-            <p>Features</p>
-            <ul>
-                <li>Adding events</li>
-                <li>Event status</li>
-                <li>Deleting events</li>
-                <li></li>
-                <li></li>
-            </ul>
+        <div class="mdl-cell--2-col mdl-cell--12-col-phone mdl-cell--12-col-tablet"></div>
+        <div class="mdl-cell--8-col mdl-cell--12-col-phone mdl-cell--12-col-tablet">
+            <div class="page-title-card calendar-page-title-card mdl-card mdl-shadow--2dp">
+                <div class="mdl-card__title">
+                    <h2 class="mdl-card__title-text">Events Calendar</h2>
+                </div>
+                <div class="mdl-card__supporting-text">
+                    <p>
+                        The DB for this structure is in the folder "DbDumps" (practice_calendar.sql)
+                    </p>
+                    <p>
+                        You need to make your own MySQL connection in the
+                        <strong>"lib/DbWork/DbConnection.php"->initDbConnection method </strong>.
+                    </p>
+                    <p>
+                        To make the events work please install the "practice_calendar" DB and do the custom connection.
+                        Event handler (Calendar class) file is located in the <strong>"lib/Pages/calendar"</strong> folder.
+                    </p>
+                    <h5>Features</h5>
+                    <ul class="features-events-list mdl-list">
+                        <li class="mdl-list__item">
+                    <span class="mdl-list__item-primary-content">
+                        <i class="material-icons mdl-list__item-icon">event</i>
+                        Adding events
+                    </span>
+                        </li>
+                        <li class="mdl-list__item">
+                    <span class="mdl-list__item-primary-content">
+                        <i class="material-icons mdl-list__item-icon">swap_horiz</i>
+                        Event status
+                    </span>
+                        </li>
+                        <li class="mdl-list__item">
+                    <span class="mdl-list__item-primary-content">
+                        <i class="material-icons mdl-list__item-icon">delete</i>
+                        Deleting events
+                    </span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="mdl-card__actions mdl-card--border">
+                    <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
+                        Button...
+                    </a>
+                </div>
+                <div class="mdl-card__menu">
+                    <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
+                        <i class="material-icons">share</i>
+                    </button>
+                </div>
+            </div>
+
             <script type="text/javascript">
                 function goPrevMonth (month, year) {
                     if (month == 1) {
@@ -89,7 +119,7 @@
 
             ?>
 
-            <table class="mdl-data-table main-calendar-table mdl-js-data-table element-hidden">
+            <table class="mdl-data-table main-calendar-table mdl-js-data-table">
                 <thead>
                     <tr>
                         <td class="mdl-data-table__cell--non-numeric">
@@ -119,13 +149,16 @@
                 <tbody>
                 <?php
                 for ($i = 1; $i < $numDays + 1; $i++, $counter++):
+                    $firstColumn = false;
                     if ($counter % 7 == 0) {
+                        $firstColumn = true;
                         echo "<tr>";
                     }
                     // Timestamp for each day in month
                     $dayTimeStamp = strtotime("{$year}-{$month}-{$i}");
 
                     if ($i == 1) {
+                        $firstColumn = false;
                         // First day in month
                         $firstDay = date('w', $dayTimeStamp);
                         for ($j = 0; $j < $firstDay; $j++, $counter++) {
@@ -156,7 +189,7 @@
                                     title="EVENTS HERE!">
                                 <i class="material-icons">date_range</i>
                             </button>
-                            <ul class="mdl-menu day-events-list mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect"
+                            <ul class="mdl-menu day-events-list <?php echo $firstColumn ? 'mdl-menu--bottom-left' : 'mdl-menu--bottom-right' ; ?>  mdl-js-menu mdl-js-ripple-effect"
                                 for="events-menu-dropdown-<?php echo $i; ?>">
                                 <?php
                                     $eventData = $calendar->getEventData($dayTimeStamp);
@@ -388,13 +421,13 @@
                 /* @todo
                 *   REFACTOR THIS
                 * */
-                $(".show-events-btn").on('click', function () {
-                    $(this).next().addClass("isVisible").trigger("mdl-menu-toggle");
-                });
-
-                $('.main-calendar-table').on('mdl-menu-toggle', function () {
-                    $('.main-calendar-table').toggleClass('element-hidden');
-                });
+//                $(".show-events-btn").on('click', function () {
+//                    $(this).next().addClass("isVisible").trigger("mdl-menu-toggle");
+//                });
+//
+//                $('.main-calendar-table').on('mdl-menu-toggle', function () {
+//                    $('.main-calendar-table').toggleClass('element-hidden');
+//                });
 
                 /* MDL snackbar. Showing when event is added */
                 function showMdlSnackbar (response, type) {
@@ -411,6 +444,6 @@
                 }
             </script>
         </div>
-        <div class="mdl-cell--2-col"></div>
+        <div class="mdl-cell--2-col mdl-cell--12-col-phone mdl-cell--12-col-tablet"></div>
     </div>
 </main>

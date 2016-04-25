@@ -31,40 +31,87 @@
     }
 /*=================*/
 
-.lesson-block {
-    @include prefixer(border-radius, 5px);
-    margin-bottom: 10px;
-    padding: 10px;
-    border: 2px solid #6d6d6d;
-    canvas {
-        border: 1px solid black;
+/*===== General styles on all pages =====*/
+    .android-logo-image {
+        height: 50px;
     }
-}
-h3 span {
-    color: #dddddd;
-    margin-right: 10px;
-}
-.description {
-    font-style: italic;
-    background-color: #dddddd;
-    padding: 5px;
-    display: inline-block;
-}
-.small-description {
-    color: coral;
-}
-.animated-image {
-    @include size(100%, 200px);
-    overflow: hidden;
-    position: relative;
-    img {
-        @include position(absolute, null null null 0px);
-        width: 150px;
+    .page-title-card {
+        width: 100%;
+        margin-bottom: 20px;
+        & > .mdl-card__title {
+            height: 200px;
+            color: #ffffff;
+        }
+        .mdl-card__supporting-text {
+            text-align: justify;
+        }
     }
-}
+/*=================*/
 
-/* ====== CALENDAR ====== */
+/*===== Main page =====*/
+    .main-page-title-card {
+        .mdl-card__title {
+            background: url('/images/main-page-title-background.png') center / cover;
+            color: dimgray;
+        }
+    }
+/*=================*/
+
+/*===== JS page =====*/
+    .js-page-title-card {
+        .mdl-card__title {
+            background: url('/images/javascript-page-title-background.jpg') center / cover;
+        }
+    }
+    .lesson-block-card {
+        width: 100%;
+        margin-bottom: 20px;
+        .subtitle {
+            font-size: 14px;
+            margin-left: 10px;
+        }
+        canvas {
+            border: 1px solid black;
+        }
+        .description {
+            font-style: italic;
+            background-color: #dddddd;
+            padding: 5px;
+            display: inline-block;
+        }
+    }
+    .animated-image {
+        @include size(100%, 200px);
+        overflow: hidden;
+        position: relative;
+        img {
+            @include position(absolute, null null null 0px);
+            width: 150px;
+        }
+    }
+/*=================*/
+
+/* ====== CALENDAR Page ====== */
+    .calendar-page-title-card .mdl-card__title {
+        background: url('/images/calendar_title_background.jpg') center / cover;
+    }
     .main-calendar-table {
+        width: 100%;
+        th.mdl-data-table__cell--non-numeric {
+            text-align: center;
+        }
+        td {
+            padding: 10px 0;
+            &:first-of-type, &:last-of-type {
+                padding: 10px 0;
+            }
+            &.mdl-data-table__cell--non-numeric {
+                text-align: center;
+            }
+            button.show-dialog {
+                width: 80%;
+            }
+        }
         .cell-active-data {
             background-color: darken(#ffffff, 10);
         }
@@ -77,6 +124,7 @@ h3 span {
     }
     /*------ Day events list ------*/
         .day-events-list {
+            text-align: left;
             min-width: 300px;
             max-width: 700px;
             .mdl-list__item {
