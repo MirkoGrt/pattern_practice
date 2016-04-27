@@ -17,7 +17,7 @@ class Request {
         $this->method = $_SERVER['REQUEST_METHOD'];
 
         /* get 'action' parameter from url. Route = action */
-        $this->path = $_REQUEST['action'];
+        $this->path = $_SERVER['REQUEST_URI'];
     }
 
     /**

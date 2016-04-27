@@ -321,7 +321,7 @@
                         var data = 'timestamp=' + eventTimestamp + '&title=' + eventTitle + '&details=' + eventDetails;
 
                         /* We need the 'action' parameter for router definition */
-                        var url = '?action=addEvent';
+                        var url = '/addEvent';
                         $.ajax({
                             url: url,
                             type: "POST",
@@ -381,7 +381,7 @@
                     var data = 'id=' + eventId;
 
                     /* We need the 'action' parameter for router definition */
-                    var url = '?action=changeEventStatus';
+                    var url = '/changeEventStatus';
                     $.ajax({
                         url: url,
                         type: "POST",
@@ -401,7 +401,7 @@
                     var deletedEvent = $('#event_' + eventId);
 
                     /* We need the 'action' parameter for router definition */
-                    var url = '?action=deleteEvent';
+                    var url = '/deleteEvent';
                     $.ajax({
                         url: url,
                         type: "POST",

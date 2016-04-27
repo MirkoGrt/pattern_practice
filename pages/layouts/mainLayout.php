@@ -60,9 +60,9 @@
             <!-- Navigation -->
             <div class="android-navigation-container">
                 <nav class="android-navigation mdl-navigation">
-                    <a class="mdl-navigation__link mdl-typography--text-uppercase" href="?action=show-main-page">Main</a>
-                    <a class="mdl-navigation__link mdl-typography--text-uppercase" href="?action=show-js-page">JS</a>
-                    <a class="mdl-navigation__link mdl-typography--text-uppercase" href="?action=show-calendar">Calendar</a>
+                    <a class="mdl-navigation__link mdl-typography--text-uppercase" href="/main-page">Main</a>
+                    <a class="mdl-navigation__link mdl-typography--text-uppercase" href="/js-page">JS</a>
+                    <a class="mdl-navigation__link mdl-typography--text-uppercase" href="/calendar">Calendar</a>
                 </nav>
             </div>
           <span class="android-mobile-title mdl-layout-title">

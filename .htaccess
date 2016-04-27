@@ -4,6 +4,11 @@ Options -Indexes
 
 DirectoryIndex index.php
 
-#Rewriting all requests to index.php
-#RewriteEngine on
-#RewriteRule .* index.php [L]
+#Rewriting all requests to index.php to make the router works
+Options +FollowSymLinks
+RewriteEngine On
+
+RewriteCond %{SCRIPT_FILENAME} !-d
+RewriteCond %{SCRIPT_FILENAME} !-f
+
+RewriteRule ^.*$ ./index.php

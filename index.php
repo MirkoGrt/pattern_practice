@@ -7,12 +7,12 @@
     /*
         Adding the new 'route'  First parameter is the action from url, the second is handler
     */
-    $router->post('addEvent', ['\Pages\Calendar', 'addEvent']);
-    $router->post('changeEventStatus', ['\Pages\Calendar', 'changeEventStatus']);
-    $router->post('deleteEvent', ['\Pages\Calendar', 'deleteEvent']);
-    $router->get('show-calendar', ['\Pages\Calendar', 'showCalendar']);
-    $router->get('show-main-page', ['\Pages\MainPageController', 'showMainPage']);
-    $router->get('show-js-page', ['\Pages\JsPageController', 'showJsPage']);
+    $router->post('/addEvent', ['\Pages\Calendar', 'addEvent']);
+    $router->post('/changeEventStatus', ['\Pages\Calendar', 'changeEventStatus']);
+    $router->post('/deleteEvent', ['\Pages\Calendar', 'deleteEvent']);
+    $router->get('/calendar', ['\Pages\Calendar', 'showCalendar']);
+    $router->get('/main-page', ['\Pages\MainPageController', 'showMainPage']);
+    $router->get('/js-page', ['\Pages\JsPageController', 'showJsPage']);
 
     try {
         $dispatcher = new \Routing\Dispatcher($router);
