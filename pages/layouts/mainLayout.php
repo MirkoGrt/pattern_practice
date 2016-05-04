@@ -84,7 +84,7 @@
           <img class="android-logo-image" src="/images/logo_small.png">
         </span>
         <nav class="mdl-navigation">
-            <a class="mdl-navigation__link" href="behavioral.php">Behavioral</a>
+            <a class="mdl-navigation__link" href="/behavioral-patterns">Behavioral</a>
             <a class="mdl-navigation__link" href="structural.php">Structural</a>
             <a class="mdl-navigation__link" href="creational.php">Creational</a>
             <div class="android-drawer-separator"></div>

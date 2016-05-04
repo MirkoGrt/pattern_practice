@@ -13,6 +13,7 @@
     $router->get('/calendar', ['\Pages\Calendar', 'showCalendar']);
     $router->get('/main-page', ['\Pages\MainPageController', 'showMainPage']);
     $router->get('/js-page', ['\Pages\JsPageController', 'showJsPage']);
+    $router->get('/behavioral-patterns', ['\Pages\BehavioralPageController', 'showBehavioralPage']);
 
     try {
         $dispatcher = new \Routing\Dispatcher($router);

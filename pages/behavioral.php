@@ -1,7 +1,7 @@
 
 <?php
-    require_once '../patterns/mediator.php';
-    require_once '../patterns/templateMethod.php';
+//    include '../patterns/mediator.php';
+//    include '../patterns/templateMethod.php';
 ?>
 <main class="android-content mdl-layout__content">
     <div class="mediator-pattern lesson-block">
@@ -22,7 +22,7 @@
             <input type="submit">
         </form>
         <?php
-        $brain = new Brain($ear, $eie);
+        $brain = new \Patterns\Behavioral\Mediator\Brain($ear, $eie);
         $part = $_POST['name'];
         $brain->somethingChangedWithBody($part);
         ?>
