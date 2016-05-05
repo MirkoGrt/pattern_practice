@@ -4,7 +4,7 @@ Options -Indexes
 
 DirectoryIndex index.php
 
-#Rewriting all requests to index.php to make the router works
+# Rewriting all requests to index.php to make the router works
 Options +FollowSymLinks
 RewriteEngine On
 

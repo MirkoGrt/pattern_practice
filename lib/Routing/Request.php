@@ -16,8 +16,13 @@ class Request {
     function __construct() {
         $this->method = $_SERVER['REQUEST_METHOD'];
 
-        /* get 'action' parameter from url. Route = action */
-        $this->path = $_SERVER['REQUEST_URI'];
+        /*
+            get route parameter from url.
+            We need to delete query params for routing works when forms are sending get request
+        */
+        $queryString = $_SERVER['QUERY_STRING'];
+        $queryPath = str_replace('?' . $queryString, '', $_SERVER['REQUEST_URI']);
+        $this->path = $queryPath;
     }
 
     /**

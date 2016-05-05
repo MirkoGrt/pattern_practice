@@ -1,8 +1,4 @@
 
-<?php
-//    include '../patterns/mediator.php';
-//    include '../patterns/templateMethod.php';
-?>
 <main class="android-content mdl-layout__content">
     <div class="mediator-pattern lesson-block">
         <h3>Body Mediator <span>(behavioral)</span><em>/patterns/mediator.php</em></h3>
@@ -17,14 +13,14 @@
             and send the signal to brain.
         </p>
         <p>Enter body part (ear, eie)</p>
-        <form method="post">
-            <input type="text" name="name" placeholder="ear, eie">
+        <form method="get">
+            <input type="text" name="body_part" placeholder="ear, eie">
             <input type="submit">
         </form>
         <?php
-        $brain = new \Patterns\Behavioral\Mediator\Brain($ear, $eie);
-        $part = $_POST['name'];
-        $brain->somethingChangedWithBody($part);
+            $brain = new \Patterns\Behavioral\Mediator\Brain($ear, $eie);
+            $part = $_GET['body_part'];
+            $brain->somethingChangedWithBody($part);
         ?>
     </div>
     <div class="template-method-pattern lesson-block">
