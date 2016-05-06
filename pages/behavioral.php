@@ -40,7 +40,7 @@
             This is the substance of Template Method.
         </p>
         <p>Load Your Book: <em>name, number of pages, start page, step, direction to flip</em></p>
-        <form method="post">
+        <form method="get">
             <input type="text" name="book-name" placeholder="Name of the Book">
             <input type="text" name="number" placeholder="Number Of pages">
             <input type="text" name="start-page" placeholder="Start Page">
@@ -51,13 +51,12 @@
             </select>
             <input type="submit" />
         </form>
-        <?php if ($_POST): ?>
             <?php
-                $name = $_POST['book-name'];
-                $number = $_POST['number'];
-                $start = $_POST['start-page'];
-                $step = $_POST['step'];
-                $direction = $_POST['direction'];
+                $name = $_GET['book-name'];
+                $number = $_GET['number'];
+                $start = $_GET['start-page'];
+                $step = $_GET['step'];
+                $direction = $_GET['direction'];
             ?>
             <p>Look trought the "<?php echo $name; ?>" Book...</p>
             <p>All pages: --<?php echo $number; ?>--...</p>
@@ -65,13 +64,12 @@
             <p>Step: **<?php echo $step; ?>**...</p>
             <p>Direction: >><?php echo $direction; ?>>>...</p>
             <?php
-                $myBook = new Book($name, $number);
-                $cooktemplate = new CookBookTemplate();
+                $myBook = new Patterns\Behavioral\TemplateMethod\Book($name, $number);
+                $cooktemplate = new Patterns\Behavioral\TemplateMethod\CookBookTemplate();
                 $pagesToLook = $cooktemplate->FlipTrough($myBook, $start, $step, $direction);
                 foreach ($pagesToLook as $simplePage) {
                     echo $simplePage . " ";
                 }
             ?>
-        <?php endif; ?>
     </div>
 </main>
