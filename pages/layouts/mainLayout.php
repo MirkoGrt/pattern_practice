@@ -86,7 +86,7 @@
         <nav class="mdl-navigation">
             <a class="mdl-navigation__link" href="/behavioral-patterns">Behavioral</a>
             <a class="mdl-navigation__link" href="structural.php">Structural</a>
-            <a class="mdl-navigation__link" href="creational.php">Creational</a>
+            <a class="mdl-navigation__link" href="/creational-patterns">Creational</a>
             <div class="android-drawer-separator"></div>
             <span class="mdl-navigation__link" href="">Stuff</span>
             <a class="mdl-navigation__link" href="">Stuff</a>

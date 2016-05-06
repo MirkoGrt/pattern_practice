@@ -14,6 +14,7 @@
     $router->get('/main-page', ['\Pages\MainPageController', 'showMainPage']);
     $router->get('/js-page', ['\Pages\JsPageController', 'showJsPage']);
     $router->get('/behavioral-patterns', ['\Pages\BehavioralPageController', 'showBehavioralPage']);
+    $router->get('/creational-patterns', ['\Pages\CreationalPageController', 'showCreationalPage']);
 
     try {
         $dispatcher = new \Routing\Dispatcher($router);

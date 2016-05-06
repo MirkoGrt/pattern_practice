@@ -1,8 +1,4 @@
-<!doctype html>
-<?php
-    require_once '../patterns/singleton.php';
-    require_once '../patterns/builder.php';
-?>
+
 <main class="android-content mdl-layout__content">
     <div class="singleton-pattern lesson-block">
         <h3>Book Singleton <span>(creational)</span><em>/patterns/singleton.php</em></h3>
@@ -12,8 +8,8 @@
         </p>
         <p class="small-description">There are two peoples want to read the same book. Sara and Lee</p>
         <?php
-            $Sara = new BookBorrower();
-            $Lee = new BookBorrower();
+            $Sara = new Patterns\Creational\Singleton\BookBorrower();
+            $Lee = new Patterns\Creational\Singleton\BookBorrower();
 
             $Sara->borrowBook();
             echo "<p>Sara borrows a book: {$Sara->getAuthorAndTitle()}</p>";
