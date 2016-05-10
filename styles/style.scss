@@ -57,6 +57,15 @@
     }
 /*=================*/
 
+/*===== Behavioral page =====*/
+.behavioral-page-title-card {
+    .mdl-card__title {
+        background: url('/images/behavioral_patterns_title_background.jpg') center / cover;
+        color: darkred;
+    }
+}
+/*=================*/
+
 /*===== JS page =====*/
     .js-page-title-card {
         .mdl-card__title {
