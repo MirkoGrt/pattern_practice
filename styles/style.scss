@@ -58,12 +58,21 @@
 /*=================*/
 
 /*===== Behavioral page =====*/
-.behavioral-page-title-card {
-    .mdl-card__title {
-        background: url('/images/behavioral_patterns_title_background.jpg') center / cover;
-        color: darkred;
+    .behavioral-page-title-card {
+        .mdl-card__title {
+            background: url('/images/behavioral_patterns_title_background.jpg') center / cover;
+            color: darkred;
+        }
     }
-}
+/*=================*/
+
+/*===== Structural page =====*/
+    .structural-page-title-card {
+        .mdl-card__title {
+            background: url('/images/structural_patterns_title_background.jpg') center / cover;
+            color: black;
+        }
+    }
 /*=================*/
 
 /*===== JS page =====*/
