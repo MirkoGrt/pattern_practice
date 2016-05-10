@@ -1,8 +1,4 @@
 
-<?php
-    require_once '../patterns/facade.php';
-    require_once '../patterns/decorator.php';
-?>
 <main class="android-content mdl-layout__content">
     <h1>Structural patterns</h1>
     <div class="facade-pattern lesson-block">
@@ -15,7 +11,7 @@
             Just imagine you are going to the Bukovel. You want to know price ranges.
         </p>
         <?php
-            $skiFacade = new SkiResortFacade();
+            $skiFacade = new Patterns\Structural\Facade\SkiResortFacade();
             echo "<p>Price for Good Rest: " . $skiFacade->haveGoodRest(180,65,40,5,5) . "</p>";
             echo "<p>Price for Rest with own ski: " . $skiFacade->restWithOwnSki(5) . "</p>";
         ?>

@@ -5,7 +5,7 @@
     $router = new \Routing\Router();
 
     /*
-        Adding the new 'route'  First parameter is the action from url, the second is handler
+        Adding the new 'route'  First parameter is the request from url, the second is handler
     */
     $router->post('/addEvent', ['\Pages\Calendar', 'addEvent']);
     $router->post('/changeEventStatus', ['\Pages\Calendar', 'changeEventStatus']);
@@ -15,6 +15,7 @@
     $router->get('/js-page', ['\Pages\JsPageController', 'showJsPage']);
     $router->get('/behavioral-patterns', ['\Pages\BehavioralPageController', 'showBehavioralPage']);
     $router->get('/creational-patterns', ['\Pages\CreationalPageController', 'showCreationalPage']);
+    $router->get('/structural-patterns', ['\Pages\StructuralPageController', 'showStructuralPage']);
 
     try {
         $dispatcher = new \Routing\Dispatcher($router);
