@@ -27,10 +27,10 @@
             its two decorators entity. (?)(?)
         </p>
         <?php
-            $mers = new Car("Toyota");
-            $carDecorator = new CarDecorator($mers);
-            $police = new PoliceCar($carDecorator);
-            $medical = new MedicalCar($carDecorator);
+            $mers = new Patterns\Structural\Decorator\Car("Toyota");
+            $carDecorator = new Patterns\Structural\Decorator\CarDecorator($mers);
+            $police = new Patterns\Structural\Decorator\PoliceCar($carDecorator);
+            $medical = new Patterns\Structural\Decorator\MedicalCar($carDecorator);
             $police->policeModel();
             $carDecorator->showModel();
             $medical->medicalModel();
