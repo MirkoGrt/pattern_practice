@@ -19,8 +19,8 @@
                     this file. First the <strong>Router ('lib/Routing/Router.php')</strong>  object is created. Now we define
                     the available routers. We should define them this way:
                     <strong>$router->get('<i>route-path</i>', ['<i>\namespace-name\class-name</i>', '<i>method-name</i>']);</strong>
-                    At the moment we can define route as 'get' or 'post'. When creating the link to some action you need
-                    to write <strong>href='?action=route-path'</strong>.  In <strong>Router->match()</strong>
+                    At the moment we can define route as 'get' or 'post'. When creating the link to some path you need
+                    to write <strong>href='/route-path'</strong>.  In <strong>Router->match()</strong>
                     method all routers are checked. If current route is matching some of the exists this method return
                     tha <strong>array['\namespace-name\class-name', 'method-name']</strong>. Then the route 'goes' to dispatcher and
                     the dispatcher handling the current route. Dispatcher run [0] element of this array as class, and
@@ -60,8 +60,8 @@
                         To add new page you need to create the view file (test.php) in 'pages' directory. Then create the
                         controller file (TestController) in 'lib/Pages' directory with action (showTestPage) that will return this view file. Controller should
                         extends the \mvc\BaseController to use the 'render' method.<br />
-                        Now create the route to TestController->showTestPage ('show-test-page', ['\Pages\TestController', 'showTestPage']) in index.php file. <br>
-                        In the menu create link with href='?action=show-test-page'. Done!
+                        Now create the route to TestController->showTestPage ('/show-test-page', ['\Pages\TestController', 'showTestPage']) in index.php file. <br>
+                        In the menu create link with href='/show-test-page'. Done!
                     </p>
 
                     <h5>Where is the layout files?</h5>
