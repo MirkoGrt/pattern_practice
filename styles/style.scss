@@ -75,6 +75,14 @@
     }
 /*=================*/
 
+/*===== Creational page =====*/
+    .creational-page-title-card {
+        .mdl-card__title {
+            background: url('/images/creational_patterns_title_background.jpg') center / cover;
+        }
+    }
+/*=================*/
+
 /*===== JS page =====*/
     .js-page-title-card {
         .mdl-card__title {
