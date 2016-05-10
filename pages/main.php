@@ -40,11 +40,21 @@
                     <hr>
                     <img src="/images/diagram_mvc_20-04-16.png" alt="MVC diagram">
                     <hr>
+
+                    <u>Patterns</u> <br>
+                    There is patterns implementations on this site. Each pattern has its own namespace (lib/Patterns)
+                    Patterns pages links are in the burger-menu. To see pattern classes open it in the "lib" folder. To
+                    see the pattern usage open the current patterns group page in the "pages" folder <strong>(creational.php,
+                    behavioral.php, structural.php)</strong>. To see the pattern presentation open its group page in burger menu
+                    and find interested pattern.
+                    <hr>
+
                     <u>Pages</u> <br>
                     Pages Controllers to render pages views and do some functionality on its views
                     <hr>
                     <img src="/images/diagram_pages_20-04-16.png" alt="Pages diagram">
                     <hr />
+                    <h1>FAQ</h1>
                     <h5>How to add new page?</h5>
                     <p>
                         To add new page you need to create the view file (test.php) in 'pages' directory. Then create the
