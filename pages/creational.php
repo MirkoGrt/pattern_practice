@@ -37,14 +37,14 @@
             Also you can define which methods should be used in Builder and in Director classes by defining them in Abstract classes.
         </p>
         <?php
-            $pageBuilder = new OneColumnPageBuilder();
-            $pageDirector = new PageDirector($pageBuilder);
+            $pageBuilder = new Patterns\Creational\Builder\OneColumnPageBuilder();
+            $pageDirector = new Patterns\Creational\Builder\PageDirector($pageBuilder);
             $pageDirector->buildPage();
             $page = $pageDirector->getPage();
             echo $page->showPage();
             echo "<hr />";
-            $pageWithSidebarBuilder = new TwoColumnsRightPageBuilder();
-            $pageDirector = new PageDirector($pageWithSidebarBuilder);
+            $pageWithSidebarBuilder = new Patterns\Creational\Builder\TwoColumnsRightPageBuilder();
+            $pageDirector = new Patterns\Creational\Builder\PageDirector($pageWithSidebarBuilder);
             $pageDirector->buildPage();
             $pageTwoColumnsFight = $pageDirector->getPage();
             echo $pageTwoColumnsFight->showPage();
