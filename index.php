@@ -11,6 +11,7 @@
     $router->post('/changeEventStatus', ['\Pages\Calendar', 'changeEventStatus']);
     $router->post('/deleteEvent', ['\Pages\Calendar', 'deleteEvent']);
     $router->get('/calendar', ['\Pages\Calendar', 'showCalendar']);
+    $router->get('/mo-spender', ['\Pages\MoSpenderController', 'showMoSpender']);
     $router->get('/main-page', ['\Pages\MainPageController', 'showMainPage']);
     $router->get('/js-page', ['\Pages\JsPageController', 'showJsPage']);
     $router->get('/behavioral-patterns', ['\Pages\BehavioralPageController', 'showBehavioralPage']);

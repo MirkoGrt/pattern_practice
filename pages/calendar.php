@@ -22,7 +22,7 @@
                     </p>
                     <p>
                         To make the events work please install the "practice_calendar" DB and do the custom connection.
-                        Event handler (Calendar class) file is located in the <strong>"lib/Pages/calendar"</strong> folder.
+                        Event handler (Calendar class) file is located in the <strong>"lib/Pages/Calendar.php"</strong> file.
                     </p>
                     <h5>Features</h5>
                     <ul class="features-events-list mdl-list">
@@ -69,7 +69,7 @@
                     if (monthString.length <= 1) {
                         monthString = "0" + month + "";
                     }
-                    document.location.href = "&month=" + monthString + "&year=" + year;
+                    document.location.href = "?month=" + monthString + "&year=" + year;
                 }
 
                 function goNextMonth (month, year) {
@@ -82,7 +82,7 @@
                     if (monthString.length <= 1) {
                         monthString = "0" + month + "";
                     }
-                    document.location.href = "&month=" + monthString + "&year=" + year;
+                    document.location.href = "?month=" + monthString + "&year=" + year;
                 }
             </script>
             <?php

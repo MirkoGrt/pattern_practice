@@ -83,6 +83,15 @@
     }
 /*=================*/
 
+/*===== MoSpender page =====*/
+    .mo-spender-title-card {
+        .mdl-card__title {
+            background: url('/images/mospender_title_background.jpg') center / cover;
+            color: black;
+        }
+    }
+/*=================*/
+
 /*===== JS page =====*/
     .js-page-title-card {
         .mdl-card__title {

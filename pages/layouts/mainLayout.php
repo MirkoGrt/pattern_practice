@@ -63,6 +63,7 @@
                     <a class="mdl-navigation__link mdl-typography--text-uppercase" href="/main-page">Main</a>
                     <a class="mdl-navigation__link mdl-typography--text-uppercase" href="/js-page">JS</a>
                     <a class="mdl-navigation__link mdl-typography--text-uppercase" href="/calendar">Calendar</a>
+                    <a class="mdl-navigation__link mdl-typography--text-uppercase" href="/mo-spender">MoSpender</a>
                 </nav>
             </div>
           <span class="android-mobile-title mdl-layout-title">
