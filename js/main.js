@@ -28,3 +28,9 @@ function arrayToDiv (array, div) {
     });
     div.append(divHtml);
 }
+
+// Function to show/hide patterns diagrams
+function togglePatternDiagram (pattern, button) {
+    $('.' + pattern + '-diagram').toggle('display');
+
+}

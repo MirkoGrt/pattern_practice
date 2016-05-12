@@ -31,7 +31,12 @@
                         Facade defines a higher-level interface that makes the subsystem easier to use.
                     </p>
                     <p class="small-description">
-                        Just imagine you are going to the Bukovel. You want to know price ranges.
+                        Just imagine you are going to the 'Bukovel'. You want to know price ranges.
+                        We create Hotel Booking class (to know hotel prices), Ski Booking class (to know ski prices)
+                        and Ticket Booking class (to know tickets prices). Then in the Facade class we have all this booking
+                        systems and get the needed rest according to the situation.
+                        In Facade constructor we create all objects we want to use. We can manipulate data rom this objects
+                        in the one place.
                     </p>
                     <hr>
                     <?php
@@ -41,14 +46,18 @@
                     ?>
                 </div>
                 <div class="mdl-card__actions mdl-card--border">
-                    <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
-                        Button
+                    <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect show-pattern-diagram-btn"
+                    onclick="togglePatternDiagram('facade', this)">
+                        Show/Hide UML Diagram
                     </a>
                 </div>
                 <div class="mdl-card__menu">
                     <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
                         <i class="material-icons">share</i>
                     </button>
+                </div>
+                <div class="pattern-diagram-wrapper facade-diagram">
+                    <img src="/images/patterns_uml_diagrams/diagram_facade.png" alt="facade_uml_diagram" />
                 </div>
             </div>
 
