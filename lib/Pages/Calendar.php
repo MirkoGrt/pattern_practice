@@ -14,7 +14,7 @@ class Calendar extends Mvc\BaseController {
      * function to get DB Connection from DbConnection class
      */
     public function getDataBase () {
-        return new DbWork\DbConnection();
+        return new DbWork\DbConnection('root', 'root', 'practice_calendar');
     }
 
     /**

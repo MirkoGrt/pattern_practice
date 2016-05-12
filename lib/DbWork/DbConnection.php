@@ -11,16 +11,24 @@ namespace DbWork;
 
 class DbConnection {
 
+    public $username;
+    public $password;
+    public $dbName;
+
+    public function __construct($username, $password, $dbName) {
+        $this->username = $username;
+        $this->password = $password;
+        $this->dbName = $dbName;
+    }
+
     /**
      * @return \PDO
      *
      * do connection to DB
      */
     public function initDbConnection () {
-        $userName = 'root';
-        $password = 'root';
 
-        $PDO_Connection = new \PDO('mysql:host=localhost; dbname=practice_calendar; charset=utf8mb4', $userName, $password);
+        $PDO_Connection = new \PDO('mysql:host=localhost; dbname=' . $this->dbName . '; charset=utf8mb4', $this->username, $this->password);
 
         $PDO_Connection or die('ERROR with connection to MYSQL server . . .<hr />');
 
