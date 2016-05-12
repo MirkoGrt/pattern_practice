@@ -10,6 +10,8 @@
     $router->post('/addEvent', ['\Pages\Calendar', 'addEvent']);
     $router->post('/changeEventStatus', ['\Pages\Calendar', 'changeEventStatus']);
     $router->post('/deleteEvent', ['\Pages\Calendar', 'deleteEvent']);
+    $router->post('/addSenderItem', ['\Pages\MoSpenderController', 'addSenderItem']);
+
     $router->get('/calendar', ['\Pages\Calendar', 'showCalendar']);
     $router->get('/mo-spender', ['\Pages\MoSpenderController', 'showMoSpender']);
     $router->get('/main-page', ['\Pages\MainPageController', 'showMainPage']);

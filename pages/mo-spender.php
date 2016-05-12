@@ -84,11 +84,11 @@
 
                 <!--Category-->
                 <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="spender_item_category_joy">
-                    <input type="checkbox" id="spender_item_category_joy" class="mdl-checkbox__input" checked>
+                    <input type="checkbox" id="spender_item_category_joy" name="spender_item_category" class="mdl-checkbox__input" value="Joy">
                     <span class="mdl-checkbox__label">Joy</span>
                 </label>
                 <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="spender_item_category_food">
-                    <input type="checkbox" id="spender_item_category_food" class="mdl-checkbox__input">
+                    <input type="checkbox" id="spender_item_category_food" name="spender_item_category" class="mdl-checkbox__input" value="Food">
                     <span class="mdl-checkbox__label">Food</span>
                 </label>
 
@@ -105,7 +105,14 @@
                     <label class="mdl-textfield__label" for="spender_item_month">Month</label>
                     <span class="mdl-textfield__error">Input is not a number!</span>
                 </div>
+                <div id="sender-item-adding-progress" class="mdl-progress mdl-js-progress mdl-progress__indeterminate"></div>
+                <br>
             </form>
+            <br>
+            <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent"
+                onclick="addSenderItemToDB()">
+                Add MoSpender Item!
+            </button>
             <!-- End Form for adiing data -->
 
             <!-- Archive list -->
@@ -146,6 +153,48 @@
                 </li>
             </ul>
             <!--/end archive list-->
+
+            <!--JAVASCRIPT FUNCTIONS-->
+            <script type="text/javascript">
+                function addSenderItemToDB () {
+                    $('#sender-item-adding-progress').css('display', 'block');
+
+                    var formToAddItems = '#form-to-add-data-from-note';
+
+                    var ItemName = $(formToAddItems + ' #spender_item_name').val();
+                    var ItemPrice = $(formToAddItems + ' #spender_item_price').val();
+                    var ItemPriceCurrency = $(formToAddItems + ' input[name=spender_currency]:checked').val();
+                    var ItemTags = $(formToAddItems + ' #spender_item_tags').val();
+                    var ItemCategories = $(formToAddItems + ' input[name=spender_item_category]:checked').map(function() {
+                        return this.value;
+                    }).get();
+                    var ItemDay = $(formToAddItems + ' #spender_item_day').val();
+                    var ItemMonth = $(formToAddItems + ' #spender_item_month').val();
+
+                    var url = '/addSenderItem';
+                    var data = 'itemName=' + ItemName +
+                        '&itemPrice=' + ItemPrice +
+                        '&itemPriceCurrency=' + ItemPriceCurrency +
+                        '&itemTags=' + ItemTags +
+                        '&itemCategories=' + ItemCategories +
+                        '&itemDay=' + ItemDay +
+                        '&itemMonth=' + ItemMonth;
+
+                    $.ajax({
+                        url: url,
+                        type: "POST",
+                        data: data,
+                        success: function (response) {
+                            console.log(response);
+                            $('#sender-item-adding-progress').css('display', 'none');
+                        },
+                        error: function (response) {
+                            $('#sender-item-adding-progress').css('display', 'none');
+                        }
+                    });
+                }
+            </script>
+            <!-- End JavaScript -->
 
         </div>
         <div class="mdl-cell--2-col"></div>

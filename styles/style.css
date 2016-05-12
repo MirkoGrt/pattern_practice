@@ -52,6 +52,11 @@
   background: url("/images/mospender_title_background.jpg") center/cover;
   color: black; }
 
+#form-to-add-data-from-note {
+  width: 300px; }
+  #form-to-add-data-from-note #sender-item-adding-progress {
+    display: none; }
+
 /*=================*/
 /*===== JS page =====*/
 .js-page-title-card .mdl-card__title {
