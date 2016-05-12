@@ -47,7 +47,69 @@
                 </div>
             </div>
 
+            <!-- Form for adding data from note to DB -->
+            <h3><i class="material-icons">cloud_upload</i> Transform items from notes to great DB!</h3>
+            <form id="form-to-add-data-from-note">
+                <!--Name-->
+                <div class="mdl-textfield mdl-js-textfield">
+                    <input class="mdl-textfield__input" type="text" id="spender_item_name">
+                    <label class="mdl-textfield__label" for="spender_item_name">Item Name</label>
+                </div>
+
+                <!--Price-->
+                <div class="mdl-textfield mdl-js-textfield">
+                    <input class="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?" id="spender_item_price">
+                    <label class="mdl-textfield__label" for="spender_item_price">Price</label>
+                    <span class="mdl-textfield__error">Input is not a number!</span>
+                </div>
+
+                <!--Currency radio buttons-->
+                <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="spender_currency_dollar">
+                    <input type="radio" id="spender_currency_dollar" class="mdl-radio__button" name="spender_currency" value="USD">
+                    <span class="mdl-radio__label">Dollar</span>
+                </label>
+                <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="spender_currency_hryvnia">
+                    <input type="radio" id="spender_currency_hryvnia" class="mdl-radio__button" name="spender_currency" value="UAH" checked>
+                    <span class="mdl-radio__label">Hryvnia</span>
+                </label>
+
+                <!--Tags-->
+                <div class="mdl-textfield mdl-js-textfield">
+                    <input class="mdl-textfield__input" type="text" id="spender_item_tags">
+                    <label class="mdl-textfield__label" for="spender_item_tags">Item Tags</label>
+                </div>
+                <div class="mdl-tooltip" for="spender_item_tags">
+                    Enter the comma (',')<br>separated values
+                </div>
+
+                <!--Category-->
+                <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="spender_item_category_joy">
+                    <input type="checkbox" id="spender_item_category_joy" class="mdl-checkbox__input" checked>
+                    <span class="mdl-checkbox__label">Joy</span>
+                </label>
+                <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="spender_item_category_food">
+                    <input type="checkbox" id="spender_item_category_food" class="mdl-checkbox__input">
+                    <span class="mdl-checkbox__label">Food</span>
+                </label>
+
+                <!--Day-->
+                <div class="mdl-textfield mdl-js-textfield">
+                    <input class="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?" id="spender_item_day">
+                    <label class="mdl-textfield__label" for="spender_item_day">Day</label>
+                    <span class="mdl-textfield__error">Input is not a number!</span>
+                </div>
+
+                <!--Month-->
+                <div class="mdl-textfield mdl-js-textfield">
+                    <input class="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?" id="spender_item_month">
+                    <label class="mdl-textfield__label" for="spender_item_month">Month</label>
+                    <span class="mdl-textfield__error">Input is not a number!</span>
+                </div>
+            </form>
+            <!-- End Form for adiing data -->
+
             <!-- Archive list -->
+            <h3><i class="material-icons">folder</i> Archive!</h3>
             <ul class="money-archive-list mdl-list">
                 <li class="mdl-list__item">
                     <span class="mdl-list__item-primary-content">
@@ -83,7 +145,7 @@
                     </span>
                 </li>
             </ul>
-            <!--/ end archive list-->
+            <!--/end archive list-->
 
         </div>
         <div class="mdl-cell--2-col"></div>
