@@ -1,3 +1,6 @@
+<?php
+
+?>
 <main class="android-content mdl-layout__content">
     <div class="mdl-grid">
         <div class="mdl-cell--2-col"></div>
@@ -105,6 +108,11 @@
                     <label class="mdl-textfield__label" for="spender_item_month">Month</label>
                     <span class="mdl-textfield__error">Input is not a number!</span>
                 </div>
+                <div class="mdl-textfield mdl-js-textfield">
+                    <input class="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?" id="spender_item_year">
+                    <label class="mdl-textfield__label" for="spender_item_year">Year</label>
+                    <span class="mdl-textfield__error">Input is not a number!</span>
+                </div>
                 <div id="sender-item-adding-progress" class="mdl-progress mdl-js-progress mdl-progress__indeterminate"></div>
                 <br>
             </form>
@@ -170,6 +178,7 @@
                     }).get();
                     var ItemDay = $(formToAddItems + ' #spender_item_day').val();
                     var ItemMonth = $(formToAddItems + ' #spender_item_month').val();
+                    var ItemYear = $(formToAddItems + ' #spender_item_year').val();
 
                     var url = '/addSenderItem';
                     var data = 'itemName=' + ItemName +
@@ -178,7 +187,8 @@
                         '&itemTags=' + ItemTags +
                         '&itemCategories=' + ItemCategories +
                         '&itemDay=' + ItemDay +
-                        '&itemMonth=' + ItemMonth;
+                        '&itemMonth=' + ItemMonth +
+                        '&itemYear=' + ItemYear;
 
                     $.ajax({
                         url: url,

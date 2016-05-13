@@ -18,7 +18,7 @@ class MoSpenderController extends Mvc\BaseController {
     }
 
     /**
-     *  adding item to DB table
+     *  adding item to DB table / add item to current year table
      */
     public function addSenderItem () {
         $PDO_Connection = $this->getDataBase()->initDbConnection();
@@ -32,28 +32,63 @@ class MoSpenderController extends Mvc\BaseController {
         $itemDay = $_POST['itemDay'];
         $itemMonth = $_POST['itemMonth'];
 
-        $tableForYearItems = $this->getTableName();
+        $itemYear = $_POST['itemYear'];
+        if (!$itemYear) {
+            $itemYear = date('Y');
+        }
 
-        // if there no table for current year - create it
+        $itemTimestamp = strtotime($itemYear . $itemMonth . $itemDay);
+
+        $tableForYearItems = $this->getTableName($itemYear);
+
+        // if there are no table for current year - create it
         if (!$this->checkIfTableForYearExist($tableForYearItems)) {
             $this->createTableForYearItems($tableForYearItems);
+        }
+
+        /* MySQL insert query. PDO prepared query */
+        $insertQuery = $PDO_Connection->prepare(
+            'INSERT INTO ' . $tableForYearItems .' (itemName, itemPrice, itemPriceCurrency, itemTags, itemCategories, itemDay, itemMonth, itemTimestamp)
+                VALUES (:itemName, :itemPrice, :itemPriceCurrency, :itemTags, :itemCategories, :itemDay, :itemMonth, ' . $itemTimestamp .')'
+        );
+
+        /* Binding params */
+        $insertQuery->bindParam(':itemName', $itemName);
+        $insertQuery->bindParam(':itemPrice', $itemPrice);
+        $insertQuery->bindParam(':itemPriceCurrency', $itemPriceCurrency);
+        $insertQuery->bindParam(':itemTags', $itemTags);
+        $insertQuery->bindParam(':itemCategories', $itemCategories);
+        $insertQuery->bindParam(':itemDay', $itemDay);
+        $insertQuery->bindParam(':itemMonth', $itemMonth);
+
+
+        /* Running and checking the query */
+        if ($insertQuery->execute()) {
+            echo json_encode('Success! MoItem is added is added');
+        } else {
+            echo json_encode("Error with adding the item!");
         }
 
     }
 
     /**
+     * @param $year
      * @return string
      *
      * Get the name of table for year items
      */
-    public function getTableName () {
-        $currentYear = date('Y');
-        $tableName = 'spender_items_' . $currentYear;
+    public function getTableName ($year) {
+        $tableName = 'spender_items_' . $year;
 
         return $tableName;
     }
 
 
+    /**
+     * @param $tableName
+     *
+     * SQL for creating year items table
+     */
     public function createTableForYearItems ($tableName) {
         $PDO_Connection = $this->getDataBase()->initDbConnection();
 
@@ -61,11 +96,12 @@ class MoSpenderController extends Mvc\BaseController {
                   id int(11) NOT NULL AUTO_INCREMENT,
                   itemName varchar(255),
                   itemPrice int(11),
+                  itemPriceCurrency varchar(255),
                   itemTags text,
                   itemCategories text,
                   itemDay int(11),
                   itemMonth int(11),
-                  itemTimestamp timestamp,
+                  itemTimestamp varchar(10),
                   PRIMARY KEY (id)
                 ) ENGINE=InnoDB;';
 
