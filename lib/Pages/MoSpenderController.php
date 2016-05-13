@@ -29,8 +29,8 @@ class MoSpenderController extends Mvc\BaseController {
         $itemPriceCurrency = $_POST['itemPriceCurrency'];
         $itemTags = $_POST['itemTags'];
         $itemCategories = $_POST['itemCategories'];
-        $itemDay = $_POST['itemDay'];
-        $itemMonth = $_POST['itemMonth'];
+        $itemDay = $this->convertDataValue($_POST['itemDay']);
+        $itemMonth = $this->convertDataValue($_POST['itemMonth']);
 
         $itemYear = $_POST['itemYear'];
         if (!$itemYear) {
@@ -122,6 +122,21 @@ class MoSpenderController extends Mvc\BaseController {
             return true;
         } else {
             return false;
+        }
+    }
+
+    /**
+     * @param $value
+     * @return string
+     *
+     * If we enter the '3' day, this function convert it to '03'.
+     */
+    public function convertDataValue ($value) {
+        if (strlen($value) <= 1) {
+            $value = '0' . $value;
+            return $value;
+        } else {
+            return $value;
         }
     }
 
