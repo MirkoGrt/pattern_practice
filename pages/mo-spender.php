@@ -57,6 +57,7 @@
                 <div class="mdl-textfield mdl-js-textfield">
                     <input class="mdl-textfield__input" type="text" id="spender_item_name">
                     <label class="mdl-textfield__label" for="spender_item_name">Item Name</label>
+                    <span class="mdl-textfield__error"></span>
                 </div>
 
                 <!--Price-->
@@ -87,13 +88,15 @@
 
                 <!--Category-->
                 <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="spender_item_category_joy">
-                    <input type="checkbox" id="spender_item_category_joy" name="spender_item_category" class="mdl-checkbox__input" value="Joy">
+                    <input type="checkbox" id="spender_item_category_joy" name="spender_item_category" class="mdl-checkbox__input spender_item_category" value="Joy">
                     <span class="mdl-checkbox__label">Joy</span>
                 </label>
                 <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="spender_item_category_food">
-                    <input type="checkbox" id="spender_item_category_food" name="spender_item_category" class="mdl-checkbox__input" value="Food">
+                    <input type="checkbox" id="spender_item_category_food" name="spender_item_category" class="mdl-checkbox__input spender_item_category" value="Food">
                     <span class="mdl-checkbox__label">Food</span>
+                    <span class="mdl-textfield__error"></span>
                 </label>
+
 
                 <div class="mdl-textfield mdl-js-textfield">
                     <input class="mdl-textfield__input" type="text" id="spender_item_new_category">
@@ -175,43 +178,68 @@
                 function addSenderItemToDB () {
                     $('#sender-item-adding-progress').css('display', 'block');
 
+                    if (validateMoSpenderForm()) {
+                        var formToAddItems = '#form-to-add-data-from-note';
+
+                        var ItemName = $(formToAddItems + ' #spender_item_name').val();
+                        var ItemPrice = $(formToAddItems + ' #spender_item_price').val();
+                        var ItemPriceCurrency = $(formToAddItems + ' input[name=spender_currency]:checked').val();
+                        var ItemTags = $(formToAddItems + ' #spender_item_tags').val();
+                        var ItemCategories = $(formToAddItems + ' input[name=spender_item_category]:checked').map(function() {
+                            return this.value;
+                        }).get();
+                        var ItemNewCategory = $(formToAddItems + ' #spender_item_new_category').val();
+                        var ItemDay = $(formToAddItems + ' #spender_item_day').val();
+                        var ItemMonth = $(formToAddItems + ' #spender_item_month').val();
+                        var ItemYear = $(formToAddItems + ' #spender_item_year').val();
+
+                        var url = '/addSenderItem';
+                        var data = 'itemName=' + ItemName +
+                            '&itemPrice=' + ItemPrice +
+                            '&itemPriceCurrency=' + ItemPriceCurrency +
+                            '&itemTags=' + ItemTags +
+                            '&itemCategories=' + ItemCategories +
+                            '&itemNewCategory=' + ItemNewCategory +
+                            '&itemDay=' + ItemDay +
+                            '&itemMonth=' + ItemMonth +
+                            '&itemYear=' + ItemYear;
+
+                        $.ajax({
+                            url: url,
+                            type: "POST",
+                            data: data,
+                            success: function (response) {
+                                console.log(response);
+                                $('#sender-item-adding-progress').css('display', 'none');
+                            },
+                            error: function (response) {
+                                $('#sender-item-adding-progress').css('display', 'none');
+                            }
+                        });
+                    }
+                }
+
+                /* Function to validate mospender form before saving */
+                function validateMoSpenderForm () {
+
                     var formToAddItems = '#form-to-add-data-from-note';
+                    var spenderName = $(formToAddItems + ' #spender_item_name');
+                    var spenderPrice = $(formToAddItems + ' #spender_item_price');
+                    var spenderCategory = $(formToAddItems + ' .spender_item_category');
+                    var spenderDay = $(formToAddItems + ' #spender_item_day');
+                    var spenderMonth = $(formToAddItems + ' #spender_item_month');
+                    var spenderYear = $(formToAddItems + ' #spender_item_year');
 
-                    var ItemName = $(formToAddItems + ' #spender_item_name').val();
-                    var ItemPrice = $(formToAddItems + ' #spender_item_price').val();
-                    var ItemPriceCurrency = $(formToAddItems + ' input[name=spender_currency]:checked').val();
-                    var ItemTags = $(formToAddItems + ' #spender_item_tags').val();
-                    var ItemCategories = $(formToAddItems + ' input[name=spender_item_category]:checked').map(function() {
-                        return this.value;
-                    }).get();
-                    var ItemNewCategory = $(formToAddItems + ' #spender_item_new_category').val();
-                    var ItemDay = $(formToAddItems + ' #spender_item_day').val();
-                    var ItemMonth = $(formToAddItems + ' #spender_item_month').val();
-                    var ItemYear = $(formToAddItems + ' #spender_item_year').val();
+                    var nameValidation = validate(spenderName, 0, 20, true);
+                    var priceValidation = validate(spenderPrice, null, null, true);
+                    var categoryValidation = validate(spenderCategory, null, null, true);
+                    var dayValidation = validate(spenderDay, null, null, true);
+                    var monthValidation = validate(spenderMonth, null, null, true);
+                    var yearValidation = validate(spenderYear, null, null, true);
 
-                    var url = '/addSenderItem';
-                    var data = 'itemName=' + ItemName +
-                        '&itemPrice=' + ItemPrice +
-                        '&itemPriceCurrency=' + ItemPriceCurrency +
-                        '&itemTags=' + ItemTags +
-                        '&itemCategories=' + ItemCategories +
-                        '&itemNewCategory=' + ItemNewCategory +
-                        '&itemDay=' + ItemDay +
-                        '&itemMonth=' + ItemMonth +
-                        '&itemYear=' + ItemYear;
-
-                    $.ajax({
-                        url: url,
-                        type: "POST",
-                        data: data,
-                        success: function (response) {
-                            console.log(response);
-                            $('#sender-item-adding-progress').css('display', 'none');
-                        },
-                        error: function (response) {
-                            $('#sender-item-adding-progress').css('display', 'none');
-                        }
-                    });
+                    if (nameValidation && priceValidation && dayValidation && monthValidation && yearValidation && categoryValidation) {
+                        return true;
+                    }
                 }
             </script>
             <!-- End JavaScript -->

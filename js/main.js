@@ -32,5 +32,37 @@ function arrayToDiv (array, div) {
 // Function to show/hide patterns diagrams
 function togglePatternDiagram (pattern, button) {
     $('.' + pattern + '-diagram').toggle('display');
+}
 
+/* Function to custom validate BASE MDL form */
+function validate (field, min, max, setRequired) {
+
+    var mdlErrorMessage = field.siblings('.mdl-textfield__error');
+    var ErrorMessageText = mdlErrorMessage.text();
+
+    // validate checkbox
+    if (setRequired && field.attr('type') == 'checkbox' && field.is(':checked') == false) {
+        mdlErrorMessage.text('This is the required field!' + ' - ' + ErrorMessageText).css('visibility', 'visible');
+        return false;
+    }
+    // validate require
+    else if (setRequired && field.val() == 0) {
+        mdlErrorMessage.text('This is the required field!' + ' - ' + ErrorMessageText).css('visibility', 'visible');
+        return false;
+    }
+    // validate max
+    else if (max != null && field.val() > max) {
+        mdlErrorMessage.text('The maximum is ' + max + ' characters!' + ' - ' + ErrorMessageText).css('visibility', 'visible');
+        return false;
+    }
+    // validate min
+    else if (min != null && field.val() < min) {
+        mdlErrorMessage.text('The minimum is ' + min + ' characters!' + ' - ' + ErrorMessageText).css('visibility', 'visible');
+        return false;
+    }
+    // validation error
+    else {
+        mdlErrorMessage.text('').css('visibility', 'hidden');
+        return true;
+    }
 }

@@ -267,26 +267,6 @@
             </div>
 
             <script>
-                /* Function to custom validate BASE MDL form */
-                function validate (field, min, max, setRequired) {
-
-                    var mdlErrorMessage = field.siblings('.mdl-textfield__error');
-
-                    if (setRequired && field.val() == 0) {
-                        mdlErrorMessage.text('This is the required field!').css('visibility', 'visible');
-                        return false;
-                    }
-                     else if (field.val() > max) {
-                        mdlErrorMessage.text('The maximum is ' + max + ' characters!').css('visibility', 'visible');
-                        return false;
-                    } else if (field.val() < min) {
-                        mdlErrorMessage.text('The minimum is ' + min + ' characters!').css('visibility', 'visible');
-                        return false;
-                    } else {
-                        mdlErrorMessage.text('').css('visibility', 'hidden');
-                        return true;
-                    }
-                }
 
                 /* Function to validate event form before saving */
                 function validateEventForm () {
