@@ -97,7 +97,7 @@
                     <span class="mdl-textfield__error"></span>
                 </label>
 
-
+                <!--/.New category-->
                 <div class="mdl-textfield mdl-js-textfield">
                     <input class="mdl-textfield__input" type="text" id="spender_item_new_category">
                     <label class="mdl-textfield__label" for="spender_item_new_category">New Category</label>
@@ -211,9 +211,11 @@
                             success: function (response) {
                                 console.log(response);
                                 $('#sender-item-adding-progress').css('display', 'none');
+                                cleanForm(formToAddItems);
                             },
                             error: function (response) {
                                 $('#sender-item-adding-progress').css('display', 'none');
+                                cleanForm(formToAddItems);
                             }
                         });
                     }
@@ -228,16 +230,14 @@
                     var spenderCategory = $(formToAddItems + ' .spender_item_category');
                     var spenderDay = $(formToAddItems + ' #spender_item_day');
                     var spenderMonth = $(formToAddItems + ' #spender_item_month');
-                    var spenderYear = $(formToAddItems + ' #spender_item_year');
 
                     var nameValidation = validate(spenderName, 0, 20, true);
                     var priceValidation = validate(spenderPrice, null, null, true);
                     var categoryValidation = validate(spenderCategory, null, null, true);
                     var dayValidation = validate(spenderDay, null, null, true);
                     var monthValidation = validate(spenderMonth, null, null, true);
-                    var yearValidation = validate(spenderYear, null, null, true);
 
-                    if (nameValidation && priceValidation && dayValidation && monthValidation && yearValidation && categoryValidation) {
+                    if (nameValidation && priceValidation && dayValidation && monthValidation && categoryValidation) {
                         return true;
                     }
                 }

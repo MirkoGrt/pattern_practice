@@ -252,8 +252,9 @@
                             <label class="mdl-textfield__label" for="event-details">Event details...</label>
                             <span class="mdl-textfield__error"></span>
                         </div>
+                        <div id="event-adding-progress" class="mdl-progress mdl-js-progress mdl-progress__indeterminate"></div>
+                        <br>
                     </form>
-                    <div id="event-adding-progress" class="mdl-progress mdl-js-progress mdl-progress__indeterminate"></div>
                 </div>
                 <div class="mdl-dialog__actions">
                     <button type="button" onclick="saveEvent()" class="mdl-button">Add Event</button>
@@ -281,14 +282,6 @@
                     }
                 }
 
-                /* Function to clean event form after save the event */
-                function cleanEventForm () {
-                    $('#event-form').trigger('reset');
-                    $('#event-form .mdl-textfield').removeClass('is-dirty');
-                    $('#event-form .mdl-textfield__error').css('visibility', 'hidden');
-                    $('#event-adding-progress').css('display', 'none');
-                }
-
                 /* Function to save event to DB via aJax */
                 function saveEvent () {
                     $('#event-adding-progress').css('display', 'block');
@@ -308,12 +301,12 @@
                             data: data,
                             success: function (response) {
                                 showMdlSnackbar(response, 'success');
-                                cleanEventForm();
+                                cleanForm('#event-form');
                                 $('#event-adding-progress').css('display', 'none');
                             },
                             error: function (response) {
                                 showMdlSnackbar(response, 'error');
-                                cleanEventForm();
+                                cleanForm('#event-form');
                                 $('#event-adding-progress').css('display', 'none');
                             }
                         });
@@ -341,12 +334,12 @@
                 /* hack default dialog behavior (now it is opening on class name) */
                 $('.show-dialog').on('click', function () {
                     dialog.showModal();
-                    cleanEventForm();
+                    cleanForm('#event-form');
                     transferEventData($(this));
                 });
                 dialog.querySelector('.close').addEventListener('click', function() {
                     dialog.close();
-                    cleanEventForm();
+                    cleanForm('#event-form');
                 });
 
                 /* Function to change event status (active / not active) via checkbox in mdl menu */

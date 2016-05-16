@@ -66,3 +66,17 @@ function validate (field, min, max, setRequired) {
         return true;
     }
 }
+
+/* Function to clean MDL form after action */
+function cleanForm (form) {
+    $(form).trigger('reset');
+    $(form + ' .mdl-textfield').removeClass('is-dirty');
+    $(form + ' .mdl-textfield__error').css('visibility', 'hidden');
+    $(form + ' .mdl-progress').css('display', 'none');
+
+    // Uncheck all checkboxes
+    $(form + ' input[type=checkbox]').each(function () {
+        $(this).parent('label').removeClass('is-checked');
+        $(this).attr('checked', false);
+    });
+}
