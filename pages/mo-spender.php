@@ -99,7 +99,6 @@
                             </div>
                         </div>
 
-
                         <!--Category-->
                         <div class="spender_item_category_wrapper">
                             <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="spender_item_category_joy">
@@ -150,7 +149,7 @@
                     </form>
                     <br>
                     <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent"
-                            onclick="addSenderItemToDB()">
+                            onclick="addSpenderItemToDB()">
                         Add MoSpender Item!
                     </button>
                     <!-- End Form for adiing data -->
@@ -197,7 +196,7 @@
 
             <!--JAVASCRIPT FUNCTIONS-->
             <script type="text/javascript">
-                function addSenderItemToDB () {
+                function addSpenderItemToDB () {
                     $('#sender-item-adding-progress').css('display', 'block');
 
                     if (validateMoSpenderForm()) {
