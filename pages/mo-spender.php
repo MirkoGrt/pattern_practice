@@ -50,94 +50,115 @@
                 </div>
             </div>
 
-            <!-- Form for adding data from note to DB -->
-            <h3><i class="material-icons">cloud_upload</i> Transform items from notes to great DB!</h3>
-            <form id="form-to-add-data-from-note">
-                <!--Name-->
-                <div class="mdl-textfield mdl-js-textfield">
-                    <input class="mdl-textfield__input" type="text" id="spender_item_name">
-                    <label class="mdl-textfield__label" for="spender_item_name">Item Name</label>
-                    <span class="mdl-textfield__error"></span>
+            <div class="mdl-tabs mdl-js-tabs mdl-js-ripple-effect">
+                <div class="mdl-tabs__tab-bar">
+                    <a href="#transform-form-panel" class="mdl-tabs__tab is-active"><i class="material-icons">cloud_upload</i> Transform Form</a>
+                    <a href="#archive-panel" class="mdl-tabs__tab"><i class="material-icons">folder</i> Archive!</a>
+                </div><!--/.mdl-tabs__tab-bar-->
+
+                <div class="mdl-tabs__panel is-active" id="transform-form-panel">
+                    <h4>Add your items from text notes to great DB!</h4>
+                    <!-- Form for adding data from note to DB -->
+                    <form id="form-to-add-data-from-note">
+                        <!--Name-->
+                        <div class="spender_item_name_wrapper">
+                            <div class="mdl-textfield mdl-js-textfield ">
+                                <input class="mdl-textfield__input" type="text" id="spender_item_name">
+                                <label class="mdl-textfield__label" for="spender_item_name">Item Name</label>
+                                <span class="mdl-textfield__error"></span>
+                            </div>
+                        </div>
+
+                        <!--Price-->
+                        <div class="spender_item_price_wrapper">
+                            <div class="mdl-textfield mdl-js-textfield ">
+                                <input class="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?" id="spender_item_price">
+                                <label class="mdl-textfield__label" for="spender_item_price">Price</label>
+                                <span class="mdl-textfield__error">Input is not a number!</span>
+                            </div>
+
+                            <!--Currency radio buttons-->
+                            <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="spender_currency_dollar">
+                                <input type="radio" id="spender_currency_dollar" class="mdl-radio__button" name="spender_currency" value="USD">
+                                <span class="mdl-radio__label">Dollar</span>
+                            </label>
+                            <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="spender_currency_hryvnia">
+                                <input type="radio" id="spender_currency_hryvnia" class="mdl-radio__button" name="spender_currency" value="UAH" checked>
+                                <span class="mdl-radio__label">Hryvnia</span>
+                            </label>
+                        </div>
+
+                        <!--Tags-->
+                        <div class="spender_item_tags_wrapper">
+                            <div class="mdl-textfield mdl-js-textfield">
+                                <input class="mdl-textfield__input" type="text" id="spender_item_tags">
+                                <label class="mdl-textfield__label" for="spender_item_tags">Item Tags</label>
+                            </div>
+                            <div class="mdl-tooltip" for="spender_item_tags">
+                                Enter the comma (',')<br>separated values
+                            </div>
+                        </div>
+
+
+                        <!--Category-->
+                        <div class="spender_item_category_wrapper">
+                            <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="spender_item_category_joy">
+                                <input type="checkbox" id="spender_item_category_joy" name="spender_item_category" class="mdl-checkbox__input spender_item_category" value="Joy">
+                                <span class="mdl-checkbox__label">Joy</span>
+                            </label>
+                            <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="spender_item_category_food">
+                                <input type="checkbox" id="spender_item_category_food" name="spender_item_category" class="mdl-checkbox__input spender_item_category" value="Food">
+                                <span class="mdl-checkbox__label">Food</span>
+                                <span class="mdl-textfield__error"></span>
+                            </label>
+
+                            <!--/.New category-->
+                            <div class="mdl-textfield mdl-js-textfield">
+                                <input class="mdl-textfield__input" type="text" id="spender_item_new_category">
+                                <label class="mdl-textfield__label" for="spender_item_new_category">New Category</label>
+                            </div>
+                            <div class="mdl-tooltip" for="spender_item_new_category">
+                                Enter the new category name<br>if there is no one
+                            </div>
+                        </div>
+
+                        <div class="spender_item_date_wrapper">
+                            <!--Day-->
+                            <div class="mdl-textfield mdl-js-textfield">
+                                <input class="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?" id="spender_item_day">
+                                <label class="mdl-textfield__label" for="spender_item_day">Day</label>
+                                <span class="mdl-textfield__error">Input is not a number!</span>
+                            </div>
+
+                            <!--Month-->
+                            <div class="mdl-textfield mdl-js-textfield">
+                                <input class="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?" id="spender_item_month">
+                                <label class="mdl-textfield__label" for="spender_item_month">Month</label>
+                                <span class="mdl-textfield__error">Input is not a number!</span>
+                            </div>
+
+                            <!-- Year -->
+                            <div class="mdl-textfield mdl-js-textfield">
+                                <input class="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?" id="spender_item_year">
+                                <label class="mdl-textfield__label" for="spender_item_year">Year</label>
+                                <span class="mdl-textfield__error">Input is not a number!</span>
+                            </div>
+                        </div>
+
+                        <div id="sender-item-adding-progress" class="mdl-progress mdl-js-progress mdl-progress__indeterminate"></div>
+                        <br>
+                    </form>
+                    <br>
+                    <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent"
+                            onclick="addSenderItemToDB()">
+                        Add MoSpender Item!
+                    </button>
+                    <!-- End Form for adiing data -->
                 </div>
 
-                <!--Price-->
-                <div class="mdl-textfield mdl-js-textfield">
-                    <input class="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?" id="spender_item_price">
-                    <label class="mdl-textfield__label" for="spender_item_price">Price</label>
-                    <span class="mdl-textfield__error">Input is not a number!</span>
-                </div>
-
-                <!--Currency radio buttons-->
-                <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="spender_currency_dollar">
-                    <input type="radio" id="spender_currency_dollar" class="mdl-radio__button" name="spender_currency" value="USD">
-                    <span class="mdl-radio__label">Dollar</span>
-                </label>
-                <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="spender_currency_hryvnia">
-                    <input type="radio" id="spender_currency_hryvnia" class="mdl-radio__button" name="spender_currency" value="UAH" checked>
-                    <span class="mdl-radio__label">Hryvnia</span>
-                </label>
-
-                <!--Tags-->
-                <div class="mdl-textfield mdl-js-textfield">
-                    <input class="mdl-textfield__input" type="text" id="spender_item_tags">
-                    <label class="mdl-textfield__label" for="spender_item_tags">Item Tags</label>
-                </div>
-                <div class="mdl-tooltip" for="spender_item_tags">
-                    Enter the comma (',')<br>separated values
-                </div>
-
-                <!--Category-->
-                <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="spender_item_category_joy">
-                    <input type="checkbox" id="spender_item_category_joy" name="spender_item_category" class="mdl-checkbox__input spender_item_category" value="Joy">
-                    <span class="mdl-checkbox__label">Joy</span>
-                </label>
-                <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="spender_item_category_food">
-                    <input type="checkbox" id="spender_item_category_food" name="spender_item_category" class="mdl-checkbox__input spender_item_category" value="Food">
-                    <span class="mdl-checkbox__label">Food</span>
-                    <span class="mdl-textfield__error"></span>
-                </label>
-
-                <!--/.New category-->
-                <div class="mdl-textfield mdl-js-textfield">
-                    <input class="mdl-textfield__input" type="text" id="spender_item_new_category">
-                    <label class="mdl-textfield__label" for="spender_item_new_category">New Category</label>
-                </div>
-                <div class="mdl-tooltip" for="spender_item_new_category">
-                    Enter the new category name<br>if there is no one
-                </div>
-
-                <!--Day-->
-                <div class="mdl-textfield mdl-js-textfield">
-                    <input class="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?" id="spender_item_day">
-                    <label class="mdl-textfield__label" for="spender_item_day">Day</label>
-                    <span class="mdl-textfield__error">Input is not a number!</span>
-                </div>
-
-                <!--Month-->
-                <div class="mdl-textfield mdl-js-textfield">
-                    <input class="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?" id="spender_item_month">
-                    <label class="mdl-textfield__label" for="spender_item_month">Month</label>
-                    <span class="mdl-textfield__error">Input is not a number!</span>
-                </div>
-                <div class="mdl-textfield mdl-js-textfield">
-                    <input class="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?" id="spender_item_year">
-                    <label class="mdl-textfield__label" for="spender_item_year">Year</label>
-                    <span class="mdl-textfield__error">Input is not a number!</span>
-                </div>
-                <div id="sender-item-adding-progress" class="mdl-progress mdl-js-progress mdl-progress__indeterminate"></div>
-                <br>
-            </form>
-            <br>
-            <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent"
-                onclick="addSenderItemToDB()">
-                Add MoSpender Item!
-            </button>
-            <!-- End Form for adiing data -->
-
-            <!-- Archive list -->
-            <h3><i class="material-icons">folder</i> Archive!</h3>
-            <ul class="money-archive-list mdl-list">
-                <li class="mdl-list__item">
+                <div class="mdl-tabs__panel" id="archive-panel">
+                    <ul class="money-archive-list mdl-list">
+                        <li class="mdl-list__item">
                     <span class="mdl-list__item-primary-content">
                       <i class="material-icons  mdl-list__item-avatar">timeline</i>
                       2014
@@ -147,8 +168,8 @@
                             <input type="checkbox" id="archive-checkbox-2014" class="mdl-switch__input" />
                         </label>
                     </span>
-                </li>
-                <li class="mdl-list__item">
+                        </li>
+                        <li class="mdl-list__item">
                     <span class="mdl-list__item-primary-content">
                       <i class="material-icons  mdl-list__item-avatar">timeline</i>
                       2015
@@ -158,8 +179,8 @@
                             <input type="checkbox" id="archive-checkbox-2015" class="mdl-switch__input" />
                         </label>
                     </span>
-                </li>
-                <li class="mdl-list__item">
+                        </li>
+                        <li class="mdl-list__item">
                     <span class="mdl-list__item-primary-content">
                       <i class="material-icons  mdl-list__item-avatar">timeline</i>
                       2016
@@ -169,9 +190,10 @@
                             <input type="checkbox" id="archive-checkbox-2016" class="mdl-switch__input" />
                         </label>
                     </span>
-                </li>
-            </ul>
-            <!--/end archive list-->
+                        </li>
+                    </ul>
+                </div><!--/#archive-panel-->
+            </div><!--/.mdl-tabs-->
 
             <!--JAVASCRIPT FUNCTIONS-->
             <script type="text/javascript">

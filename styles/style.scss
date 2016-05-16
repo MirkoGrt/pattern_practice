@@ -96,12 +96,57 @@
             color: black;
         }
     }
+    /*------ Spender page tabs ------*/
+    .mdl-tabs__tab-bar {
+        background-color: gainsboro;
+        .material-icons {
+            margin-right: 10px;
+        }
+    }
+    /*------------*/
+    /*------ Spender form (add items) ------*/
     #form-to-add-data-from-note {
-        width: 300px;
+        .spender_item_name_wrapper {
+            width: 100%;
+            .mdl-textfield {
+                width: 100%;
+            }
+        }
+        .spender_item_price_wrapper {
+            width: 100%;
+            .mdl-textfield {
+                width: 20%;
+            }
+        }
+        .spender_item_tags_wrapper {
+            width: 100%;
+            .mdl-textfield {
+                width: 100%;
+            }
+        }
+        .spender_item_category_wrapper {
+            width: 100%;
+        }
+        .spender_item_date_wrapper {
+            width: 100%;
+            text-align: center;
+            .mdl-textfield {
+                width: 20%;
+            }
+        }
+        .spender_item_date_wrapper,
+        .spender_item_category_wrapper,
+        .spender_item_tags_wrapper,
+        .spender_item_price_wrapper,
+        .spender_item_name_wrapper {
+            padding: 10px;
+        }
+
         #sender-item-adding-progress {
             display: none;
         }
     }
+    /*------------*/
 /*=================*/
 
 /*===== JS page =====*/
