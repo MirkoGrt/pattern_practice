@@ -29,6 +29,7 @@ class MoSpenderController extends Mvc\BaseController {
         $itemPriceCurrency = $_POST['itemPriceCurrency'];
         $itemTags = $_POST['itemTags'];
         $itemCategories = $_POST['itemCategories'];
+        $itemNewCategory = $_POST['itemNewCategory'];
         $itemDay = $this->convertDataValue($_POST['itemDay']);
         $itemMonth = $this->convertDataValue($_POST['itemMonth']);
 
@@ -41,9 +42,22 @@ class MoSpenderController extends Mvc\BaseController {
 
         $tableForYearItems = $this->getTableName($itemYear);
 
-        // if there are no table for current year - create it
-        if (!$this->checkIfTableForYearExist($tableForYearItems)) {
+        // if there is no table for current year - create it
+        if (!$this->checkIfTableExist($tableForYearItems)) {
             $this->createTableForYearItems($tableForYearItems);
+        }
+
+        // if there is no category table - create it
+        if (!$this->checkIfTableExist('items_categories')) {
+            $this->createTableForItemsCategories('items_categories');
+        }
+
+        // if new category - write it to DB table
+        if ($itemNewCategory) {
+            $this->addNewCategory($itemNewCategory, 'items_categories');
+
+            // add item to this new category
+            $itemCategories = $itemCategories .',' . $itemNewCategory;
         }
 
         /* MySQL insert query. PDO prepared query */
@@ -68,7 +82,16 @@ class MoSpenderController extends Mvc\BaseController {
         } else {
             echo json_encode("Error with adding the item!");
         }
+    }
 
+    public function addNewCategory ($category, $categoryTable) {
+        $PDO_Connection = $this->getDataBase()->initDbConnection();
+
+        $insertQuery = $PDO_Connection->prepare(
+            'INSERT INTO ' . $categoryTable .' (categoryName) VALUES (" ' . $category .' ")'
+        );
+
+        $insertQuery->execute();
     }
 
     /**
@@ -110,11 +133,28 @@ class MoSpenderController extends Mvc\BaseController {
 
     /**
      * @param $tableName
+     *
+     * SQL for creating categories table
+     */
+    public function createTableForItemsCategories ($tableName) {
+        $PDO_Connection = $this->getDataBase()->initDbConnection();
+
+        $sql = 'CREATE TABLE ' . $tableName .' (
+                  id int(11) NOT NULL AUTO_INCREMENT,
+                  categoryName varchar(255),
+                  PRIMARY KEY (id)
+                ) ENGINE=InnoDB;';
+
+        $PDO_Connection->exec($sql);
+    }
+
+    /**
+     * @param $tableName
      * @return bool
      *
      * check if table for current year exists
      */
-    public function checkIfTableForYearExist ($tableName) {
+    public function checkIfTableExist ($tableName) {
         $PDO_Connection = $this->getDataBase()->initDbConnection();
 
         $results = $PDO_Connection->query("SHOW TABLES LIKE '$tableName'");

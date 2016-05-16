@@ -95,6 +95,14 @@
                     <span class="mdl-checkbox__label">Food</span>
                 </label>
 
+                <div class="mdl-textfield mdl-js-textfield">
+                    <input class="mdl-textfield__input" type="text" id="spender_item_new_category">
+                    <label class="mdl-textfield__label" for="spender_item_new_category">New Category</label>
+                </div>
+                <div class="mdl-tooltip" for="spender_item_new_category">
+                    Enter the new category name<br>if there is no one
+                </div>
+
                 <!--Day-->
                 <div class="mdl-textfield mdl-js-textfield">
                     <input class="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?" id="spender_item_day">
@@ -176,6 +184,7 @@
                     var ItemCategories = $(formToAddItems + ' input[name=spender_item_category]:checked').map(function() {
                         return this.value;
                     }).get();
+                    var ItemNewCategory = $(formToAddItems + ' #spender_item_new_category').val();
                     var ItemDay = $(formToAddItems + ' #spender_item_day').val();
                     var ItemMonth = $(formToAddItems + ' #spender_item_month').val();
                     var ItemYear = $(formToAddItems + ' #spender_item_year').val();
@@ -186,6 +195,7 @@
                         '&itemPriceCurrency=' + ItemPriceCurrency +
                         '&itemTags=' + ItemTags +
                         '&itemCategories=' + ItemCategories +
+                        '&itemNewCategory=' + ItemNewCategory +
                         '&itemDay=' + ItemDay +
                         '&itemMonth=' + ItemMonth +
                         '&itemYear=' + ItemYear;
