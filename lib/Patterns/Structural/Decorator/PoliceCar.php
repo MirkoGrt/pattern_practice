@@ -10,12 +10,13 @@ namespace Patterns\Structural\Decorator;
 
 
 class PoliceCar extends CarDecorator {
-    private $decorator;
-    public function __construct ($decorator) {
-        $this->decorator = $decorator;
+    public $car;
+    public function __construct ($car) {
+        $this->car = $car;
     }
 
-    public function policeModel () {
-        $this->decorator->model = "{$this->decorator->model} - Police->->...";
+    public function go () {
+        echo 'Now toyota is police<br>';
+        $this->car->go();
     }
 }

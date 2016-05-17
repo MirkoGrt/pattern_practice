@@ -100,6 +100,11 @@ class MoSpenderController extends Mvc\BaseController {
         $insertQuery->execute();
     }
 
+    /**
+     * @return array
+     *
+     * get all categories from DB
+     */
     public function getAllCategories () {
         $PDO_Connection = $this->getDataBase()->initDbConnection();
 

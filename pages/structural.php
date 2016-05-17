@@ -71,30 +71,48 @@
                         a flexible alternative to subclassing for extending functionality.
                     </p>
                     <p class="small-description">
-                        Here we have a  object car. Car can change its model due to decorator class. In our example
-                        its two decorators entity. (?)(?)
+                        Here we have a default car class (default toyota). Also we have the main decorator class (CarDecorator).
+                        Now imagine you want to make you car police or medical. At first you have to create a default car and then
+                        send the this default car to the decorator class. Imagine that in the decorator some people make your car tuning.
+                        So you just <strong>WRAP</strong> you car. You can wrapping your car as many times as you want.
                     </p>
                     <hr>
                     <?php
-                        $mers = new Patterns\Structural\Decorator\Car("Toyota");
-                        $carDecorator = new Patterns\Structural\Decorator\CarDecorator($mers);
-                        $police = new Patterns\Structural\Decorator\PoliceCar($carDecorator);
-                        $medical = new Patterns\Structural\Decorator\MedicalCar($carDecorator);
-                        $police->policeModel();
-                        $carDecorator->showModel();
-                        $medical->medicalModel();
-                        $carDecorator->showModel();
+                        echo '<strong>Declaring Toyota (default car):</strong>';
+                        $car = new Patterns\Structural\Decorator\Car("Toyota");
+                        $car->go();
+
+                        echo '<strong>Declaring Medical Toyota:</strong> <br>';
+                        $car = new Patterns\Structural\Decorator\Car("Toyota");
+                        $medicalCar = new Patterns\Structural\Decorator\MedicalCar($car);
+                        $medicalCar->go();
+
+                        echo '<strong>Declaring Police Toyota:</strong> <br>';
+                        $car = new Patterns\Structural\Decorator\Car("Toyota");
+                        $policeCar = new Patterns\Structural\Decorator\PoliceCar($car);
+                        $policeCar->go();
+
+                        echo '<strong>Declaring Police and Medical Toyota (all in one):</strong> <br>';
+                        $car = new Patterns\Structural\Decorator\Car("Toyota");
+                        $policeCar = new Patterns\Structural\Decorator\PoliceCar($car);
+                        $allInOneCar = new Patterns\Structural\Decorator\MedicalCar($policeCar);
+                        $allInOneCar->go();
+
                     ?>
                 </div>
                 <div class="mdl-card__actions mdl-card--border">
-                    <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
-                        Button
+                    <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect"
+                       onclick="togglePatternDiagram('decorator', this)">
+                        Show/Hide UML Diagram
                     </a>
                 </div>
                 <div class="mdl-card__menu">
                     <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
                         <i class="material-icons">share</i>
                     </button>
+                </div>
+                <div class="pattern-diagram-wrapper decorator-diagram">
+                    <img src="/images/patterns_uml_diagrams/diagram_decorator.png" alt="decorator_uml_diagram" />
                 </div>
             </div>
 

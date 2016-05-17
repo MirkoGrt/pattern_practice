@@ -10,12 +10,13 @@ namespace Patterns\Structural\Decorator;
 
 
 class MedicalCar extends CarDecorator {
-    private $decorator;
-    public function __construct ($decorator) {
-        $this->decorator = $decorator;
+    public $car;
+    public function __construct ($car) {
+        $this->car = $car;
     }
 
-    public function medicalModel () {
-        $this->decorator->model = "{$this->decorator->model} - Medical->->...";
+    public function go () {
+        echo 'Now toyota is medical<br>';
+        $this->car->go();
     }
 }
