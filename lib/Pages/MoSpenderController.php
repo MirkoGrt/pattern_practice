@@ -84,6 +84,12 @@ class MoSpenderController extends Mvc\BaseController {
         }
     }
 
+    /**
+     * @param $category
+     * @param $categoryTable
+     *
+     * SQL for adding the new category to DB
+     */
     public function addNewCategory ($category, $categoryTable) {
         $PDO_Connection = $this->getDataBase()->initDbConnection();
 
@@ -92,6 +98,22 @@ class MoSpenderController extends Mvc\BaseController {
         );
 
         $insertQuery->execute();
+    }
+
+    public function getAllCategories () {
+        $PDO_Connection = $this->getDataBase()->initDbConnection();
+
+        $insertQuery = 'SELECT id, categoryName FROM items_categories';
+        $allCategoriesData = array();
+
+        foreach ($PDO_Connection->query($insertQuery) as $row) {
+            $categoryData = array();
+            $categoryData['name'] = $row["categoryName"];
+            $categoryData['id'] = $row["id"];
+            $allCategoriesData[] = $categoryData;
+        }
+
+        return $allCategoriesData;
     }
 
     /**
@@ -152,7 +174,7 @@ class MoSpenderController extends Mvc\BaseController {
      * @param $tableName
      * @return bool
      *
-     * check if table for current year exists
+     * check if table exists in DB
      */
     public function checkIfTableExist ($tableName) {
         $PDO_Connection = $this->getDataBase()->initDbConnection();
@@ -169,7 +191,7 @@ class MoSpenderController extends Mvc\BaseController {
      * @param $value
      * @return string
      *
-     * If we enter the '3' day, this function convert it to '03'.
+     * If we enter the '3' day or month, this function convert it to '03'.
      */
     public function convertDataValue ($value) {
         if (strlen($value) <= 1) {
@@ -184,7 +206,8 @@ class MoSpenderController extends Mvc\BaseController {
      * return page view (display the page)
      */
     public function showMoSpender() {
-        $result = $this->render('mo-spender.php', []);
+        $allCategories = $this->getAllCategories();
+        $result = $this->render('mo-spender.php', ['allCategories' => $allCategories]);
         echo $result;
     }
 }

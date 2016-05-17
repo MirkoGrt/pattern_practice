@@ -100,16 +100,31 @@
                         </div>
 
                         <!--Category-->
+                        <?php
+                            $allCategories = $variables["allCategories"];
+                            $categoriesQuantity = count($allCategories);
+                        ?>
                         <div class="spender_item_category_wrapper">
-                            <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="spender_item_category_joy">
-                                <input type="checkbox" id="spender_item_category_joy" name="spender_item_category" class="mdl-checkbox__input spender_item_category" value="Joy">
-                                <span class="mdl-checkbox__label">Joy</span>
-                            </label>
-                            <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="spender_item_category_food">
-                                <input type="checkbox" id="spender_item_category_food" name="spender_item_category" class="mdl-checkbox__input spender_item_category" value="Food">
-                                <span class="mdl-checkbox__label">Food</span>
-                                <span class="mdl-textfield__error"></span>
-                            </label>
+                            <?php
+                                if ($categoriesQuantity > 0):
+                            ?>
+                                <?php $i = 1; foreach ($allCategories as $category): ?>
+                                    <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="spender_item_category_<?php echo $category['id']; ?>">
+                                        <input type="checkbox"
+                                           id="spender_item_category_<?php echo $category['id']; ?>"
+                                           name="spender_item_category"
+                                           class="mdl-checkbox__input spender_item_category"
+                                           value="<?php echo $category['name']; ?>"
+                                        >
+                                        <span class="mdl-checkbox__label"><?php echo $category['name']; ?></span>
+
+                                        <!-- Show field for error message only in the end of category list -->
+                                        <?php if ($i == $categoriesQuantity): ?>
+                                            <span class="mdl-textfield__error"></span>
+                                        <?php endif; ?>
+                                    </label>
+                                <?php $i++; endforeach; ?>
+                            <?php endif; ?>
 
                             <!--/.New category-->
                             <div class="mdl-textfield mdl-js-textfield">
@@ -119,7 +134,7 @@
                             <div class="mdl-tooltip" for="spender_item_new_category">
                                 Enter the new category name<br>if there is no one
                             </div>
-                        </div>
+                        </div><!--/.spender_item_category_wrapper-->
 
                         <div class="spender_item_date_wrapper">
                             <!--Day-->
@@ -242,7 +257,7 @@
                     }
                 }
 
-                /* Function to validate mospender form before saving */
+                /* Function to validate moSpender form before saving */
                 function validateMoSpenderForm () {
 
                     var formToAddItems = '#form-to-add-data-from-note';

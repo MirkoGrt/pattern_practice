@@ -72,6 +72,14 @@
                         In the <strong>'lib\Routing'</strong> folder and 'Router->match()' method we check if the router path exists. If no - make it
                         as main page route.
                     </p>
+
+                    <h5>How to get variables from controller in the view file?</h5>
+                    <p>
+                        Every page controller has the <strong>render()</strong>
+                        function extended from <strong>BaseController</strong>
+                        The first parameter in this method is the path to file and the second is the array.
+                        We can use this array ( <i>$variables</i> in our case) in the view file to get needed var.
+                    </p>
                 </div>
                 <div class="mdl-card__actions mdl-card--border">
                     <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
