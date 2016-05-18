@@ -52,7 +52,8 @@
 
             <div class="mdl-tabs mdl-js-tabs mdl-js-ripple-effect">
                 <div class="mdl-tabs__tab-bar">
-                    <a href="#transform-form-panel" class="mdl-tabs__tab is-active"><i class="material-icons">cloud_upload</i> Transform Form</a>
+                    <a href="#transform-form-panel" class="mdl-tabs__tab is-active"><i class="material-icons">shopping_basket</i> Transform Form</a>
+                    <a href="#money-income-panel" class="mdl-tabs__tab"><i class="material-icons">attach_money</i> Money Income</a>
                     <a href="#archive-panel" class="mdl-tabs__tab"><i class="material-icons">folder</i> Archive!</a>
                 </div><!--/.mdl-tabs__tab-bar-->
 
@@ -168,6 +169,10 @@
                         Add MoSpender Item!
                     </button>
                     <!-- End Form for adiing data -->
+                </div>
+
+                <div class="mdl-tabs__panel" id="money-income-panel">
+                    <h4>Money income!</h4>
                 </div>
 
                 <div class="mdl-tabs__panel" id="archive-panel">
