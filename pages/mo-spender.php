@@ -214,20 +214,21 @@
                 function addSpenderItemToDB () {
                     $('#sender-item-adding-progress').css('display', 'block');
 
-                    if (validateMoSpenderForm()) {
-                        var formToAddItems = '#form-to-add-data-from-note';
+                    var formToAddItems = '#form-to-add-data-from-note';
 
-                        var ItemName = $(formToAddItems + ' #spender_item_name').val();
-                        var ItemPrice = $(formToAddItems + ' #spender_item_price').val();
-                        var ItemPriceCurrency = $(formToAddItems + ' input[name=spender_currency]:checked').val();
-                        var ItemTags = $(formToAddItems + ' #spender_item_tags').val();
-                        var ItemCategories = $(formToAddItems + ' input[name=spender_item_category]:checked').map(function() {
-                            return this.value;
-                        }).get();
-                        var ItemNewCategory = $(formToAddItems + ' #spender_item_new_category').val();
-                        var ItemDay = $(formToAddItems + ' #spender_item_day').val();
-                        var ItemMonth = $(formToAddItems + ' #spender_item_month').val();
-                        var ItemYear = $(formToAddItems + ' #spender_item_year').val();
+                    var ItemName = $(formToAddItems + ' #spender_item_name').val();
+                    var ItemPrice = $(formToAddItems + ' #spender_item_price').val();
+                    var ItemPriceCurrency = $(formToAddItems + ' input[name=spender_currency]:checked').val();
+                    var ItemTags = $(formToAddItems + ' #spender_item_tags').val();
+                    var ItemCategories = $(formToAddItems + ' input[name=spender_item_category]:checked').map(function() {
+                        return this.value;
+                    }).get();
+                    var ItemNewCategory = $(formToAddItems + ' #spender_item_new_category').val();
+                    var ItemDay = $(formToAddItems + ' #spender_item_day').val();
+                    var ItemMonth = $(formToAddItems + ' #spender_item_month').val();
+                    var ItemYear = $(formToAddItems + ' #spender_item_year').val();
+
+                    if (validateMoSpenderForm(ItemNewCategory)) {
 
                         var url = '/addSenderItem';
                         var data = 'itemName=' + ItemName +
@@ -258,18 +259,26 @@
                 }
 
                 /* Function to validate moSpender form before saving */
-                function validateMoSpenderForm () {
-
+                function validateMoSpenderForm (newCategory) {
                     var formToAddItems = '#form-to-add-data-from-note';
+
+                    var spenderCategory = $(formToAddItems + ' .spender_item_category');
+                    var categoryValidation;
+
+                    // Don't validate the categories checkboxes when the new category is adding
+                    if (!newCategory) {
+                        categoryValidation = validate(spenderCategory, null, null, true);
+                    } else {
+                        categoryValidation = validate(spenderCategory, null, null, false);
+                    }
+
                     var spenderName = $(formToAddItems + ' #spender_item_name');
                     var spenderPrice = $(formToAddItems + ' #spender_item_price');
-                    var spenderCategory = $(formToAddItems + ' .spender_item_category');
                     var spenderDay = $(formToAddItems + ' #spender_item_day');
                     var spenderMonth = $(formToAddItems + ' #spender_item_month');
 
                     var nameValidation = validate(spenderName, 0, 20, true);
                     var priceValidation = validate(spenderPrice, null, null, true);
-                    var categoryValidation = validate(spenderCategory, null, null, true);
                     var dayValidation = validate(spenderDay, null, null, true);
                     var monthValidation = validate(spenderMonth, null, null, true);
 
