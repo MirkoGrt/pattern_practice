@@ -13,6 +13,11 @@ use \DbWork;
 
 class MoSpenderController extends Mvc\BaseController {
 
+    public $categoryTable = '';
+    public $yearTablePrefix = 'spender_items_';
+    public $moneyIncomeTable = 'money_income';
+    public $moneyCategoriesTable = 'money_income_categories';
+
     public function getDataBase () {
         return new DbWork\DbConnection('root', 'root', 'moSpender');
     }
@@ -84,6 +89,85 @@ class MoSpenderController extends Mvc\BaseController {
         }
     }
 
+    public function addMoneyIncome () {
+        $PDO_Connection = $this->getDataBase()->initDbConnection();
+
+        // Getting POST data
+        $moneyReason = $_POST['moneyReason'];
+        $moneyQuantity = $_POST['moneyQuantity'];
+        $moneyCurrency = $_POST['moneyCurrency'];
+        $moneyCategories = $_POST['moneyCategory'];
+        $moneyNewCategory = $_POST['moneyNewCategory'];
+        $moneyDay = $this->convertDataValue($_POST['moneyDay']);
+        $moneyMonth = $this->convertDataValue($_POST['moneyMonth']);
+        $moneyYear = $_POST['moneyYear'];
+
+        $moneyTimestamp = strtotime($moneyYear . $moneyMonth . $moneyDay);
+
+        // if there is no table for money income - create it
+        if (!$this->checkIfTableExist($this->moneyIncomeTable)) {
+            $this->createMoneyIncomeTable($this->moneyIncomeTable);
+        }
+
+        // if there is no table for money income categories - create it
+        if (!$this->checkIfTableExist($this->moneyCategoriesTable)) {
+            $this->createTableForMoneyCategories($this->moneyCategoriesTable);
+        }
+
+        // if new category - write it to DB table
+        if ($moneyNewCategory) {
+            $this->addNewCategory($moneyNewCategory, $this->moneyCategoriesTable);
+
+            // add item to this new category
+            $moneyCategories = $moneyCategories .',' . $moneyNewCategory;
+        }
+
+        /* MySQL insert query. PDO prepared query */
+        $insertQuery = $PDO_Connection->prepare(
+            'INSERT INTO ' . $this->moneyIncomeTable .' (moneyReason, moneyQuantity, moneyCurrency, moneyCategories, moneyDay, moneyMonth, moneyYear, moneyTimestamp)
+                VALUES (:moneyReason, :moneyQuantity, :moneyCurrency, :moneyCategories, :moneyDay, :moneyMonth, :moneyYear, ' . $moneyTimestamp .')'
+        );
+        /* Binding params */
+        $insertQuery->bindParam(':moneyReason', $moneyReason);
+        $insertQuery->bindParam(':moneyQuantity', $moneyQuantity);
+        $insertQuery->bindParam(':moneyCurrency', $moneyCurrency);
+        $insertQuery->bindParam(':moneyCategories', $moneyCategories);
+        $insertQuery->bindParam(':moneyDay', $moneyDay);
+        $insertQuery->bindParam(':moneyMonth', $moneyMonth);
+        $insertQuery->bindParam(':moneyYear', $moneyYear);
+
+        /* Running and checking the query */
+        if ($insertQuery->execute()) {
+            echo json_encode('Success! Money added');
+        } else {
+            echo json_encode("Error with adding money!");
+        }
+    }
+
+    /**
+     * @param $tableName
+     *
+     * function for creating table for money income
+     */
+    public function createMoneyIncomeTable ($tableName) {
+        $PDO_Connection = $this->getDataBase()->initDbConnection();
+
+        $sql = 'CREATE TABLE ' . $tableName .' (
+                  id int(11) NOT NULL AUTO_INCREMENT,
+                  moneyReason varchar(255),
+                  moneyQuantity int(11),
+                  moneyCurrency varchar(255),
+                  moneyCategories text,
+                  moneyDay int(11),
+                  moneyMonth int(11),
+                  moneyYear int(11),
+                  moneyTimestamp varchar(10),
+                  PRIMARY KEY (id)
+                ) ENGINE=InnoDB;';
+
+        $PDO_Connection->exec($sql);
+    }
+
     /**
      * @param $category
      * @param $categoryTable
@@ -128,7 +212,7 @@ class MoSpenderController extends Mvc\BaseController {
      * Get the name of table for year items
      */
     public function getTableName ($year) {
-        $tableName = 'spender_items_' . $year;
+        $tableName = $this->yearTablePrefix . $year;
 
         return $tableName;
     }
@@ -164,6 +248,18 @@ class MoSpenderController extends Mvc\BaseController {
      * SQL for creating categories table
      */
     public function createTableForItemsCategories ($tableName) {
+        $PDO_Connection = $this->getDataBase()->initDbConnection();
+
+        $sql = 'CREATE TABLE ' . $tableName .' (
+                  id int(11) NOT NULL AUTO_INCREMENT,
+                  categoryName varchar(255),
+                  PRIMARY KEY (id)
+                ) ENGINE=InnoDB;';
+
+        $PDO_Connection->exec($sql);
+    }
+
+    public function createTableForMoneyCategories ($tableName) {
         $PDO_Connection = $this->getDataBase()->initDbConnection();
 
         $sql = 'CREATE TABLE ' . $tableName .' (

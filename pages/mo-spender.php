@@ -115,7 +115,7 @@
                                            id="spender_item_category_<?php echo $category['id']; ?>"
                                            name="spender_item_category"
                                            class="mdl-checkbox__input spender_item_category"
-                                           value="<?php echo $category['name']; ?>"
+                                           value="<?php echo $category['id']; ?>"
                                         >
                                         <span class="mdl-checkbox__label"><?php echo $category['name']; ?></span>
 
@@ -173,6 +173,87 @@
 
                 <div class="mdl-tabs__panel" id="money-income-panel">
                     <h4>Money income!</h4>
+                    <form id="form-to-add-money-income">
+
+                        <div class="money_income_reason_wrapper">
+                            <div class="mdl-textfield mdl-js-textfield ">
+                                <input class="mdl-textfield__input" type="text" id="money_income_reason">
+                                <label class="mdl-textfield__label" for="money_income_name">Money income reason</label>
+                                <span class="mdl-textfield__error"></span>
+                            </div>
+                        </div><!--/.money_income_name_wrapper-->
+
+                        <!-- Quantity -->
+                        <div class="money_income_quantity_wrapper">
+                            <div class="mdl-textfield mdl-js-textfield ">
+                                <input class="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?" id="money_income_quantity">
+                                <label class="mdl-textfield__label" for="money_income_quantity">Quantity</label>
+                                <span class="mdl-textfield__error">Input is not a number!</span>
+                            </div>
+
+                            <!--Currency radio buttons-->
+                            <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="money_quantity_currency_dollar">
+                                <input type="radio" id="money_quantity_currency_dollar" class="mdl-radio__button" name="money_quantity_currency" value="USD">
+                                <span class="mdl-radio__label">Dollar</span>
+                            </label>
+                            <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="money_quantity_currency_hryvnia">
+                                <input type="radio" id="money_quantity_currency_hryvnia" class="mdl-radio__button" name="money_quantity_currency" value="UAH" checked>
+                                <span class="mdl-radio__label">Hryvnia</span>
+                            </label>
+                        </div><!--/.money_income_quantity_wrapper-->
+
+                        <div class="money_income_category_wrapper">
+
+                            <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="money_income_category_1">
+                                <input type="checkbox" id="money_income_category_1" class="mdl-checkbox__input money_income_category" name="money_income_category" value="1">
+                                <span class="mdl-checkbox__label">One</span>
+                            </label>
+                            <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="money_income_category_2">
+                                <input type="checkbox" id="money_income_category_2" class="mdl-checkbox__input money_income_category" name="money_income_category" value="2">
+                                <span class="mdl-checkbox__label">Two</span>
+                                <span class="mdl-textfield__error"></span>
+                            </label>
+
+                            <!--/.New category-->
+                            <div class="mdl-textfield mdl-js-textfield">
+                                <input class="mdl-textfield__input" type="text" id="money_income_new_category">
+                                <label class="mdl-textfield__label" for="money_income_new_category">New Money Category</label>
+                            </div>
+                            <div class="mdl-tooltip" for="money_income_new_category">
+                                Enter the new category name<br>if there is no one
+                            </div>
+                        </div><!--/.money_income_category_wrapper-->
+
+                        <div class="money_income_date_wrapper">
+                            <!--Day-->
+                            <div class="mdl-textfield mdl-js-textfield">
+                                <input class="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?" id="money_income_day">
+                                <label class="mdl-textfield__label" for="money_income_day">Day</label>
+                                <span class="mdl-textfield__error">Input is not a number!</span>
+                            </div>
+
+                            <!--Month-->
+                            <div class="mdl-textfield mdl-js-textfield">
+                                <input class="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?" id="money_income_month">
+                                <label class="mdl-textfield__label" for="money_income_month">Month</label>
+                                <span class="mdl-textfield__error">Input is not a number!</span>
+                            </div>
+
+                            <!-- Year -->
+                            <div class="mdl-textfield mdl-js-textfield">
+                                <input class="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?" id="money_income_year">
+                                <label class="mdl-textfield__label" for="money_income_year">Year</label>
+                                <span class="mdl-textfield__error">Input is not a number!</span>
+                            </div>
+                        </div><!--/.money_income_date_wrapper-->
+                        <div id="money-income-adding-progress" class="mdl-progress mdl-js-progress mdl-progress__indeterminate"></div>
+                        <br>
+                    </form>
+                    <br>
+                    <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent"
+                            onclick="addMoney()">
+                        Add Money!
+                    </button>
                 </div>
 
                 <div class="mdl-tabs__panel" id="archive-panel">
@@ -216,6 +297,81 @@
 
             <!--JAVASCRIPT FUNCTIONS-->
             <script type="text/javascript">
+                /* Function to add money income to DB */
+                function addMoney () {
+                    $('#money-income-adding-progress').css('display', 'block');
+
+                    var formToAddMoney = '#form-to-add-money-income';
+
+                    var moneyReason = $(formToAddMoney + ' #money_income_reason').val();
+                    var moneyQuantity = $(formToAddMoney + ' #money_income_quantity').val();
+                    var moneyCurrency = $(formToAddMoney + ' input[name=money_quantity_currency]:checked').val();
+                    var moneyCategory = $(formToAddMoney + ' input[name=money_income_category]:checked').map(function() {
+                        return this.value;
+                    }).get();
+                    var moneyNewCategory = $(formToAddMoney + ' #money_income_new_category').val();
+
+                    var moneyDay = $(formToAddMoney + ' #money_income_day').val();
+                    var moneyMonth = $(formToAddMoney + ' #money_income_month').val();
+                    var moneyYear = $(formToAddMoney + ' #money_income_year').val();
+
+                    if (validateMoneyForm(formToAddMoney, moneyNewCategory)) {
+                        var url = '/addMoneyIncome';
+                        var data = 'moneyReason=' + moneyReason +
+                            '&moneyQuantity=' + moneyQuantity +
+                            '&moneyCurrency=' + moneyCurrency +
+                            '&moneyCategory=' + moneyCategory +
+                            '&moneyNewCategory=' + moneyNewCategory +
+                            '&moneyDay=' + moneyDay +
+                            '&moneyMonth=' + moneyMonth +
+                            '&moneyYear=' + moneyYear;
+
+                        $.ajax({
+                            url: url,
+                            type: "POST",
+                            data: data,
+                            success: function (response) {
+                                console.log(response);
+                                $('#money-income-adding-progress').css('display', 'none');
+                                cleanForm(formToAddMoney);
+                            },
+                            error: function (response) {
+                                $('#money-income-adding-progress').css('display', 'none');
+                                cleanForm(formToAddMoney);
+                            }
+                        });
+                    }
+                }
+
+                function validateMoneyForm (form, newCategory) {
+
+                    var moneyCategory = $(form + ' .money_income_category');
+                    var categoryValidation;
+
+                    // Don't validate the categories checkboxes when the new category is adding
+                    if (!newCategory) {
+                        categoryValidation = validate(moneyCategory, null, null, true);
+                    } else {
+                        categoryValidation = validate(moneyCategory, null, null, false);
+                    }
+
+                    var reason = $(form + ' #money_income_reason');
+                    var moneyQuantity = $(form + ' #money_income_quantity');
+                    var moneyDay = $(form + ' #money_income_day');
+                    var moneyMonth = $(form + ' #money_income_month');
+                    var moneyYear = $(form + ' #money_income_year');
+
+                    var reasonValidation = validate(reason, 0, 50, true);
+                    var quantityValidation = validate(moneyQuantity, null, null, true);
+                    var dayValidation = validate(moneyDay, null, null, true);
+                    var monthValidation = validate(moneyMonth, null, null, true);
+                    var yearValidation = validate(moneyYear, null, null, true);
+
+                    if (categoryValidation && reasonValidation && quantityValidation && dayValidation && monthValidation && yearValidation) {
+                        return true;
+                    }
+                }
+
                 function addSpenderItemToDB () {
                     $('#sender-item-adding-progress').css('display', 'block');
 
@@ -282,7 +438,7 @@
                     var spenderDay = $(formToAddItems + ' #spender_item_day');
                     var spenderMonth = $(formToAddItems + ' #spender_item_month');
 
-                    var nameValidation = validate(spenderName, 0, 20, true);
+                    var nameValidation = validate(spenderName, 0, 50, true);
                     var priceValidation = validate(spenderPrice, null, null, true);
                     var dayValidation = validate(spenderDay, null, null, true);
                     var monthValidation = validate(spenderMonth, null, null, true);

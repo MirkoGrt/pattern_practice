@@ -104,6 +104,16 @@
         }
     }
     /*------------*/
+
+    /*------ Money income form (add items) ------*/
+    #form-to-add-money-income {
+        #money-income-adding-progress {
+            width: 100%;
+            display: none;
+        }
+    }
+    /*------------*/
+
     /*------ Spender form (add items) ------*/
     #form-to-add-data-from-note {
         .spender_item_name_wrapper {
