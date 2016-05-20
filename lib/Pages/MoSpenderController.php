@@ -13,7 +13,7 @@ use \DbWork;
 
 class MoSpenderController extends Mvc\BaseController {
 
-    public $categoryTable = '';
+    public $categoryTable = 'items_categories';
     public $yearTablePrefix = 'spender_items_';
     public $moneyIncomeTable = 'money_income';
     public $moneyCategoriesTable = 'money_income_categories';
@@ -25,8 +25,11 @@ class MoSpenderController extends Mvc\BaseController {
     /**
      *  adding item to DB table / add item to current year table
      */
-    public function addSenderItem () {
+    public function addSpenderItem () {
         $PDO_Connection = $this->getDataBase()->initDbConnection();
+        $moSpenderCreate = new DbWork\MoSpender\CreateTables($PDO_Connection);
+        $DbGeneralFunctions = new DbWork\GeneralFunctions($PDO_Connection);
+        $moSpenderInsert = new DbWork\MoSpender\InsertData($PDO_Connection);
 
         // Getting POST data
         $itemName = $_POST['itemName'];
@@ -48,49 +51,51 @@ class MoSpenderController extends Mvc\BaseController {
         $tableForYearItems = $this->getTableName($itemYear);
 
         // if there is no table for current year - create it
-        if (!$this->checkIfTableExist($tableForYearItems)) {
-            $this->createTableForYearItems($tableForYearItems);
+        if (!$DbGeneralFunctions->checkIfTableExist($tableForYearItems)) {
+            $moSpenderCreate->createTableForYearItems($tableForYearItems);
         }
 
         // if there is no category table - create it
-        if (!$this->checkIfTableExist('items_categories')) {
-            $this->createTableForItemsCategories('items_categories');
+        if (!$DbGeneralFunctions->checkIfTableExist($this->categoryTable)) {
+            $moSpenderCreate->createTableCategories($this->categoryTable);
         }
 
         // if new category - write it to DB table
         if ($itemNewCategory) {
-            $this->addNewCategory($itemNewCategory, 'items_categories');
+            $moSpenderInsert->addNewCategory($itemNewCategory, $this->categoryTable);
 
             // add item to this new category
             $itemCategories = $itemCategories .',' . $itemNewCategory;
         }
 
-        /* MySQL insert query. PDO prepared query */
-        $insertQuery = $PDO_Connection->prepare(
-            'INSERT INTO ' . $tableForYearItems .' (itemName, itemPrice, itemPriceCurrency, itemTags, itemCategories, itemDay, itemMonth, itemTimestamp)
-                VALUES (:itemName, :itemPrice, :itemPriceCurrency, :itemTags, :itemCategories, :itemDay, :itemMonth, ' . $itemTimestamp .')'
+        $itemAdd = $moSpenderInsert->addSpenderItem(
+            $tableForYearItems,
+            $itemName,
+            $itemPrice,
+            $itemPriceCurrency,
+            $itemTags,
+            $itemCategories,
+            $itemDay,
+            $itemMonth,
+            $itemTimestamp
         );
 
-        /* Binding params */
-        $insertQuery->bindParam(':itemName', $itemName);
-        $insertQuery->bindParam(':itemPrice', $itemPrice);
-        $insertQuery->bindParam(':itemPriceCurrency', $itemPriceCurrency);
-        $insertQuery->bindParam(':itemTags', $itemTags);
-        $insertQuery->bindParam(':itemCategories', $itemCategories);
-        $insertQuery->bindParam(':itemDay', $itemDay);
-        $insertQuery->bindParam(':itemMonth', $itemMonth);
-
-
         /* Running and checking the query */
-        if ($insertQuery->execute()) {
+        if ($itemAdd) {
             echo json_encode('Success! MoItem is added is added');
         } else {
             echo json_encode("Error with adding the item!");
         }
     }
 
+    /**
+     * adding money income info to DB
+     */
     public function addMoneyIncome () {
         $PDO_Connection = $this->getDataBase()->initDbConnection();
+        $moSpenderCreate = new DbWork\MoSpender\CreateTables($PDO_Connection);
+        $DbGeneralFunctions = new DbWork\GeneralFunctions($PDO_Connection);
+        $moSpenderInsert = new DbWork\MoSpender\InsertData($PDO_Connection);
 
         // Getting POST data
         $moneyReason = $_POST['moneyReason'];
@@ -105,83 +110,40 @@ class MoSpenderController extends Mvc\BaseController {
         $moneyTimestamp = strtotime($moneyYear . $moneyMonth . $moneyDay);
 
         // if there is no table for money income - create it
-        if (!$this->checkIfTableExist($this->moneyIncomeTable)) {
-            $this->createMoneyIncomeTable($this->moneyIncomeTable);
+        if (!$DbGeneralFunctions->checkIfTableExist($this->moneyIncomeTable)) {
+            $moSpenderCreate->createMoneyIncomeTable($this->moneyIncomeTable);
         }
 
         // if there is no table for money income categories - create it
-        if (!$this->checkIfTableExist($this->moneyCategoriesTable)) {
-            $this->createTableForMoneyCategories($this->moneyCategoriesTable);
+        if (!$DbGeneralFunctions->checkIfTableExist($this->moneyCategoriesTable)) {
+            $moSpenderCreate->createTableCategories($this->moneyCategoriesTable);
         }
 
         // if new category - write it to DB table
         if ($moneyNewCategory) {
-            $this->addNewCategory($moneyNewCategory, $this->moneyCategoriesTable);
+            $moSpenderInsert->addNewCategory($moneyNewCategory, $this->moneyCategoriesTable);
 
             // add item to this new category
             $moneyCategories = $moneyCategories .',' . $moneyNewCategory;
         }
 
-        /* MySQL insert query. PDO prepared query */
-        $insertQuery = $PDO_Connection->prepare(
-            'INSERT INTO ' . $this->moneyIncomeTable .' (moneyReason, moneyQuantity, moneyCurrency, moneyCategories, moneyDay, moneyMonth, moneyYear, moneyTimestamp)
-                VALUES (:moneyReason, :moneyQuantity, :moneyCurrency, :moneyCategories, :moneyDay, :moneyMonth, :moneyYear, ' . $moneyTimestamp .')'
+        $moneyAdd = $moSpenderInsert->addMoney(
+            $this->moneyIncomeTable,
+            $moneyReason,
+            $moneyQuantity,
+            $moneyCurrency,
+            $moneyCategories,
+            $moneyDay,
+            $moneyMonth,
+            $moneyYear,
+            $moneyTimestamp
         );
-        /* Binding params */
-        $insertQuery->bindParam(':moneyReason', $moneyReason);
-        $insertQuery->bindParam(':moneyQuantity', $moneyQuantity);
-        $insertQuery->bindParam(':moneyCurrency', $moneyCurrency);
-        $insertQuery->bindParam(':moneyCategories', $moneyCategories);
-        $insertQuery->bindParam(':moneyDay', $moneyDay);
-        $insertQuery->bindParam(':moneyMonth', $moneyMonth);
-        $insertQuery->bindParam(':moneyYear', $moneyYear);
 
-        /* Running and checking the query */
-        if ($insertQuery->execute()) {
+        if ($moneyAdd) {
             echo json_encode('Success! Money added');
         } else {
             echo json_encode("Error with adding money!");
         }
-    }
-
-    /**
-     * @param $tableName
-     *
-     * function for creating table for money income
-     */
-    public function createMoneyIncomeTable ($tableName) {
-        $PDO_Connection = $this->getDataBase()->initDbConnection();
-
-        $sql = 'CREATE TABLE ' . $tableName .' (
-                  id int(11) NOT NULL AUTO_INCREMENT,
-                  moneyReason varchar(255),
-                  moneyQuantity int(11),
-                  moneyCurrency varchar(255),
-                  moneyCategories text,
-                  moneyDay int(11),
-                  moneyMonth int(11),
-                  moneyYear int(11),
-                  moneyTimestamp varchar(10),
-                  PRIMARY KEY (id)
-                ) ENGINE=InnoDB;';
-
-        $PDO_Connection->exec($sql);
-    }
-
-    /**
-     * @param $category
-     * @param $categoryTable
-     *
-     * SQL for adding the new category to DB
-     */
-    public function addNewCategory ($category, $categoryTable) {
-        $PDO_Connection = $this->getDataBase()->initDbConnection();
-
-        $insertQuery = $PDO_Connection->prepare(
-            'INSERT INTO ' . $categoryTable .' (categoryName) VALUES (" ' . $category .' ")'
-        );
-
-        $insertQuery->execute();
     }
 
     /**
@@ -215,77 +177,6 @@ class MoSpenderController extends Mvc\BaseController {
         $tableName = $this->yearTablePrefix . $year;
 
         return $tableName;
-    }
-
-
-    /**
-     * @param $tableName
-     *
-     * SQL for creating year items table
-     */
-    public function createTableForYearItems ($tableName) {
-        $PDO_Connection = $this->getDataBase()->initDbConnection();
-
-        $sql = 'CREATE TABLE ' . $tableName .' (
-                  id int(11) NOT NULL AUTO_INCREMENT,
-                  itemName varchar(255),
-                  itemPrice int(11),
-                  itemPriceCurrency varchar(255),
-                  itemTags text,
-                  itemCategories text,
-                  itemDay int(11),
-                  itemMonth int(11),
-                  itemTimestamp varchar(10),
-                  PRIMARY KEY (id)
-                ) ENGINE=InnoDB;';
-
-        $PDO_Connection->exec($sql);
-    }
-
-    /**
-     * @param $tableName
-     *
-     * SQL for creating categories table
-     */
-    public function createTableForItemsCategories ($tableName) {
-        $PDO_Connection = $this->getDataBase()->initDbConnection();
-
-        $sql = 'CREATE TABLE ' . $tableName .' (
-                  id int(11) NOT NULL AUTO_INCREMENT,
-                  categoryName varchar(255),
-                  PRIMARY KEY (id)
-                ) ENGINE=InnoDB;';
-
-        $PDO_Connection->exec($sql);
-    }
-
-    public function createTableForMoneyCategories ($tableName) {
-        $PDO_Connection = $this->getDataBase()->initDbConnection();
-
-        $sql = 'CREATE TABLE ' . $tableName .' (
-                  id int(11) NOT NULL AUTO_INCREMENT,
-                  categoryName varchar(255),
-                  PRIMARY KEY (id)
-                ) ENGINE=InnoDB;';
-
-        $PDO_Connection->exec($sql);
-    }
-
-    /**
-     * @param $tableName
-     * @return bool
-     *
-     * check if table exists in DB
-     */
-    public function checkIfTableExist ($tableName) {
-        $PDO_Connection = $this->getDataBase()->initDbConnection();
-
-        $results = $PDO_Connection->query("SHOW TABLES LIKE '$tableName'");
-        if ($results->rowCount() > 0) {
-            return true;
-        } else {
-            return false;
-        }
     }
 
     /**

@@ -10,6 +10,10 @@
                     <h2 class="mdl-card__title-text">MoSpender</h2>
                 </div>
                 <div class="mdl-card__supporting-text">
+                    <p>
+                        To make it works just create the empty BD and connect it in the
+                        <strong>lib/Pages/MoSpenderController/getDataBase()</strong> method
+                    </p>
                     <h5>Features</h5>
                     <ul class="features-events-list mdl-list">
                         <li class="mdl-list__item">
@@ -391,7 +395,7 @@
 
                     if (validateMoSpenderForm(ItemNewCategory)) {
 
-                        var url = '/addSenderItem';
+                        var url = '/addSpenderItem';
                         var data = 'itemName=' + ItemName +
                             '&itemPrice=' + ItemPrice +
                             '&itemPriceCurrency=' + ItemPriceCurrency +

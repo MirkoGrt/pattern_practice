@@ -10,7 +10,7 @@
     $router->post('/addEvent', ['\Pages\Calendar', 'addEvent']);
     $router->post('/changeEventStatus', ['\Pages\Calendar', 'changeEventStatus']);
     $router->post('/deleteEvent', ['\Pages\Calendar', 'deleteEvent']);
-    $router->post('/addSenderItem', ['\Pages\MoSpenderController', 'addSenderItem']);
+    $router->post('/addSpenderItem', ['\Pages\MoSpenderController', 'addSpenderItem']);
     $router->post('/addMoneyIncome', ['\Pages\MoSpenderController', 'addMoneyIncome']);
 
     $router->get('/calendar', ['\Pages\Calendar', 'showCalendar']);
