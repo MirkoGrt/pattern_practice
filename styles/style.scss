@@ -1,28 +1,5 @@
 /*===== MIXINS =====*/
-    @mixin size ($width, $height: $width) {
-        width: $width;
-        height: $height;
-    }
-    @mixin position ($position, $values) {
-        position: $position;
-        $offsets: (
-                top:    nth($values, 1),
-                right:  nth($values, 2),
-                bottom: nth($values, 3),
-                left:   nth($values, 4),
-        );
-        @each $offset, $value in $offsets {
-            @if ($value != null) {
-                #{$offset}: $value;
-            }
-        }
-    }
-    @mixin prefixer ($property, $value, $prefixes: webkit moz ms o) {
-        @each $prefix in $prefixes {
-            #{"-" + $prefix + "-" + $property}: $value;
-        }
-        #{$property}: $value;
-    }
+    @import "config/mixins";
 /*=================*/
 
 /*===== Helper classes =====*/
@@ -106,63 +83,11 @@
     /*------------*/
 
     /*------ Money income form (add items) ------*/
-    #form-to-add-money-income {
-        #money-income-adding-progress {
-            width: 100%;
-            display: none;
-        }
-    }
+    @import "forms/money-income-form";
     /*------------*/
 
     /*------ Spender form (add items) ------*/
-    #form-to-add-data-from-note {
-        .spender_item_name_wrapper {
-            width: 100%;
-            .mdl-textfield {
-                width: 100%;
-            }
-        }
-        .spender_item_price_wrapper {
-            width: 100%;
-            .mdl-textfield {
-                width: 20%;
-            }
-        }
-        .spender_item_tags_wrapper {
-            width: 100%;
-            .mdl-textfield {
-                width: 100%;
-            }
-        }
-        .spender_item_category_wrapper {
-            width: 100%;
-        }
-        .spender_item_date_wrapper {
-            width: 100%;
-            text-align: center;
-            .mdl-textfield {
-                width: 20%;
-                @media (max-width: 768px) {
-                    width: 60%;
-                }
-            }
-        }
-        .spender_item_date_wrapper,
-        .spender_item_category_wrapper,
-        .spender_item_tags_wrapper,
-        .spender_item_price_wrapper,
-        .spender_item_name_wrapper {
-            padding: 10px;
-        }
-        .mdl-textfield__error {
-            background-color: antiquewhite;
-            z-index: 3
-        }
-        #sender-item-adding-progress {
-            width: 100%;
-            display: none;
-        }
-    }
+    @import "forms/spender-form";
     /*------------*/
 /*=================*/
 

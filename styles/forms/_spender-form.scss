@@ -1,0 +1,48 @@
+#form-to-add-data-from-note {
+    .spender_item_name_wrapper {
+        width: 100%;
+        .mdl-textfield {
+            width: 100%;
+        }
+    }
+    .spender_item_price_wrapper {
+        width: 100%;
+        .mdl-textfield {
+            width: 20%;
+        }
+    }
+    .spender_item_tags_wrapper {
+        width: 100%;
+        .mdl-textfield {
+            width: 100%;
+        }
+    }
+    .spender_item_category_wrapper {
+        width: 100%;
+    }
+    .spender_item_date_wrapper {
+        width: 100%;
+        text-align: center;
+        .mdl-textfield {
+            width: 20%;
+            @media (max-width: 768px) {
+                width: 60%;
+            }
+        }
+    }
+    .spender_item_date_wrapper,
+    .spender_item_category_wrapper,
+    .spender_item_tags_wrapper,
+    .spender_item_price_wrapper,
+    .spender_item_name_wrapper {
+        padding: 10px;
+    }
+    .mdl-textfield__error {
+        background-color: antiquewhite;
+        z-index: 3
+    }
+    #sender-item-adding-progress {
+        width: 100%;
+        display: none;
+    }
+}

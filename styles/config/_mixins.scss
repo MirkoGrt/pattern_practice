@@ -1,0 +1,24 @@
+@mixin size ($width, $height: $width) {
+    width: $width;
+    height: $height;
+}
+@mixin position ($position, $values) {
+    position: $position;
+    $offsets: (
+            top:    nth($values, 1),
+            right:  nth($values, 2),
+            bottom: nth($values, 3),
+            left:   nth($values, 4),
+    );
+    @each $offset, $value in $offsets {
+        @if ($value != null) {
+            #{$offset}: $value;
+        }
+    }
+}
+@mixin prefixer ($property, $value, $prefixes: webkit moz ms o) {
+    @each $prefix in $prefixes {
+        #{"-" + $prefix + "-" + $property}: $value;
+    }
+    #{$property}: $value;
+}
