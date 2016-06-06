@@ -82,7 +82,7 @@ class MoSpenderController extends Mvc\BaseController {
 
         /* Running and checking the query */
         if ($itemAdd) {
-            echo json_encode('Success! MoItem is added is added');
+            echo json_encode('Success! MoItem is added!');
         } else {
             echo json_encode("Error with adding the item!");
         }

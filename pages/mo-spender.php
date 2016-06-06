@@ -245,7 +245,7 @@
 
                             <!-- Year -->
                             <div class="mdl-textfield mdl-js-textfield">
-                                <input class="mdl-textfield__input" type="text" name="Year" pattern="-?[0-9]*(\.[0-9]+)?" id="money_income_year">
+                                <input class="mdl-textfield__input" type="text" name="ear" pattern="-?[0-9]*(\.[0-9]+)?" id="money_income_year">
                                 <label class="mdl-textfield__label" for="money_income_year">Year</label>
                                 <span class="mdl-textfield__error">Input is not a number!</span>
                             </div>
@@ -299,6 +299,11 @@
                 </div><!--/#archive-panel-->
             </div><!--/.mdl-tabs-->
 
+            <div id="mospender-snackbar" class="mdl-js-snackbar mdl-snackbar">
+                <div class="mdl-snackbar__text"></div>
+                <button class="mdl-snackbar__action" type="button"></button>
+            </div>
+
             <!--JAVASCRIPT FUNCTIONS-->
             <script type="text/javascript">
                 /* Function to add money income to DB */
@@ -335,11 +340,12 @@
                             type: "POST",
                             data: data,
                             success: function (response) {
-                                console.log(response);
+                                showMdlSnackbar(response, 'success', '#mospender-snackbar');
                                 $('#money-income-adding-progress').css('display', 'none');
                                 cleanForm(formToAddMoney);
                             },
                             error: function (response) {
+                                showMdlSnackbar(response, 'error', '#mospender-snackbar');
                                 $('#money-income-adding-progress').css('display', 'none');
                                 cleanForm(formToAddMoney);
                             }
@@ -411,11 +417,12 @@
                             type: "POST",
                             data: data,
                             success: function (response) {
-                                console.log(response);
+                                showMdlSnackbar(response, 'success', '#mospender-snackbar');
                                 $('#sender-item-adding-progress').css('display', 'none');
                                 cleanForm(formToAddItems);
                             },
                             error: function (response) {
+                                showMdlSnackbar(response, 'error', '#mospender-snackbar');
                                 $('#sender-item-adding-progress').css('display', 'none');
                                 cleanForm(formToAddItems);
                             }

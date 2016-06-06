@@ -90,3 +90,17 @@ function cleanForm (form) {
         $(this).attr('checked', false);
     });
 }
+
+/* MDL snackbar. Showing when form is confirmed */
+function showMdlSnackbar (response, type, id) {
+    'use strict';
+    window['counter'] = 0;
+    var snackbarContainer = document.querySelector(id);
+    var data = {message: response};
+    if (type == 'error') {
+        snackbarContainer.style.backgroundColor = 'red';
+    } else if (type == 'success') {
+        snackbarContainer.style.backgroundColor = '#A2CD5A';
+    }
+    snackbarContainer.MaterialSnackbar.showSnackbar(data);
+}

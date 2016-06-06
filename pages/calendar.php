@@ -300,12 +300,12 @@
                             type: "POST",
                             data: data,
                             success: function (response) {
-                                showMdlSnackbar(response, 'success');
+                                showMdlSnackbar(response, 'success', '#event-snackbar-success');
                                 cleanForm('#event-form');
                                 $('#event-adding-progress').css('display', 'none');
                             },
                             error: function (response) {
-                                showMdlSnackbar(response, 'error');
+                                showMdlSnackbar(response, 'error', '#event-snackbar-success');
                                 cleanForm('#event-form');
                                 $('#event-adding-progress').css('display', 'none');
                             }
@@ -401,20 +401,6 @@
 //                $('.main-calendar-table').on('mdl-menu-toggle', function () {
 //                    $('.main-calendar-table').toggleClass('element-hidden');
 //                });
-
-                /* MDL snackbar. Showing when event is added */
-                function showMdlSnackbar (response, type) {
-                    'use strict';
-                    window['counter'] = 0;
-                    var snackbarContainer = document.querySelector('#event-snackbar-success');
-                    var data = {message: response};
-                    if (type == 'error') {
-                        snackbarContainer.style.backgroundColor = 'red';
-                    } else if (type == 'success') {
-                        snackbarContainer.style.backgroundColor = '#A2CD5A';
-                    }
-                    snackbarContainer.MaterialSnackbar.showSnackbar(data);
-                }
             </script>
         </div>
         <div class="mdl-cell--2-col mdl-cell--12-col-phone mdl-cell--12-col-tablet"></div>
