@@ -68,7 +68,7 @@
                         <!--Name-->
                         <div class="spender_item_name_wrapper">
                             <div class="mdl-textfield mdl-js-textfield ">
-                                <input class="mdl-textfield__input" type="text" id="spender_item_name">
+                                <input class="mdl-textfield__input" name="Name" type="text" id="spender_item_name">
                                 <label class="mdl-textfield__label" for="spender_item_name">Item Name</label>
                                 <span class="mdl-textfield__error"></span>
                             </div>
@@ -77,7 +77,7 @@
                         <!--Price-->
                         <div class="spender_item_price_wrapper">
                             <div class="mdl-textfield mdl-js-textfield ">
-                                <input class="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?" id="spender_item_price">
+                                <input class="mdl-textfield__input" type="text" name="Price" pattern="-?[0-9]*(\.[0-9]+)?" id="spender_item_price">
                                 <label class="mdl-textfield__label" for="spender_item_price">Price</label>
                                 <span class="mdl-textfield__error">Input is not a number!</span>
                             </div>
@@ -96,7 +96,7 @@
                         <!--Tags-->
                         <div class="spender_item_tags_wrapper">
                             <div class="mdl-textfield mdl-js-textfield">
-                                <input class="mdl-textfield__input" type="text" id="spender_item_tags">
+                                <input class="mdl-textfield__input" name="Tags" type="text" id="spender_item_tags">
                                 <label class="mdl-textfield__label" for="spender_item_tags">Item Tags</label>
                             </div>
                             <div class="mdl-tooltip" for="spender_item_tags">
@@ -133,7 +133,7 @@
 
                             <!--/.New category-->
                             <div class="mdl-textfield mdl-js-textfield">
-                                <input class="mdl-textfield__input" type="text" id="spender_item_new_category">
+                                <input class="mdl-textfield__input" name="New_Category" type="text" id="spender_item_new_category">
                                 <label class="mdl-textfield__label" for="spender_item_new_category">New Category</label>
                             </div>
                             <div class="mdl-tooltip" for="spender_item_new_category">
@@ -144,21 +144,21 @@
                         <div class="spender_item_date_wrapper">
                             <!--Day-->
                             <div class="mdl-textfield mdl-js-textfield">
-                                <input class="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?" id="spender_item_day">
+                                <input class="mdl-textfield__input" type="text" name="Day" pattern="-?[0-9]*(\.[0-9]+)?" id="spender_item_day">
                                 <label class="mdl-textfield__label" for="spender_item_day">Day</label>
                                 <span class="mdl-textfield__error">Input is not a number!</span>
                             </div>
 
                             <!--Month-->
                             <div class="mdl-textfield mdl-js-textfield">
-                                <input class="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?" id="spender_item_month">
+                                <input class="mdl-textfield__input" type="text" name="Month" pattern="-?[0-9]*(\.[0-9]+)?" id="spender_item_month">
                                 <label class="mdl-textfield__label" for="spender_item_month">Month</label>
                                 <span class="mdl-textfield__error">Input is not a number!</span>
                             </div>
 
                             <!-- Year -->
                             <div class="mdl-textfield mdl-js-textfield">
-                                <input class="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?" id="spender_item_year">
+                                <input class="mdl-textfield__input" type="text" name="Year" pattern="-?[0-9]*(\.[0-9]+)?" id="spender_item_year">
                                 <label class="mdl-textfield__label" for="spender_item_year">Year</label>
                                 <span class="mdl-textfield__error">Input is not a number!</span>
                             </div>
@@ -181,7 +181,7 @@
 
                         <div class="money_income_reason_wrapper">
                             <div class="mdl-textfield mdl-js-textfield ">
-                                <input class="mdl-textfield__input" type="text" id="money_income_reason">
+                                <input class="mdl-textfield__input" type="text" name="Reason" id="money_income_reason">
                                 <label class="mdl-textfield__label" for="money_income_name">Money income reason</label>
                                 <span class="mdl-textfield__error"></span>
                             </div>
@@ -190,7 +190,7 @@
                         <!-- Quantity -->
                         <div class="money_income_quantity_wrapper">
                             <div class="mdl-textfield mdl-js-textfield ">
-                                <input class="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?" id="money_income_quantity">
+                                <input class="mdl-textfield__input" type="text" name="Quantity" pattern="-?[0-9]*(\.[0-9]+)?" id="money_income_quantity">
                                 <label class="mdl-textfield__label" for="money_income_quantity">Quantity</label>
                                 <span class="mdl-textfield__error">Input is not a number!</span>
                             </div>
@@ -220,7 +220,7 @@
 
                             <!--/.New category-->
                             <div class="mdl-textfield mdl-js-textfield">
-                                <input class="mdl-textfield__input" type="text" id="money_income_new_category">
+                                <input class="mdl-textfield__input" type="text" name="new_category" id="money_income_new_category">
                                 <label class="mdl-textfield__label" for="money_income_new_category">New Money Category</label>
                             </div>
                             <div class="mdl-tooltip" for="money_income_new_category">
@@ -231,21 +231,21 @@
                         <div class="money_income_date_wrapper">
                             <!--Day-->
                             <div class="mdl-textfield mdl-js-textfield">
-                                <input class="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?" id="money_income_day">
+                                <input class="mdl-textfield__input" type="text" name="Day" pattern="-?[0-9]*(\.[0-9]+)?" id="money_income_day">
                                 <label class="mdl-textfield__label" for="money_income_day">Day</label>
                                 <span class="mdl-textfield__error">Input is not a number!</span>
                             </div>
 
                             <!--Month-->
                             <div class="mdl-textfield mdl-js-textfield">
-                                <input class="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?" id="money_income_month">
+                                <input class="mdl-textfield__input" type="text" name="Month" pattern="-?[0-9]*(\.[0-9]+)?" id="money_income_month">
                                 <label class="mdl-textfield__label" for="money_income_month">Month</label>
                                 <span class="mdl-textfield__error">Input is not a number!</span>
                             </div>
 
                             <!-- Year -->
                             <div class="mdl-textfield mdl-js-textfield">
-                                <input class="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?" id="money_income_year">
+                                <input class="mdl-textfield__input" type="text" name="Year" pattern="-?[0-9]*(\.[0-9]+)?" id="money_income_year">
                                 <label class="mdl-textfield__label" for="money_income_year">Year</label>
                                 <span class="mdl-textfield__error">Input is not a number!</span>
                             </div>

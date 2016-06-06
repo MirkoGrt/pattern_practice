@@ -37,6 +37,7 @@ function togglePatternDiagram (pattern) {
 /* Function to custom validate BASE MDL form */
 function validate (field, min, max, setRequired) {
     var defaultErrorLength = 23;
+    var fieldName = field.attr('name');
 
     var mdlErrorMessage = field.siblings('.mdl-textfield__error');
     var ErrorMessageText = mdlErrorMessage.text();
@@ -44,14 +45,14 @@ function validate (field, min, max, setRequired) {
     // validate checkbox
     if (setRequired && field.attr('type') == 'checkbox' && field.is(':checked') == false) {
         if (ErrorMessageText.length < defaultErrorLength) {
-            mdlErrorMessage.text('This is the required field!' + ' - ' + ErrorMessageText).css('visibility', 'visible');
+            mdlErrorMessage.text(fieldName + ' is the required field!' + ' - ' + ErrorMessageText).css('visibility', 'visible');
         }
         return false;
     }
     // validate require
     else if (setRequired && field.val() == 0) {
         if (ErrorMessageText.length < defaultErrorLength) {
-            mdlErrorMessage.text('This is the required field!' + ' - ' + ErrorMessageText).css('visibility', 'visible');
+            mdlErrorMessage.text(fieldName + ' is the required field!' + ' - ' + ErrorMessageText).css('visibility', 'visible');
         }
         return false;
     }
