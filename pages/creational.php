@@ -77,36 +77,48 @@
                         the same construction process can create different representations.
                     </p>
                     <p class="small-description">
-                        Imagine you want to create some page builder. <strong>Builder</strong> classes is the structure of pages.
+                        Imagine you want to create some page builder. <strong>Builder</strong> class is the structure of pages.
                         <strong>Page director</strong> is the content of pages. In this case there is one page director to
                         both pages. You can use different directors. Depending on what you want you can construct the needed page.
                         Also you can define which methods should be used in Builder and in Director classes by defining them
-                        in Abstract classes.
+                        in Abstract classes. <br>
+                        First we create the needed page object. <br> Then we create the page builder object with needed page in
+                        constructor. PageBuilder uses page-class set-methods to set the data <br> Then we create a Page director object with page builder in constructor
+                        <br> Director(buildPage)->Builder(formatPage)->Page(formatPage)
                     </p>
                     <hr>
                     <?php
-                        $pageBuilder = new Patterns\Creational\Builder\OneColumnPageBuilder();
+                        $oneColumnPage = new Patterns\Creational\Builder\OneColumnPage();
+                        $pageBuilder = new Patterns\Creational\Builder\MainPageBuilder($oneColumnPage);
+                    
                         $pageDirector = new Patterns\Creational\Builder\PageDirector($pageBuilder);
                         $pageDirector->buildPage();
                         $page = $pageDirector->getPage();
                         echo $page->showPage();
                         echo "<hr />";
-                        $pageWithSidebarBuilder = new Patterns\Creational\Builder\TwoColumnsRightPageBuilder();
-                        $pageDirector = new Patterns\Creational\Builder\PageDirector($pageWithSidebarBuilder);
+
+                        $twoColumnsRightPage = new Patterns\Creational\Builder\TwoColumnsRightPage();
+                        $pageBuilder = new Patterns\Creational\Builder\MainPageBuilder($twoColumnsRightPage);
+
+                        $pageDirector = new Patterns\Creational\Builder\PageDirector($pageBuilder);
                         $pageDirector->buildPage();
-                        $pageTwoColumnsFight = $pageDirector->getPage();
-                        echo $pageTwoColumnsFight->showPage();
+                        $pageTwoColumnsRight = $pageDirector->getPage();
+                        echo $pageTwoColumnsRight->showPage();
                     ?>
                 </div>
                 <div class="mdl-card__actions mdl-card--border">
-                    <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
-                        Button
+                    <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect"
+                       onclick="togglePatternDiagram('builder', this)">
+                        Show/Hide UML Diagram
                     </a>
                 </div>
                 <div class="mdl-card__menu">
                     <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
                         <i class="material-icons">share</i>
                     </button>
+                </div>
+                <div class="pattern-diagram-wrapper builder-diagram">
+                    <img src="/images/patterns_uml_diagrams/diagram_builder.png" alt="builder_uml_diagram" />
                 </div>
             </div>
 

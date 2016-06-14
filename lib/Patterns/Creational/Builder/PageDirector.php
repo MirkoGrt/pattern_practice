@@ -17,9 +17,9 @@ class PageDirector extends AbstractPageDirector {
     }
 
     public function buildPage() {
-        $this->builder->setTitle('OneColumnPage');
-        $this->builder->setHeading('Hello One Column');
-        $this->builder->setText('One Column Text');
+        $this->builder->setTitle('Page Title');
+        $this->builder->setHeading('Page heading');
+        $this->builder->setText('Page text');
         $this->builder->formatPage();
     }
 

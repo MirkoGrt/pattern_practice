@@ -9,11 +9,11 @@
 namespace Patterns\Creational\Builder;
 
 
-class OneColumnPageBuilder extends AbstractPageBuilder {
+class MainPageBuilder extends AbstractPageBuilder {
     private $page = NULL;
 
-    function __construct () {
-        $this->page = new OneColumnPage();
+    function __construct ($pageType) {
+        $this->page = $pageType;
     }
 
     function setTitle ($title_in) {

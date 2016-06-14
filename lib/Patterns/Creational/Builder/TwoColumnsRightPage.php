@@ -34,19 +34,15 @@ class TwoColumnsRightPage {
     }
 
     function formatPage () {
-        $this->page = "<html>"
-            . "<head>"
-            . "<title>" . $this->pageTitle . "</title>"
-            . "</head>"
-            . "<body>"
+        $this->page =  "<div>"
+            . "<p>" . $this->pageTitle . "</p>"
+            . "</div>"
             . "<div style='width: 65%; display: inline-block;'>"
             . "<h1 style='text-align:center'>" . $this->pageHeading . "</h1>"
             . "<p style='text-align:center'>" . $this->pageText . "</p>"
             . "</div>"
             . "<div style='width: 30%; display: inline-block; border-left: 1px solid black'>"
             . "<h1 style='text-align:center'>Sidebar</h1>"
-            . "</div>"
-            . "</body>"
-            . "</html>";
+            . "</div>";
     }
 }

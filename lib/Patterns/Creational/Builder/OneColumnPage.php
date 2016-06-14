@@ -34,14 +34,12 @@ class OneColumnPage {
     }
 
     function formatPage () {
-        $this->page = "<html>"
-            . "<head>"
-            . "<title>" . $this->pageTitle . "</title>"
-            . "</head>"
-            . "<body>"
+        $this->page = "<div>"
+            . "<div>"
+            . "<p>" . $this->pageTitle . "</p>"
+            . "</div>"
             . "<h1 style='text-align:center'>" . $this->pageHeading . "</h1>"
             . "<p style='text-align:center'>" . $this->pageText . "</p>"
-            . "</body>"
-            . "</html>";
+            . "</div>";
     }
 }
