@@ -11,6 +11,6 @@ class Ear extends BodyPart {
     }
 
     public function hearSomething() {
-        echo "<p>" . "Ear: I'm hear some music" . "</p>";
+        echo "<p>" . "Ear: I'm hear some music (some ear action)" . "</p>";
     }
 }

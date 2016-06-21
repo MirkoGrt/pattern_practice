@@ -11,10 +11,10 @@ class Hand extends BodyPart {
     }
 
     public function takeMyHand () {
-        echo "<p>" . "Hand: I'm take your hand" . "</p>";
+        echo "<p>" . "Hand: I'm take your hand (some hand action)" . "</p>";
     }
 
     public function hit () {
-        echo "<p>" . "Hand: APPERCOT!!!" . "</p>";
+        echo "<p>" . "Hand: APPERCOT!!! (some hand action)" . "</p>";
     }
 }

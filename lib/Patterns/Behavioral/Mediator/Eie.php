@@ -12,7 +12,7 @@ class Eie extends BodyPart {
     }
 
     public function seeSomething() {
-        echo "<p>" . "Eie: I'm see Picasso" . "</p>";
+        echo "<p>" . "Eie: I'm see Picasso (some eie action)" . "</p>";
     }
 
 }

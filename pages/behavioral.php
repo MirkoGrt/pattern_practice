@@ -53,14 +53,18 @@
                     ?>
                 </div>
                 <div class="mdl-card__actions mdl-card--border">
-                    <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
-                        Button
+                    <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect"
+                       onclick="togglePatternDiagram('mediator', this)">
+                        Show/Hide UML Diagram
                     </a>
                 </div>
                 <div class="mdl-card__menu">
                     <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
                         <i class="material-icons">share</i>
                     </button>
+                </div>
+                <div class="pattern-diagram-wrapper mediator-diagram">
+                    <img src="/images/patterns_uml_diagrams/diagram_mediator.png" alt="mediator_uml_diagram" />
                 </div>
             </div>
 
