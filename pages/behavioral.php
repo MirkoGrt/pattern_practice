@@ -86,6 +86,8 @@
                         You can add and use different templates to your main algorithm (Such as pages style). Or you can to change
                         the one of the methods in Abstract Class without change the algorithm.
                         This is the substance of Template Method.
+                        <strong>In "BookAbstract" class we can define the core functions (private) that will be used for all
+                        templates and functions than will be declared in each template (abstract functions)</strong>
                     </p>
                     <p>Load Your Book: <em>name, number of pages, start page, step, direction to flip</em></p>
                     <form class="template-method-form" method="get">
@@ -120,30 +122,48 @@
                             $direction = $_GET['direction'];
                         ?>
                         <hr>
-                        <p>Look trought the "<?php echo $name; ?>" Book...</p>
-                        <p>All pages: --<?php echo $number; ?>--...</p>
-                        <p>Start Page: __<?php echo $start; ?>__...</p>
-                        <p>Step: **<?php echo $step; ?>**...</p>
-                        <p>Direction: >><?php echo $direction; ?>>>...</p>
-                        <?php
-                            $myBook = new Patterns\Behavioral\TemplateMethod\Book($name, $number);
-                            $cooktemplate = new Patterns\Behavioral\TemplateMethod\CookBookTemplate();
-                            $pagesToLook = $cooktemplate->FlipTrough($myBook, $start, $step, $direction);
-                            foreach ($pagesToLook as $simplePage) {
-                                echo $simplePage . " ";
-                            }
-                        ?>
+                        <?php if ($name && $number && $start && $step): ?>
+                            <p>Look trought the "<?php echo $name; ?>" Book...</p>
+                            <p>All pages: <?php echo $number; ?></p>
+                            <p>Start Page: <?php echo $start; ?></p>
+                            <p>Step: <?php echo $step; ?></p>
+                            <p>Direction: <?php echo $direction; ?></p>
+                            <?php
+                                $myBook = new Patterns\Behavioral\TemplateMethod\Book($name, $number);
+                                $cookTemplate = new Patterns\Behavioral\TemplateMethod\CookBookTemplate();
+                                $medicalTemplate = new Patterns\Behavioral\TemplateMethod\MedicalBookTemplate();
+
+                                $pagesToLook = $cookTemplate->FlipTrough($myBook, $start, $step, $direction);
+                                echo '<h4>First book template - &#9818</h4>';
+                                foreach ($pagesToLook as $simplePage) {
+                                    echo $simplePage . " ";
+                                }
+
+                                $pagesToLook = $medicalTemplate->FlipTrough($myBook, $start, $step, $direction);
+                                echo '<h4>Second book template - &#9819</h4>';
+                                foreach ($pagesToLook as $simplePage) {
+                                    echo $simplePage . " ";
+                                }
+                            ?>
+                        <?php else: ?>
+                            <p>There is no book!  Please load your book!</p>
+                        <?php endif; ?>
+
                     </form>
                 </div>
                 <div class="mdl-card__actions mdl-card--border">
-                    <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
-                        Button
+                    <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect"
+                       onclick="togglePatternDiagram('template-method', this)">
+                        Show/Hide UML Diagram
                     </a>
                 </div>
                 <div class="mdl-card__menu">
                     <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
                         <i class="material-icons">share</i>
                     </button>
+                </div>
+                <div class="pattern-diagram-wrapper template-method-diagram">
+                    <img src="/images/patterns_uml_diagrams/diagram_template-method.png" alt="template-method_uml_diagram" />
                 </div>
             </div>
 
