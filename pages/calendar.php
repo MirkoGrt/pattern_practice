@@ -360,10 +360,10 @@
                         type: "POST",
                         data: data,
                         success: function (response) {
-                            console.log(response);
+                            showMdlSnackbar(response, 'success', '#event-snackbar-success');
                         },
                         error: function (response) {
-                            console.log(response);
+                            showMdlSnackbar(response, 'error', '#event-snackbar-success');
                         }
                     });
                 }
@@ -380,11 +380,11 @@
                         type: "POST",
                         data: data,
                         success: function (response) {
-                            console.log(response);
+                            showMdlSnackbar(response, 'success', '#event-snackbar-success');
                             deletedEvent.remove();
                         },
                         error: function (response) {
-                            console.log(response);
+                            showMdlSnackbar(response, 'error', '#event-snackbar-success');
                         }
                     });
                 }
