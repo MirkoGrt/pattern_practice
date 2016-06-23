@@ -18,12 +18,13 @@ class DeleteData {
     }
 
     /**
+     * @param $table
      * @param $eventId
      * @return bool
      */
-    public function deleteEvent ($eventId) {
+    public function deleteEvent ($table, $eventId) {
         $deleteQuery = $this->dbConnection->prepare(
-            'DELETE FROM events WHERE id = :eventId'
+            'DELETE FROM '. $table .' WHERE id = :eventId'
         );
 
         $deleteQuery->bindParam(':eventId', $eventId);

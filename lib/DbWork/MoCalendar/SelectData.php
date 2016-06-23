@@ -17,10 +17,11 @@ class SelectData {
     }
 
     /**
+     * @param $table
      * @return array
      */
-    public function getAllEvents () {
-        $insertQuery = 'SELECT id, title, detail, eventStatus, eventDate FROM events';
+    public function getAllEvents ($table) {
+        $insertQuery = 'SELECT id, title, detail, eventStatus, eventDate FROM ' . $table;
         $allEventsData = array();
 
         foreach ($this->dbConnection->query($insertQuery) as $row) {
@@ -36,10 +37,11 @@ class SelectData {
     }
 
     /**
+     * @param $table
      * @return array
      */
-    public function getTimestamps () {
-        $insertQuery = 'SELECT eventDate FROM events';
+    public function getTimestamps ($table) {
+        $insertQuery = 'SELECT eventDate FROM ' . $table;
         $allTimestamps = array();
 
         foreach ($this->dbConnection->query($insertQuery) as $row) {

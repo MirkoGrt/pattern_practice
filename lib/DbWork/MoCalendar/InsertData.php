@@ -18,14 +18,15 @@ class InsertData {
     }
 
     /**
+     * @param $table
      * @param $eventTitle
      * @param $eventDetails
      * @param $eventTimestamp
      * @return bool
      */
-    public function addEvent ($eventTitle, $eventDetails, $eventTimestamp) {
+    public function addEvent ($table, $eventTitle, $eventDetails, $eventTimestamp) {
         $insertQuery = $this->dbConnection->prepare(
-            'INSERT INTO events (title, detail, eventDate, dateAdded, eventStatus)
+            'INSERT INTO '. $table .' (title, detail, eventDate, dateAdded, eventStatus)
                 VALUES (:eventTitle, :eventDetails, :eventTimestamp, NOW(), 1)'
         );
 
@@ -43,14 +44,13 @@ class InsertData {
     }
 
     /**
+     * @param $table
      * @param $eventId
      * @return bool
-     * 
-     * function to toggle event status (active / not active)
      */
-    public function updateEventStatus ($eventId) {
+    public function updateEventStatus ($table, $eventId) {
         $insertQuery = $this->dbConnection->prepare(
-            'UPDATE events
+            'UPDATE '. $table .'
               SET eventStatus = !eventStatus
               WHERE id = :eventId'
         );

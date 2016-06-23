@@ -38,7 +38,7 @@ class Calendar extends Mvc\BaseController {
             $moCalendarCreate->createEventsTable($this->eventsTableName);
         }
 
-        $eventInserting = $moCalendarInsert->addEvent($eventTitle, $eventDetails, $eventTimestamp);
+        $eventInserting = $moCalendarInsert->addEvent($this->eventsTableName, $eventTitle, $eventDetails, $eventTimestamp);
 
         if ($eventInserting) {
             echo json_encode('Success! Event is added');
@@ -56,7 +56,7 @@ class Calendar extends Mvc\BaseController {
         
         $eventId = $_POST['id'];
 
-        $eventUpdating = $moCalendarInsert->updateEventStatus($eventId);
+        $eventUpdating = $moCalendarInsert->updateEventStatus($this->eventsTableName, $eventId);
 
         if ($eventUpdating) {
             echo json_encode('Success! Status is changed');
@@ -74,7 +74,7 @@ class Calendar extends Mvc\BaseController {
         
         $eventId = $_POST['id'];
 
-        $eventDeleting = $moCalendarDelete->deleteEvent($eventId);
+        $eventDeleting = $moCalendarDelete->deleteEvent($this->eventsTableName, $eventId);
 
         if ($eventDeleting) {
             echo json_encode('Success! Event deleted');
@@ -92,7 +92,7 @@ class Calendar extends Mvc\BaseController {
         $PDO_Connection = $this->getDataBase()->initDbConnection();
         $moCalendarSelect = new DbWork\MoCalendar\SelectData($PDO_Connection);
 
-        $allEventsData = $moCalendarSelect->getAllEvents();
+        $allEventsData = $moCalendarSelect->getAllEvents($this->eventsTableName);
 
         return $allEventsData;
     }
@@ -116,7 +116,7 @@ class Calendar extends Mvc\BaseController {
         $PDO_Connection = $this->getDataBase()->initDbConnection();
         $moCalendarSelect = new DbWork\MoCalendar\SelectData($PDO_Connection);
 
-        $allTimestamps = $moCalendarSelect->getTimestamps();
+        $allTimestamps = $moCalendarSelect->getTimestamps($this->eventsTableName);
 
         return $allTimestamps;
     }
