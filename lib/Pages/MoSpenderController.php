@@ -36,7 +36,7 @@ class MoSpenderController extends Mvc\BaseController {
         $itemPrice = $_POST['itemPrice'];
         $itemPriceCurrency = $_POST['itemPriceCurrency'];
         $itemTags = $_POST['itemTags'];
-        $itemCategories = $_POST['itemCategories'];
+        $itemCategory = $_POST['itemCategories'];
         $itemNewCategory = $_POST['itemNewCategory'];
         $itemDay = $this->convertDataValue($_POST['itemDay']);
         $itemMonth = $this->convertDataValue($_POST['itemMonth']);
@@ -65,7 +65,7 @@ class MoSpenderController extends Mvc\BaseController {
             $moSpenderInsert->addNewCategory($itemNewCategory, $this->categoryTable);
 
             // add item to this new category
-            $itemCategories = $itemCategories .',' . $itemNewCategory;
+            $itemCategory = $itemNewCategory;
         }
 
         $itemAdd = $moSpenderInsert->addSpenderItem(
@@ -74,7 +74,7 @@ class MoSpenderController extends Mvc\BaseController {
             $itemPrice,
             $itemPriceCurrency,
             $itemTags,
-            $itemCategories,
+            $itemCategory,
             $itemDay,
             $itemMonth,
             $itemTimestamp
@@ -101,7 +101,7 @@ class MoSpenderController extends Mvc\BaseController {
         $moneyReason = $_POST['moneyReason'];
         $moneyQuantity = $_POST['moneyQuantity'];
         $moneyCurrency = $_POST['moneyCurrency'];
-        $moneyCategories = $_POST['moneyCategory'];
+        $moneyCategory = $_POST['moneyCategory'];
         $moneyNewCategory = $_POST['moneyNewCategory'];
         $moneyDay = $this->convertDataValue($_POST['moneyDay']);
         $moneyMonth = $this->convertDataValue($_POST['moneyMonth']);
@@ -124,7 +124,7 @@ class MoSpenderController extends Mvc\BaseController {
             $moSpenderInsert->addNewCategory($moneyNewCategory, $this->moneyCategoriesTable);
 
             // add item to this new category
-            $moneyCategories = $moneyCategories .',' . $moneyNewCategory;
+            $moneyCategory = $moneyNewCategory;
         }
 
         $moneyAdd = $moSpenderInsert->addMoney(
@@ -132,7 +132,7 @@ class MoSpenderController extends Mvc\BaseController {
             $moneyReason,
             $moneyQuantity,
             $moneyCurrency,
-            $moneyCategories,
+            $moneyCategory,
             $moneyDay,
             $moneyMonth,
             $moneyYear,

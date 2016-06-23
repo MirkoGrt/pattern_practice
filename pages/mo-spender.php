@@ -119,7 +119,8 @@
                                            id="spender_item_category_<?php echo $category['id']; ?>"
                                            name="spender_item_category"
                                            class="mdl-checkbox__input spender_item_category"
-                                           value="<?php echo $category['id']; ?>"
+                                           onclick="selectOnlyThis(this, 'spender_item')"
+                                           value="<?php echo $category['name']; ?>"
                                         >
                                         <span class="mdl-checkbox__label"><?php echo $category['name']; ?></span>
 
@@ -133,7 +134,7 @@
 
                             <!--/.New category-->
                             <div class="mdl-textfield mdl-js-textfield">
-                                <input class="mdl-textfield__input" name="New_Category" type="text" id="spender_item_new_category">
+                                <input class="mdl-textfield__input" name="New_Category" type="text" onchange="uncheckCheckboxes('spender_item')" id="spender_item_new_category">
                                 <label class="mdl-textfield__label" for="spender_item_new_category">New Category</label>
                             </div>
                             <div class="mdl-tooltip" for="spender_item_new_category">
@@ -209,18 +210,22 @@
                         <div class="money_income_category_wrapper">
 
                             <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="money_income_category_1">
-                                <input type="checkbox" id="money_income_category_1" class="mdl-checkbox__input money_income_category" name="money_income_category" value="1">
+                                <input type="checkbox" id="money_income_category_1" class="mdl-checkbox__input money_income_category" onclick="selectOnlyThis(this, 'money_income')" name="money_income_category" value="1">
                                 <span class="mdl-checkbox__label">One</span>
                             </label>
                             <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="money_income_category_2">
-                                <input type="checkbox" id="money_income_category_2" class="mdl-checkbox__input money_income_category" name="money_income_category" value="2">
+                                <input type="checkbox" id="money_income_category_2" class="mdl-checkbox__input money_income_category" onclick="selectOnlyThis(this, 'money_income')" name="money_income_category" value="2">
                                 <span class="mdl-checkbox__label">Two</span>
+                            </label>
+                            <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="money_income_category_3">
+                                <input type="checkbox" id="money_income_category_3" class="mdl-checkbox__input money_income_category" onclick="selectOnlyThis(this, 'money_income')" name="money_income_category" value="3">
+                                <span class="mdl-checkbox__label">Three</span>
                                 <span class="mdl-textfield__error"></span>
                             </label>
 
                             <!--/.New category-->
                             <div class="mdl-textfield mdl-js-textfield">
-                                <input class="mdl-textfield__input" type="text" name="new_category" id="money_income_new_category">
+                                <input class="mdl-textfield__input" type="text" name="new_category" onchange="uncheckCheckboxes('money_income')" id="money_income_new_category">
                                 <label class="mdl-textfield__label" for="money_income_new_category">New Money Category</label>
                             </div>
                             <div class="mdl-tooltip" for="money_income_new_category">
@@ -315,9 +320,7 @@
                     var moneyReason = $(formToAddMoney + ' #money_income_reason').val();
                     var moneyQuantity = $(formToAddMoney + ' #money_income_quantity').val();
                     var moneyCurrency = $(formToAddMoney + ' input[name=money_quantity_currency]:checked').val();
-                    var moneyCategory = $(formToAddMoney + ' input[name=money_income_category]:checked').map(function() {
-                        return this.value;
-                    }).get();
+                    var moneyCategory = $(formToAddMoney + ' input[name=money_income_category]:checked').val();
                     var moneyNewCategory = $(formToAddMoney + ' #money_income_new_category').val();
 
                     var moneyDay = $(formToAddMoney + ' #money_income_day').val();
@@ -391,9 +394,7 @@
                     var ItemPrice = $(formToAddItems + ' #spender_item_price').val();
                     var ItemPriceCurrency = $(formToAddItems + ' input[name=spender_currency]:checked').val();
                     var ItemTags = $(formToAddItems + ' #spender_item_tags').val();
-                    var ItemCategories = $(formToAddItems + ' input[name=spender_item_category]:checked').map(function() {
-                        return this.value;
-                    }).get();
+                    var ItemCategories = $(formToAddItems + ' input[name=spender_item_category]:checked').val();
                     var ItemNewCategory = $(formToAddItems + ' #spender_item_new_category').val();
                     var ItemDay = $(formToAddItems + ' #spender_item_day').val();
                     var ItemMonth = $(formToAddItems + ' #spender_item_month').val();

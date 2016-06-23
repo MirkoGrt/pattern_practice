@@ -104,3 +104,28 @@ function showMdlSnackbar (response, type, id) {
     }
     snackbarContainer.MaterialSnackbar.showSnackbar(data);
 }
+
+/*
+    Functions to check only one checkbox at the time (for categories on the moSpender page)
+
+*/
+function selectOnlyThis (checkbox, className) {
+    // clean the new category if select category from the list
+    var newCategoryInput = $('input#' + className + '_new_category');
+    newCategoryInput.val('').parent('div').removeClass('is-dirty');
+    
+    // check only one category from the list
+    var inputsToCheckOut = $('input.' + className + '_category').not(checkbox);
+    inputsToCheckOut.each(function () {
+        $(this).parent('label').removeClass('is-checked');
+        $(this).attr('checked', false);
+    });
+}
+
+function uncheckCheckboxes (className) {
+    var checkboxes = $('input.' + className + '_category');
+    checkboxes.each(function () {
+        $(this).parent('label').removeClass('is-checked');
+        $(this).attr('checked', false);
+    });
+}
