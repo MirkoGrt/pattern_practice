@@ -41,6 +41,15 @@
                             </span>
                         </li>
                     </ul>
+                    <h5>Attention!</h5>
+                    <ul class='mospender-info-list mdl-list'>
+                        <li class="mdl-list__item">
+                            <span class="mdl-list__item-primary-content">
+                                <i class="material-icons mdl-list__item-icon">info</i>
+                                One item ore one money income can has only one category!
+                            </span>
+                        </li>
+                    </ul>
                 </div>
                 <div class="mdl-card__actions mdl-card--border">
                     <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">

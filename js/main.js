@@ -122,6 +122,9 @@ function selectOnlyThis (checkbox, className) {
     });
 }
 
+/*
+* Function to check out categories if new category is inputted (for categories on the moSpender page)
+* */
 function uncheckCheckboxes (className) {
     var checkboxes = $('input.' + className + '_category');
     checkboxes.each(function () {
