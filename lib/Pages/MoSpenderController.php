@@ -147,22 +147,16 @@ class MoSpenderController extends Mvc\BaseController {
     }
 
     /**
+     * @param $table
      * @return array
      *
-     * get all categories from DB
+     * the same function for money income and spender items
      */
-    public function getAllCategories () {
+    public function getAllCategories ($table) {
         $PDO_Connection = $this->getDataBase()->initDbConnection();
+        $moSpenderSelect = new DbWork\MoSpender\SelectData($PDO_Connection);
 
-        $insertQuery = 'SELECT id, categoryName FROM items_categories';
-        $allCategoriesData = array();
-
-        foreach ($PDO_Connection->query($insertQuery) as $row) {
-            $categoryData = array();
-            $categoryData['name'] = $row["categoryName"];
-            $categoryData['id'] = $row["id"];
-            $allCategoriesData[] = $categoryData;
-        }
+        $allCategoriesData = $moSpenderSelect->getCategories($table);
 
         return $allCategoriesData;
     }
@@ -198,8 +192,12 @@ class MoSpenderController extends Mvc\BaseController {
      * return page view (display the page)
      */
     public function showMoSpender() {
-        $allCategories = $this->getAllCategories();
-        $result = $this->render('mo-spender.php', ['allCategories' => $allCategories]);
+        $allCategories = $this->getAllCategories($this->categoryTable);
+        $allMoneyIncomeCategories = $this->getAllCategories($this->moneyCategoriesTable);
+        $result = $this->render('mo-spender.php', [
+            'allCategories' => $allCategories,
+            'moneyIncomeCategories' => $allMoneyIncomeCategories
+        ]);
         echo $result;
     }
 }

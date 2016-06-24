@@ -219,21 +219,31 @@
                             </label>
                         </div><!--/.money_income_quantity_wrapper-->
 
+                        <?php
+                            $allMoneyCategories = $variables["moneyIncomeCategories"];
+                            $moneyCategoriesQuantity = count($allCategories);
+                        ?>
                         <div class="money_income_category_wrapper">
+                            <?php
+                                if ($moneyCategoriesQuantity > 0):
+                            ?>
+                                <?php $i = 1; foreach ($allMoneyCategories as $category): ?>
+                                    <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="money_income_category_<?php echo $category['id']; ?>">
+                                        <input type="checkbox"
+                                               id="money_income_category_<?php echo $category['id']; ?>"
+                                               class="mdl-checkbox__input money_income_category"
+                                               onclick="selectOnlyThis(this, 'money_income')"
+                                               name="money_income_category"
+                                               value="<?php echo $category['name']; ?>">
+                                        <span class="mdl-checkbox__label"><?php echo $category['name']; ?></span>
 
-                            <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="money_income_category_1">
-                                <input type="checkbox" id="money_income_category_1" class="mdl-checkbox__input money_income_category" onclick="selectOnlyThis(this, 'money_income')" name="money_income_category" value="1">
-                                <span class="mdl-checkbox__label">One</span>
-                            </label>
-                            <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="money_income_category_2">
-                                <input type="checkbox" id="money_income_category_2" class="mdl-checkbox__input money_income_category" onclick="selectOnlyThis(this, 'money_income')" name="money_income_category" value="2">
-                                <span class="mdl-checkbox__label">Two</span>
-                            </label>
-                            <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="money_income_category_3">
-                                <input type="checkbox" id="money_income_category_3" class="mdl-checkbox__input money_income_category" onclick="selectOnlyThis(this, 'money_income')" name="money_income_category" value="3">
-                                <span class="mdl-checkbox__label">Three</span>
-                                <span class="mdl-textfield__error"></span>
-                            </label>
+                                        <!-- Show field for error message only in the end of category list -->
+                                        <?php if ($i == $moneyCategoriesQuantity): ?>
+                                            <span class="mdl-textfield__error"></span>
+                                        <?php endif; ?>
+                                    </label>
+                                <?php $i++; endforeach; ?>
+                            <?php endif; ?>
 
                             <!--/.New category-->
                             <div class="mdl-textfield mdl-js-textfield">
