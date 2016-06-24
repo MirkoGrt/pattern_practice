@@ -2,7 +2,7 @@
 
 namespace mvc;
 
-class BaseController {
+class BaseController extends \MoPower {
 
     protected $view;
 

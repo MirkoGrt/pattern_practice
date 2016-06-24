@@ -14,8 +14,8 @@
                 </div>
                 <div class="mdl-card__supporting-text">
                     <p>
-                        You need to make your own MySQL connection in the
-                        <strong>"lib/Pages/Calendar.php"->getDataBase method </strong>.
+                        You need to set your MySQL connection in the
+                        <strong>"lib/MoPower.php" variables </strong>.
                     </p>
                     <p>
                         To make the events work please do the custom connection.

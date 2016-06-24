@@ -8,7 +8,6 @@
 
 namespace Pages;
 use \mvc as Mvc;
-use \DbWork;
 
 
 class MoSpenderController extends Mvc\BaseController {
@@ -18,18 +17,17 @@ class MoSpenderController extends Mvc\BaseController {
     public $moneyIncomeTable = 'money_income';
     public $moneyCategoriesTable = 'money_income_categories';
 
-    public function getDataBase () {
-        return new DbWork\DbConnection('root', 'root', 'moSpender');
+    public function __construct() {
+        parent::__construct();
+
+        // Set the connection to DB in "MoPower" class
+        $this->setMoSpenderConnection();
     }
 
     /**
      *  adding item to DB table / add item to current year table
      */
     public function addSpenderItem () {
-        $PDO_Connection = $this->getDataBase()->initDbConnection();
-        $moSpenderCreate = new DbWork\MoSpender\CreateTables($PDO_Connection);
-        $DbGeneralFunctions = new DbWork\GeneralFunctions($PDO_Connection);
-        $moSpenderInsert = new DbWork\MoSpender\InsertData($PDO_Connection);
 
         // Getting POST data
         $itemName = $_POST['itemName'];
@@ -51,24 +49,24 @@ class MoSpenderController extends Mvc\BaseController {
         $tableForYearItems = $this->getTableName($itemYear);
 
         // if there is no table for current year - create it
-        if (!$DbGeneralFunctions->checkIfTableExist($tableForYearItems)) {
-            $moSpenderCreate->createTableForYearItems($tableForYearItems);
+        if (!$this->generalFunctions()->checkIfTableExist($tableForYearItems)) {
+            $this->moSpenderCreate()->createTableForYearItems($tableForYearItems);
         }
 
         // if there is no category table - create it
-        if (!$DbGeneralFunctions->checkIfTableExist($this->categoryTable)) {
-            $moSpenderCreate->createTableCategories($this->categoryTable);
+        if (!$this->generalFunctions()->checkIfTableExist($this->categoryTable)) {
+            $this->moSpenderCreate()->createTableCategories($this->categoryTable);
         }
 
         // if new category - write it to DB table
         if ($itemNewCategory) {
-            $moSpenderInsert->addNewCategory($itemNewCategory, $this->categoryTable);
+            $this->moSpenderInsert()->addNewCategory($itemNewCategory, $this->categoryTable);
 
             // add item to this new category
             $itemCategory = $itemNewCategory;
         }
 
-        $itemAdd = $moSpenderInsert->addSpenderItem(
+        $itemAdd = $this->moSpenderInsert()->addSpenderItem(
             $tableForYearItems,
             $itemName,
             $itemPrice,
@@ -92,10 +90,6 @@ class MoSpenderController extends Mvc\BaseController {
      * adding money income info to DB
      */
     public function addMoneyIncome () {
-        $PDO_Connection = $this->getDataBase()->initDbConnection();
-        $moSpenderCreate = new DbWork\MoSpender\CreateTables($PDO_Connection);
-        $DbGeneralFunctions = new DbWork\GeneralFunctions($PDO_Connection);
-        $moSpenderInsert = new DbWork\MoSpender\InsertData($PDO_Connection);
 
         // Getting POST data
         $moneyReason = $_POST['moneyReason'];
@@ -110,24 +104,24 @@ class MoSpenderController extends Mvc\BaseController {
         $moneyTimestamp = strtotime($moneyYear . $moneyMonth . $moneyDay);
 
         // if there is no table for money income - create it
-        if (!$DbGeneralFunctions->checkIfTableExist($this->moneyIncomeTable)) {
-            $moSpenderCreate->createMoneyIncomeTable($this->moneyIncomeTable);
+        if (!$this->generalFunctions()->checkIfTableExist($this->moneyIncomeTable)) {
+            $this->moSpenderCreate()->createMoneyIncomeTable($this->moneyIncomeTable);
         }
 
         // if there is no table for money income categories - create it
-        if (!$DbGeneralFunctions->checkIfTableExist($this->moneyCategoriesTable)) {
-            $moSpenderCreate->createTableCategories($this->moneyCategoriesTable);
+        if (!$this->generalFunctions()->checkIfTableExist($this->moneyCategoriesTable)) {
+            $this->moSpenderCreate()->createTableCategories($this->moneyCategoriesTable);
         }
 
         // if new category - write it to DB table
         if ($moneyNewCategory) {
-            $moSpenderInsert->addNewCategory($moneyNewCategory, $this->moneyCategoriesTable);
+            $this->moSpenderInsert()->addNewCategory($moneyNewCategory, $this->moneyCategoriesTable);
 
             // add item to this new category
             $moneyCategory = $moneyNewCategory;
         }
 
-        $moneyAdd = $moSpenderInsert->addMoney(
+        $moneyAdd = $this->moSpenderInsert()->addMoney(
             $this->moneyIncomeTable,
             $moneyReason,
             $moneyQuantity,
@@ -153,11 +147,7 @@ class MoSpenderController extends Mvc\BaseController {
      * the same function for money income and spender items
      */
     public function getAllCategories ($table) {
-        $PDO_Connection = $this->getDataBase()->initDbConnection();
-        $moSpenderSelect = new DbWork\MoSpender\SelectData($PDO_Connection);
-
-        $allCategoriesData = $moSpenderSelect->getCategories($table);
-
+        $allCategoriesData = $this->moSpenderSelect()->getCategories($table);
         return $allCategoriesData;
     }
 

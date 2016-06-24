@@ -11,22 +11,17 @@ class Calendar extends Mvc\BaseController {
 
     public $eventsTableName = 'events';
 
-    /**
-     * @return DbWork\DbConnection
-     * function to get DB Connection from DbConnection class
-     */
-    public function getDataBase () {
-        return new DbWork\DbConnection('root', 'root', 'practice_calendar');
+    public function __construct() {
+        parent::__construct();
+
+        // Set the connection to DB in "MoPower" class
+        $this->setMoCalendarConnection();
     }
 
     /**
      * Adding event to events table
      */
     public function addEvent() {
-        $PDO_Connection = $this->getDataBase()->initDbConnection();
-        $moCalendarCreate = new DbWork\MoCalendar\CreateTables($PDO_Connection);
-        $DbGeneralFunctions = new DbWork\GeneralFunctions($PDO_Connection);
-        $moCalendarInsert = new DbWork\MoCalendar\InsertData($PDO_Connection);
 
         /* Getting post data */
         $eventTimestamp = $_POST['timestamp'];
@@ -34,11 +29,11 @@ class Calendar extends Mvc\BaseController {
         $eventDetails = $_POST['details'];
 
         // if there is no table for current year - create it
-        if (!$DbGeneralFunctions->checkIfTableExist($this->eventsTableName)) {
-            $moCalendarCreate->createEventsTable($this->eventsTableName);
+        if (!$this->generalFunctions()->checkIfTableExist($this->eventsTableName)) {
+            $this->moCalendarCreate()->createEventsTable($this->eventsTableName);
         }
 
-        $eventInserting = $moCalendarInsert->addEvent($this->eventsTableName, $eventTitle, $eventDetails, $eventTimestamp);
+        $eventInserting = $this->moCalendarInsert()->addEvent($this->eventsTableName, $eventTitle, $eventDetails, $eventTimestamp);
 
         if ($eventInserting) {
             echo json_encode('Success! Event is added');
@@ -51,12 +46,10 @@ class Calendar extends Mvc\BaseController {
      * Function to toggle event status (0/1)
      */
     public function changeEventStatus () {
-        $PDO_Connection = $this->getDataBase()->initDbConnection();
-        $moCalendarInsert = new DbWork\MoCalendar\InsertData($PDO_Connection);
         
         $eventId = $_POST['id'];
 
-        $eventUpdating = $moCalendarInsert->updateEventStatus($this->eventsTableName, $eventId);
+        $eventUpdating = $this->moCalendarInsert()->updateEventStatus($this->eventsTableName, $eventId);
 
         if ($eventUpdating) {
             echo json_encode('Success! Status is changed');
@@ -69,12 +62,10 @@ class Calendar extends Mvc\BaseController {
      * Function to delete event from DB
      */
     public function deleteEvent () {
-        $PDO_Connection = $this->getDataBase()->initDbConnection();
-        $moCalendarDelete = new DbWork\MoCalendar\DeleteData($PDO_Connection);
         
         $eventId = $_POST['id'];
 
-        $eventDeleting = $moCalendarDelete->deleteEvent($this->eventsTableName, $eventId);
+        $eventDeleting = $this->moCalendarDelete()->deleteEvent($this->eventsTableName, $eventId);
 
         if ($eventDeleting) {
             echo json_encode('Success! Event deleted');
@@ -89,11 +80,7 @@ class Calendar extends Mvc\BaseController {
      * return all events data from the table
      */
     public function getAllEventsData () {
-        $PDO_Connection = $this->getDataBase()->initDbConnection();
-        $moCalendarSelect = new DbWork\MoCalendar\SelectData($PDO_Connection);
-
-        $allEventsData = $moCalendarSelect->getAllEvents($this->eventsTableName);
-
+        $allEventsData = $this->moCalendarSelect()->getAllEvents($this->eventsTableName);
         return $allEventsData;
     }
 
@@ -113,11 +100,7 @@ class Calendar extends Mvc\BaseController {
      * get all timestamp in array to check if current day has events
      */
     public function getAllEventsTimestamp () {
-        $PDO_Connection = $this->getDataBase()->initDbConnection();
-        $moCalendarSelect = new DbWork\MoCalendar\SelectData($PDO_Connection);
-
-        $allTimestamps = $moCalendarSelect->getTimestamps($this->eventsTableName);
-
+        $allTimestamps = $this->moCalendarSelect()->getTimestamps($this->eventsTableName);
         return $allTimestamps;
     }
 

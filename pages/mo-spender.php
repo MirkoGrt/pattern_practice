@@ -11,8 +11,8 @@
                 </div>
                 <div class="mdl-card__supporting-text">
                     <p>
-                        To make it works just create the empty BD and connect it in the
-                        <strong>lib/Pages/MoSpenderController/getDataBase()</strong> method
+                        You need to set your MySQL connection in the
+                        <strong>"lib/MoPower.php" variables </strong>.
                     </p>
                     <p>
                         Event handler (moSpender class) file: <strong>"lib/Pages/MoSpenderController.php"</strong>
