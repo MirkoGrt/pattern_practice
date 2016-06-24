@@ -14,15 +14,12 @@
                 </div>
                 <div class="mdl-card__supporting-text">
                     <p>
-                        The DB for this structure is in the folder "DbDumps" (practice_calendar.sql)
-                    </p>
-                    <p>
                         You need to make your own MySQL connection in the
                         <strong>"lib/Pages/Calendar.php"->getDataBase method </strong>.
                     </p>
                     <p>
-                        To make the events work please install the "practice_calendar" DB and do the custom connection.
-                        Event handler (Calendar class) file is located in the <strong>"lib/Pages/Calendar.php"</strong> file.
+                        To make the events work please do the custom connection.
+                        Event handler (Calendar class) file: <strong>"lib/Pages/Calendar.php"</strong>
                     </p>
                     <h5>Features</h5>
                     <ul class="features-events-list mdl-list">

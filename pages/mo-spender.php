@@ -14,6 +14,9 @@
                         To make it works just create the empty BD and connect it in the
                         <strong>lib/Pages/MoSpenderController/getDataBase()</strong> method
                     </p>
+                    <p>
+                        Event handler (moSpender class) file: <strong>"lib/Pages/MoSpenderController.php"</strong>
+                    </p>
                     <h5>Features</h5>
                     <ul class="features-events-list mdl-list">
                         <li class="mdl-list__item">

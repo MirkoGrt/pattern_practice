@@ -3,4 +3,39 @@
         width: 100%;
         display: none;
     }
+    .money_income_reason_wrapper {
+        width: 100%;
+        .mdl-textfield {
+            width: 100%;
+        }
+    }
+    .money_income_quantity_wrapper {
+        width: 100%;
+        .mdl-textfield {
+            width: 20%;
+        }
+    }
+    .money_income_category_wrapper {
+        width: 100%;
+    }
+    .money_income_date_wrapper {
+        width: 100%;
+        text-align: center;
+        .mdl-textfield {
+            width: 20%;
+            @media (max-width: 768px) {
+                width: 60%;
+            }
+        }
+    }
+    .money_income_date_wrapper,
+    .money_income_category_wrapper,
+    .money_income_quantity_wrapper,
+    .money_income_reason_wrapper {
+        padding: 10px;
+    }
+    .mdl-textfield__error {
+        background-color: antiquewhite;
+        z-index: 3
+    }
 }
