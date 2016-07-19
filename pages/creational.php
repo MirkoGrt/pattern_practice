@@ -122,6 +122,84 @@
                 </div>
             </div>
 
+            <div class="lesson-block-card abstract-factory-pattern mdl-card mdl-shadow--2dp">
+                <div class="mdl-card__title">
+                    <h2 class="mdl-card__title-text">War Abstract Factory (people vs zombie) <span class="subtitle">lib/Patterns/Creational/AbstractFactory</span></h2>
+                </div>
+                <div class="mdl-card__supporting-text">
+                    <p class="description">
+                        Provide an interface for creating families of related or dependent objects without
+                        specifying their concrete classes.
+                    </p>
+                    <p class="small-description">
+                        Here we have the simple war imitation. We input quantity of warriors and start the war.
+                        Peoples and Zombies have the same interfaces, but another implementation.
+                        <br>
+                        Abstract factory is used for creating different objects from one interface.
+                    </p>
+                    <hr>
+                    <form class="abstract-factory-form" method="get">
+                        <div class="mdl-textfield mdl-js-textfield">
+                            <input class="mdl-textfield__input" type="number" required name="people-qty">
+                            <label class="mdl-textfield__label" for="people-qty">Peoples quantity</label>
+                        </div>
+                        <div class="mdl-textfield mdl-js-textfield">
+                            <input class="mdl-textfield__input" required type="number" name="zombies-qty">
+                            <label class="mdl-textfield__label" for="zombies-qty">Zombies quantity</label>
+                        </div>
+                        <button type="submit" class="mdl-button mdl-button--colored mdl-js-button mdl-button--raised mdl-js-ripple-effect">
+                            Run WAR!
+                        </button>
+                        <?php
+                            $zombiesQty = $_GET['zombies-qty'];
+                            $peopleQty = $_GET['people-qty'];
+                        ?>
+                        <hr>
+                        <?php if ($zombiesQty && $peopleQty): ?>
+                            <?php
+                                $zombies = new Patterns\Creational\AbstractFactory\ZombieFactory();
+                                $peoples = new Patterns\Creational\AbstractFactory\PeopleFactory();
+                            ?>
+                            <div class="half-page-block">
+                                <?php
+                                    for ($i = 0; $i < $zombiesQty; $i++) {
+                                        $zombie = $zombies->getWarrior();
+                                        $zombie->sayHello();
+                                    }
+                                    $zombies->horrorSlogan();
+                                ?>
+                            </div>
+                            <div class="half-page-block">
+                                <?php
+                                    for ($y = 0; $y < $peopleQty; $y++) {
+                                        $people = $peoples->getWarrior();
+                                        $people->sayHello();
+                                    }
+                                    $peoples->horrorSlogan();
+                                ?>
+                            </div>
+                            <div class="clearfix"></div>
+                        <?php else: ?>
+                            <h4>First run the war!!...</h4>
+                        <?php endif; ?>
+                    </form>
+                </div>
+                <div class="mdl-card__actions mdl-card--border">
+                    <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect"
+                       onclick="togglePatternDiagram('abstract-factory', this)">
+                        Show/Hide UML Diagram
+                    </a>
+                </div>
+                <div class="mdl-card__menu">
+                    <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
+                        <i class="material-icons">share</i>
+                    </button>
+                </div>
+                <div class="pattern-diagram-wrapper abstract-factory-diagram">
+                    <img src="/images/patterns_uml_diagrams/diagram_abstract-factory.png" alt="abstract-factory_uml_diagram" />
+                </div>
+            </div>
+
         </div>
         <div class="mdl-cell--2-col"></div>
     </div>

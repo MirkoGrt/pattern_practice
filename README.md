@@ -10,9 +10,12 @@ in this repo I do some cool stuff, implement patterns and practice with web-tech
 - Singleton
 - Mediator
 - Decorator
+- Proxy
+- Abstract Factory
 
 **Cool features here:**
 
+- JsPage (Caesar Cipher, animation ... )
 - moCalendar
 - moSpender
 
