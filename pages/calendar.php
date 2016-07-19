@@ -18,7 +18,6 @@
                         <strong>"lib/MoPower.php" variables </strong>.
                     </p>
                     <p>
-                        To make the events work please do the custom connection.
                         Event handler (Calendar class) file: <strong>"lib/Pages/Calendar.php"</strong>
                     </p>
                     <h5>Features</h5>

@@ -2,6 +2,10 @@
     @import "config/mixins";
 /*=================*/
 
+/*===== helper classes =====*/
+@import "config/helpers";
+/*=================*/
+
 /*===== Helper classes =====*/
     .element-hidden {
         overflow: hidden;

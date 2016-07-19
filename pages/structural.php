@@ -116,6 +116,98 @@
                 </div>
             </div>
 
+            <div class="lesson-block-card proxy-pattern mdl-card mdl-shadow--2dp">
+                <div class="mdl-card__title">
+                    <h2 class="mdl-card__title-text">Robot-Defuser Proxy <span class="subtitle">lib/Patterns/Structural/Proxy</span></h2>
+                </div>
+                <div class="mdl-card__supporting-text">
+                    <p class="description">
+                        Provide a surrogate or placeholder for another object to control access to it.
+                    </p>
+                    <p class="small-description">
+                        Before every move the robot check its connection. He has three attempts to check it.
+                        If connection is good the robot move on, else he is BOOM and stops the algorithm. The way to bomb and true
+                        wire are generated randomly from array. After all steps to bomb robot tries to
+                        defuse the bomb (Cutting random wire). After all steps to the bomb and cutting the
+                        true wire the bomb is defused. <br>
+                        <strong>RobotDefuserProxy</strong> class controls <strong>RobotDefuser</strong> object.
+                    </p>
+                    <hr>
+                    <div class="half-page-block">
+                        <p>Here is the way to bomb: </p>
+                        <ol style="font-size: 20px; color: red">
+                            <?php
+                                $randomWayArray = [];
+                                $movesArrowsArray = ['&larr;', '&uarr;', '&rarr;', '&darr;'];
+                                for ($i = 0; $i < 5; $i++) {
+                                    $randomArrow = array_rand($movesArrowsArray, 1);
+                                    $randomWayArray[] = $randomArrow;
+                                    echo '<li>'. $movesArrowsArray[$randomArrow] .'</li>';
+                                }
+                            ?>
+                        </ol>
+                    </div>
+                    <div class="half-page-block">
+                        <p>Here is wires for cut: </p>
+                        <ol style="font-size: 20px;">
+                            <?php
+                                $wiresArray = ['yellow', 'black', 'blue', 'green'];
+                                $trueWire = array_rand($wiresArray, 1);
+                                for ($y = 0; $y < count($wiresArray); $y++) {
+                                    if ($trueWire == $y) {
+                                        echo '<li style="color: '. $wiresArray[$y] .'">'. $wiresArray[$y] .' -- this is true</li>';
+                                    } else {
+                                        echo '<li style="color: '. $wiresArray[$y] .'">'. $wiresArray[$y] .'</li>';
+                                    }
+                                }
+                            ?>
+                        </ol>
+                    </div>
+                    <div class="clearfix"></div>
+                    <hr>
+                    <p>Robot starts his operation:</p>
+                    <?php
+                        $robot = new Patterns\Structural\Proxy\RobotDefuserProxy(107);
+                        for ($t = 0; $t < count($randomWayArray); $t++) {
+                            if ($robot->isBoomed) {
+                                continue;
+                            }
+                            echo $t + 1 . ' --- <br>';
+                            if ($randomWayArray[$t] == 0) {
+                                $robot->turnLeft();
+                            } elseif ($randomWayArray[$t] == 1) {
+                                $robot->turnUp();
+                            } elseif ($randomWayArray[$t] == 2) {
+                                $robot->turnRight();
+                            } elseif ($randomWayArray[$t] == 3) {
+                                $robot->turnDown();
+                            } else {
+                                $robot->boom();
+                            }
+                        }
+
+                        if (!$robot->isBoomed) {
+                            echo '<p>Robot cuts the wire:</p>';
+                            $robot->defusing($trueWire, array_rand($wiresArray, 1));
+                        }
+                    ?>
+                </div>
+                <div class="mdl-card__actions mdl-card--border">
+                    <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect"
+                       onclick="togglePatternDiagram('proxy', this)">
+                        Show/Hide UML Diagram
+                    </a>
+                </div>
+                <div class="mdl-card__menu">
+                    <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
+                        <i class="material-icons">share</i>
+                    </button>
+                </div>
+                <div class="pattern-diagram-wrapper proxy-diagram">
+                    <img src="/images/patterns_uml_diagrams/diagram_proxy.png" alt="proxy_uml_diagram" />
+                </div>
+            </div>
+
         </div>
         <div class="mdl-cell--2-col"></div>
     </div>

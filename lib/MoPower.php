@@ -29,6 +29,7 @@ class MoPower {
         return new DbWork\GeneralFunctions($this->dbConnection);
     }
 
+    // MoSpender DB classes
     public function moSpenderCreate () {
         return new DbWork\MoSpender\CreateTables($this->dbConnection);
     }
@@ -41,6 +42,7 @@ class MoPower {
         return new DbWork\MoSpender\SelectData($this->dbConnection);
     }
 
+    // MoCalendar DB classes
     public function moCalendarCreate () {
         return new DbWork\MoCalendar\CreateTables($this->dbConnection);
     }
