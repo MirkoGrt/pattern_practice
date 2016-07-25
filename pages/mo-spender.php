@@ -183,6 +183,14 @@
                                     <span class="mdl-checkbox__label">Today Date</span>
                                 </label>
                             </div>
+
+                            <!-- Previous Date -->
+                            <div class="previous-date">
+                                <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="spender-previous-date">
+                                    <input type="checkbox" id="spender-previous-date" class="mdl-checkbox__input">
+                                    <span class="mdl-checkbox__label" id="spender-previous-date-label"></span>
+                                </label>
+                            </div>
                         </div>
 
                         <div id="sender-item-adding-progress" class="mdl-progress mdl-js-progress mdl-progress__indeterminate"></div>
@@ -193,8 +201,7 @@
                             onclick="addSpenderItemToDB()">
                         Add MoSpender Item!
                     </button>
-                    <!-- End Form for adiing data -->
-                </div>
+                </div><!--/#transform-form-panel-->
 
                 <div class="mdl-tabs__panel" id="money-income-panel">
                     <h4>Money income!</h4>
@@ -292,6 +299,14 @@
                                     <span class="mdl-checkbox__label">Today Date</span>
                                 </label>
                             </div>
+
+                            <!-- Previous Date -->
+                            <div class="previous-date">
+                                <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="money-income-previous-date">
+                                    <input type="checkbox" id="money-income-previous-date" class="mdl-checkbox__input">
+                                    <span class="mdl-checkbox__label" id="money-income-previous-date-label"></span>
+                                </label>
+                            </div>
                         </div><!--/.money_income_date_wrapper-->
                         <div id="money-income-adding-progress" class="mdl-progress mdl-js-progress mdl-progress__indeterminate"></div>
                         <br>
@@ -301,7 +316,7 @@
                             onclick="addMoney()">
                         Add Money!
                     </button>
-                </div>
+                </div><!--/#money-income-panel-->
 
                 <div class="mdl-tabs__panel" id="archive-panel">
                     <ul class="money-archive-list mdl-list">

@@ -14,6 +14,7 @@ function addMoney () {
     var moneyMonth = $(formToAddMoney + ' #money_income_month').val();
     var moneyYear = $(formToAddMoney + ' #money_income_year').val();
     var TodayDate = $(formToAddMoney + ' #money-income-today-date').is(':checked');
+    var PreviousDate = $(formToAddMoney + ' #money-income-previous-date').is(':checked');
 
     // if today date checkbox is checked - set today date
     if (TodayDate) {
@@ -23,7 +24,22 @@ function addMoney () {
         moneyDay = date.getDate();
     }
 
-    if (validateMoneyForm(formToAddMoney, moneyNewCategory, TodayDate)) {
+    // Write date to local storage (for prev date checkbox)
+    if (moneyDay && moneyMonth && moneyYear) {
+        localStorage.setItem('moneyDay', moneyDay);
+        localStorage.setItem('moneyMonth', moneyMonth);
+        localStorage.setItem('moneyYear', moneyYear);
+        $('#money-income-previous-date-label').text('Prev Date -' + localStorage.getItem('moneyDay') + '-' + localStorage.getItem('moneyMonth') + '-' + localStorage.getItem('moneyYear'));
+    }
+
+    // If Previous date checkbox is checked - get item data from local storage
+    if (PreviousDate) {
+        moneyYear = localStorage.getItem('itemYear');
+        moneyMonth = localStorage.getItem('itemMonth');
+        moneyDay = localStorage.getItem('itemDay');
+    }
+
+    if (validateMoneyForm(formToAddMoney, moneyNewCategory, TodayDate, PreviousDate)) {
         var url = '/addMoneyIncome';
         var data = 'moneyReason=' + moneyReason +
             '&moneyQuantity=' + moneyQuantity +
@@ -52,7 +68,7 @@ function addMoney () {
     }
 }
 
-function validateMoneyForm (form, newCategory, todayDate) {
+function validateMoneyForm (form, newCategory, todayDate, previousDate) {
 
     var moneyCategory = $(form + ' .money_income_category');
     var reason = $(form + ' #money_income_reason');
@@ -72,7 +88,7 @@ function validateMoneyForm (form, newCategory, todayDate) {
     }
 
     // Don't validate date inputs if today date is checked
-    if (todayDate) {
+    if (todayDate || previousDate) {
         dayValidation = validate(moneyDay, null, null, false);
         monthValidation = validate(moneyMonth, null, null, false);
         yearValidation = validate(moneyYear, null, null, false);
@@ -103,6 +119,7 @@ function addSpenderItemToDB () {
     var ItemYear = $(formToAddItems + ' #spender_item_year').val();
 
     var TodayDate = $(formToAddItems + ' #spender-today-date').is(':checked');
+    var PreviousDate = $(formToAddItems + ' #spender-previous-date').is(':checked');
 
     // if today date checkbox is checked - set today date
     if (TodayDate) {
@@ -112,7 +129,22 @@ function addSpenderItemToDB () {
         ItemDay = date.getDate();
     }
 
-    if (validateMoSpenderForm(ItemNewCategory, TodayDate)) {
+    // Write date to local storage (for prev date checkbox)
+    if (ItemDay && ItemMonth && ItemYear) {
+        localStorage.setItem('itemDay', ItemDay);
+        localStorage.setItem('itemMonth', ItemMonth);
+        localStorage.setItem('itemYear', ItemYear);
+        $('#spender-previous-date-label').text('Prev Date -' + localStorage.getItem('itemDay') + '-' + localStorage.getItem('itemMonth') + '-' + localStorage.getItem('itemYear'));
+    }
+
+    // If Previous date checkbox is checked - get item data from local storage
+    if (PreviousDate) {
+        ItemYear = localStorage.getItem('itemYear');
+        ItemMonth = localStorage.getItem('itemMonth');
+        ItemDay = localStorage.getItem('itemDay');
+    }
+
+    if (validateMoSpenderForm(ItemNewCategory, TodayDate, PreviousDate)) {
 
         var url = '/addSpenderItem';
         var data = 'itemName=' + ItemName +
@@ -144,18 +176,20 @@ function addSpenderItemToDB () {
 }
 
 /* Function to validate moSpender form before saving */
-function validateMoSpenderForm (newCategory, todayDate) {
+function validateMoSpenderForm (newCategory, todayDate, previousDate) {
     var formToAddItems = '#form-to-add-data-from-note';
 
     var spenderName = $(formToAddItems + ' #spender_item_name');
     var spenderPrice = $(formToAddItems + ' #spender_item_price');
     var spenderDay = $(formToAddItems + ' #spender_item_day');
     var spenderMonth = $(formToAddItems + ' #spender_item_month');
+    var spenderYear = $(formToAddItems + ' #spender_item_year');
 
     var nameValidation = validate(spenderName, 0, 50, true);
     var priceValidation = validate(spenderPrice, null, null, true);
     var dayValidation = validate(spenderDay, null, null, true);
     var monthValidation = validate(spenderMonth, null, null, true);
+    var yearValidation = validate(spenderYear, null, null, true);
 
     var spenderCategory = $(formToAddItems + ' .spender_item_category');
     var categoryValidation = validate(spenderCategory, null, null, true);
@@ -165,13 +199,27 @@ function validateMoSpenderForm (newCategory, todayDate) {
         categoryValidation = validate(spenderCategory, null, null, false);
     }
 
-    // Don't validate date inputs if today date is checked
-    if (todayDate) {
+    // Don't validate date inputs if today date or previous is checked
+    if (todayDate || previousDate) {
         dayValidation = validate(spenderDay, null, null, false);
         monthValidation = validate(spenderMonth, null, null, false);
+        yearValidation = validate(spenderYear, null, null, false);
     }
 
-    if (nameValidation && priceValidation && dayValidation && monthValidation && categoryValidation) {
+    if (nameValidation && priceValidation && dayValidation && monthValidation && yearValidation && categoryValidation) {
         return true;
     }
+}
+
+/* Functions for showing previous dates from local storage in checkbox labels when page is loaded */
+if (localStorage.getItem('itemYear') && localStorage.getItem('itemMonth') && localStorage.getItem('itemDay')) {
+    $('#spender-previous-date-label').text('Prev Date: ' + localStorage.getItem('itemDay') + '-' + localStorage.getItem('itemMonth') + '-' + localStorage.getItem('itemYear'));
+} else {
+    $('#spender-previous-date-label').text('No previous date');
+}
+
+if (localStorage.getItem('moneyYear') && localStorage.getItem('moneyMonth') && localStorage.getItem('moneyDay')) {
+    $('#money-income-previous-date-label').text('Prev Date: ' + localStorage.getItem('moneyDay') + '-' + localStorage.getItem('moneyMonth') + '-' + localStorage.getItem('moneyYear'));
+} else {
+    $('#money-income-previous-date-label').text('No previous date');
 }

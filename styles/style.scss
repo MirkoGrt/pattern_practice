@@ -96,13 +96,16 @@
             padding: 20px 0;
         }
     }
+    .previous-date .mdl-checkbox {
+        width: auto;
+    }
     .mdl-textfield__error {
         background-color: antiquewhite;
         z-index: 3
     }
     /*------------*/
 
-    /*------ Money income form (add items) ------*/
+    /*------ Money income form (add money) ------*/
     @import "forms/money-income-form";
     /*------------*/
 
