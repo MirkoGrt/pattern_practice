@@ -7,7 +7,7 @@
  * Time: 10:36
  */
 
-namespace Patterns\Structural\Proxy;
+namespace lib\Patterns\Structural\Proxy;
 
 class RobotDefuser {
 

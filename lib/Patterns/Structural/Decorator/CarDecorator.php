@@ -6,7 +6,7 @@
  * Time: 10:49
  */
 
-namespace Patterns\Structural\Decorator;
+namespace lib\Patterns\Structural\Decorator;
 
 
 class CarDecorator {

@@ -6,7 +6,7 @@
  * Time: 12:58
  */
 
-namespace Patterns\Creational\AbstractFactory;
+namespace lib\Patterns\Creational\AbstractFactory;
 
 
 interface WarInterface {

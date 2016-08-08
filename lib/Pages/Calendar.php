@@ -1,8 +1,8 @@
 <?php
 
-namespace Pages;
-use \mvc as Mvc;
-use \DbWork;
+namespace lib\Pages;
+use lib\mvc as Mvc;
+use lib\DbWork;
 
 /**
  * Class Calendar

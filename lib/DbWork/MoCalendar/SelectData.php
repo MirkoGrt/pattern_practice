@@ -6,7 +6,7 @@
  * Time: 11:50
  */
 
-namespace DbWork\MoCalendar;
+namespace lib\DbWork\MoCalendar;
 
 
 class SelectData {

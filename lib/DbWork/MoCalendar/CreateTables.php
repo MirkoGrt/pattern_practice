@@ -7,7 +7,7 @@
  * Time: 11:08
  */
 
-namespace DbWork\MoCalendar;
+namespace lib\DbWork\MoCalendar;
 
 class CreateTables {
 

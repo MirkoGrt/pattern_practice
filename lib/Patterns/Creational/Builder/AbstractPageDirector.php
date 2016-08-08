@@ -6,7 +6,7 @@
  * Time: 10:04
  */
 
-namespace Patterns\Creational\Builder;
+namespace lib\Patterns\Creational\Builder;
 
 
 abstract class AbstractPageDirector {

@@ -1,6 +1,6 @@
 <?php
 
-namespace Routing;
+namespace lib\Routing;
 
 /**
  * Class Dispatcher

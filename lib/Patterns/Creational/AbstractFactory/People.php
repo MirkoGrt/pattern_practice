@@ -6,7 +6,7 @@
  * Time: 14:28
  */
 
-namespace Patterns\Creational\AbstractFactory;
+namespace lib\Patterns\Creational\AbstractFactory;
 
 
 class People implements WarriorInterface {

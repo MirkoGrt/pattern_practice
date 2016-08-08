@@ -7,7 +7,7 @@
  * Time: 10:40
  */
 
-namespace DbWork;
+namespace lib\DbWork;
 
 class DbConnection {
 

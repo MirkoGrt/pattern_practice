@@ -6,8 +6,8 @@
  * Time: 9:55
  */
 
-namespace Pages;
-use \mvc as Mvc;
+namespace lib\Pages;
+use lib\mvc as Mvc;
 
 
 class MoSpenderController extends Mvc\BaseController {

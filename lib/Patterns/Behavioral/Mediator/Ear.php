@@ -1,6 +1,6 @@
 <?php
 
-namespace Patterns\Behavioral\Mediator;
+namespace lib\Patterns\Behavioral\Mediator;
 
 class Ear extends BodyPart {
     private $ear;

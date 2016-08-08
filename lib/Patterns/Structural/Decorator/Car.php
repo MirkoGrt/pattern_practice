@@ -7,7 +7,7 @@
  * Time: 10:48
  */
 
-namespace Patterns\Structural\Decorator;
+namespace lib\Patterns\Structural\Decorator;
 
 class Car {
     public $model;

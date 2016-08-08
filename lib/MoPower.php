@@ -6,6 +6,9 @@
  * Date: 24.06.16
  * Time: 12:06
  */
+
+namespace lib;
+
 class MoPower {
 
     private $moSpenderDB = 'moSpender';

@@ -4,10 +4,6 @@
   },
   "autoload": {
     "psr-4": {
-      "Routing\\": "lib/Routing/",
-      "mvc\\": "lib/mvc/",
-      "Pages\\": "lib/Pages/",
-      "DbWork\\": "lib/DbWork/",
       "lib\\": "lib/"
     }
   }

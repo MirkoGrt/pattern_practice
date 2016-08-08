@@ -7,7 +7,7 @@
  * Time: 10:42
  */
 
-namespace Patterns\Creational\Singleton;
+namespace lib\Patterns\Creational\Singleton;
 
 class BookSingleton {
     private $author = "John";

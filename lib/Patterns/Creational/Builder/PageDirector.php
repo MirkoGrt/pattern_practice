@@ -6,7 +6,7 @@
  * Time: 10:14
  */
 
-namespace Patterns\Creational\Builder;
+namespace lib\Patterns\Creational\Builder;
 
 
 class PageDirector extends AbstractPageDirector {

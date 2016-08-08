@@ -7,7 +7,7 @@
  * Time: 10:01
  */
 
-namespace Patterns\Creational\Builder;
+namespace lib\Patterns\Creational\Builder;
 
 abstract class AbstractPageBuilder {
     abstract function getPage();

@@ -6,7 +6,7 @@
  * Time: 11:20
  */
 
-namespace DbWork;
+namespace lib\DbWork;
 
 
 class GeneralFunctions {

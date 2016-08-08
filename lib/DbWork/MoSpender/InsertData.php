@@ -6,7 +6,7 @@
  * Time: 13:04
  */
 
-namespace DbWork\MoSpender;
+namespace lib\DbWork\MoSpender;
 
 
 class InsertData {

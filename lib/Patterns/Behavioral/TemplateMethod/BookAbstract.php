@@ -1,6 +1,6 @@
 <?php
 
-namespace Patterns\Behavioral\TemplateMethod;
+namespace lib\Patterns\Behavioral\TemplateMethod;
 
 abstract class BookAbstract {
     public final function FlipTrough ($book, $start, $step, $direction) {

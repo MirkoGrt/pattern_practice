@@ -1,8 +1,10 @@
 <?php
 
-namespace mvc;
+namespace lib\mvc;
 
-class BaseController extends \MoPower {
+use lib;
+
+class BaseController extends lib\MoPower {
 
     protected $view;
 

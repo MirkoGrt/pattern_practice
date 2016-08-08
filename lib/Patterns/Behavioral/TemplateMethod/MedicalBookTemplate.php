@@ -1,6 +1,6 @@
 <?php
 
-namespace Patterns\Behavioral\TemplateMethod;
+namespace lib\Patterns\Behavioral\TemplateMethod;
 
 
 class MedicalBookTemplate extends BookAbstract {

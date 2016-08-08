@@ -6,7 +6,7 @@
  * Time: 10:23
  */
 
-namespace Patterns\Structural\Facade;
+namespace lib\Patterns\Structural\Facade;
 
 
 class SkiResortFacade {

@@ -6,7 +6,7 @@
  * Time: 10:50
  */
 
-namespace Patterns\Structural\Decorator;
+namespace lib\Patterns\Structural\Decorator;
 
 
 class MedicalCar extends CarDecorator {

@@ -1,6 +1,6 @@
 <?php
     // Definition the Calendar class
-    $calendar = new \Pages\Calendar();
+    $calendar = new lib\Pages\Calendar();
     $allEvents = $calendar->getAllEventsTimestamp();
 
 ?>

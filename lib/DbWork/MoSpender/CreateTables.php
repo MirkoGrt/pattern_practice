@@ -6,7 +6,7 @@
  * Time: 10:36
  */
 
-namespace DbWork\MoSpender;
+namespace lib\DbWork\MoSpender;
 
 
 class CreateTables {

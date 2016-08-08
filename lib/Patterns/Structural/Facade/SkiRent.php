@@ -7,7 +7,7 @@
  * Time: 10:21
  */
 
-namespace Patterns\Structural\Facade;
+namespace lib\Patterns\Structural\Facade;
 
 class SkiRent {
     public function rentBoots ($feetSize, $skierLevel) {

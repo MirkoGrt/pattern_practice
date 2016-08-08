@@ -6,7 +6,7 @@
  * Time: 12:57
  */
 
-namespace Patterns\Creational\AbstractFactory;
+namespace lib\Patterns\Creational\AbstractFactory;
 
 
 class PeopleFactory implements WarInterface {

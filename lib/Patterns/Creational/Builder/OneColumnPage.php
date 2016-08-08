@@ -6,7 +6,7 @@
  * Time: 10:05
  */
 
-namespace Patterns\Creational\Builder;
+namespace lib\Patterns\Creational\Builder;
 
 
 class OneColumnPage {

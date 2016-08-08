@@ -6,7 +6,7 @@
  * Time: 11:21
  */
 
-namespace DbWork\MoCalendar;
+namespace lib\DbWork\MoCalendar;
 
 
 class InsertData {

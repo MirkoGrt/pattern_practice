@@ -7,7 +7,7 @@
  * Time: 12:53
  */
 
-namespace Patterns\Creational\AbstractFactory;
+namespace lib\Patterns\Creational\AbstractFactory;
 
 class ZombieFactory implements WarInterface {
 

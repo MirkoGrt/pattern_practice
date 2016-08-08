@@ -40,7 +40,7 @@
                     </p>
                     <hr>
                     <?php
-                        $skiFacade = new Patterns\Structural\Facade\SkiResortFacade();
+                        $skiFacade = new lib\Patterns\Structural\Facade\SkiResortFacade();
                         echo "<p>Price for Good Rest: " . $skiFacade->haveGoodRest(180,65,40,5,5) . "</p>";
                         echo "<p>Price for Rest with own ski: " . $skiFacade->restWithOwnSki(5) . "</p>";
                     ?>
@@ -79,23 +79,23 @@
                     <hr>
                     <?php
                         echo '<strong>Declaring Toyota (default car):</strong>';
-                        $car = new Patterns\Structural\Decorator\Car("Toyota");
+                        $car = new lib\Patterns\Structural\Decorator\Car("Toyota");
                         $car->go();
 
                         echo '<strong>Declaring Medical Toyota:</strong> <br>';
-                        $car = new Patterns\Structural\Decorator\Car("Toyota");
-                        $medicalCar = new Patterns\Structural\Decorator\MedicalCar($car);
+                        $car = new lib\Patterns\Structural\Decorator\Car("Toyota");
+                        $medicalCar = new lib\Patterns\Structural\Decorator\MedicalCar($car);
                         $medicalCar->go();
 
                         echo '<strong>Declaring Police Toyota:</strong> <br>';
-                        $car = new Patterns\Structural\Decorator\Car("Toyota");
-                        $policeCar = new Patterns\Structural\Decorator\PoliceCar($car);
+                        $car = new lib\Patterns\Structural\Decorator\Car("Toyota");
+                        $policeCar = new lib\Patterns\Structural\Decorator\PoliceCar($car);
                         $policeCar->go();
 
                         echo '<strong>Declaring Police and Medical Toyota (all in one):</strong> <br>';
-                        $car = new Patterns\Structural\Decorator\Car("Toyota");
-                        $policeCar = new Patterns\Structural\Decorator\PoliceCar($car);
-                        $allInOneCar = new Patterns\Structural\Decorator\MedicalCar($policeCar);
+                        $car = new lib\Patterns\Structural\Decorator\Car("Toyota");
+                        $policeCar = new lib\Patterns\Structural\Decorator\PoliceCar($car);
+                        $allInOneCar = new lib\Patterns\Structural\Decorator\MedicalCar($policeCar);
                         $allInOneCar->go();
 
                     ?>
@@ -167,7 +167,7 @@
                     <hr>
                     <p>Robot starts his operation:</p>
                     <?php
-                        $robot = new Patterns\Structural\Proxy\RobotDefuserProxy(107);
+                        $robot = new lib\Patterns\Structural\Proxy\RobotDefuserProxy(107);
                         for ($t = 0; $t < count($randomWayArray); $t++) {
                             if ($robot->isBoomed) {
                                 continue;

@@ -35,8 +35,8 @@
                     </p>
                     <hr>
                     <?php
-                        $Sara = new Patterns\Creational\Singleton\BookBorrower();
-                        $Lee = new Patterns\Creational\Singleton\BookBorrower();
+                        $Sara = new lib\Patterns\Creational\Singleton\BookBorrower();
+                        $Lee = new lib\Patterns\Creational\Singleton\BookBorrower();
 
                         $Sara->borrowBook();
                         echo "<p>Sara borrows a book: {$Sara->getAuthorAndTitle()}</p>";
@@ -88,19 +88,19 @@
                     </p>
                     <hr>
                     <?php
-                        $oneColumnPage = new Patterns\Creational\Builder\OneColumnPage();
-                        $pageBuilder = new Patterns\Creational\Builder\MainPageBuilder($oneColumnPage);
+                        $oneColumnPage = new lib\Patterns\Creational\Builder\OneColumnPage();
+                        $pageBuilder = new lib\Patterns\Creational\Builder\MainPageBuilder($oneColumnPage);
                     
-                        $pageDirector = new Patterns\Creational\Builder\PageDirector($pageBuilder);
+                        $pageDirector = new lib\Patterns\Creational\Builder\PageDirector($pageBuilder);
                         $pageDirector->buildPage();
                         $page = $pageDirector->getPage();
                         echo $page->showPage();
                         echo "<hr />";
 
-                        $twoColumnsRightPage = new Patterns\Creational\Builder\TwoColumnsRightPage();
-                        $pageBuilder = new Patterns\Creational\Builder\MainPageBuilder($twoColumnsRightPage);
+                        $twoColumnsRightPage = new lib\Patterns\Creational\Builder\TwoColumnsRightPage();
+                        $pageBuilder = new lib\Patterns\Creational\Builder\MainPageBuilder($twoColumnsRightPage);
 
-                        $pageDirector = new Patterns\Creational\Builder\PageDirector($pageBuilder);
+                        $pageDirector = new lib\Patterns\Creational\Builder\PageDirector($pageBuilder);
                         $pageDirector->buildPage();
                         $pageTwoColumnsRight = $pageDirector->getPage();
                         echo $pageTwoColumnsRight->showPage();
@@ -157,8 +157,8 @@
                         <hr>
                         <?php if ($zombiesQty && $peopleQty): ?>
                             <?php
-                                $zombies = new Patterns\Creational\AbstractFactory\ZombieFactory();
-                                $peoples = new Patterns\Creational\AbstractFactory\PeopleFactory();
+                                $zombies = new lib\Patterns\Creational\AbstractFactory\ZombieFactory();
+                                $peoples = new lib\Patterns\Creational\AbstractFactory\PeopleFactory();
                             ?>
                             <div class="half-page-block">
                                 <?php

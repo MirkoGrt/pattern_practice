@@ -6,7 +6,7 @@
  * Time: 10:31
  */
 
-namespace Patterns\Behavioral\TemplateMethod;
+namespace lib\Patterns\Behavioral\TemplateMethod;
 
 
 class Book {

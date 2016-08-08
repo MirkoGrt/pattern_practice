@@ -6,7 +6,7 @@
  * Time: 10:43
  */
 
-namespace Patterns\Creational\Singleton;
+namespace lib\Patterns\Creational\Singleton;
 
 
 class BookBorrower {

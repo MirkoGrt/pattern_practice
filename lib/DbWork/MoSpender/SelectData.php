@@ -6,7 +6,7 @@
  * Time: 10:47
  */
 
-namespace DbWork\MoSpender;
+namespace lib\DbWork\MoSpender;
 
 
 class SelectData {

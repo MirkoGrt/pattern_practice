@@ -6,7 +6,7 @@
  * Time: 11:39
  */
 
-namespace DbWork\MoCalendar;
+namespace lib\DbWork\MoCalendar;
 
 
 class DeleteData {

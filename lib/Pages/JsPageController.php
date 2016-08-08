@@ -1,7 +1,8 @@
 <?php
 
-namespace Pages;
-use \mvc as Mvc;
+namespace lib\Pages;
+use lib\mvc as Mvc;
+use lib\DbWork;
 
 /**
  * Created by PhpStorm.

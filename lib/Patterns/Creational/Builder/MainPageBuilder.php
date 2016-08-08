@@ -6,7 +6,7 @@
  * Time: 10:13
  */
 
-namespace Patterns\Creational\Builder;
+namespace lib\Patterns\Creational\Builder;
 
 
 class MainPageBuilder extends AbstractPageBuilder {

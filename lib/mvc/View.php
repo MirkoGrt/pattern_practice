@@ -1,6 +1,6 @@
 <?php
 
-namespace mvc;
+namespace lib\mvc;
 
 /**
  * Created by PhpStorm.

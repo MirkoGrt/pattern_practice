@@ -47,7 +47,7 @@
                         </button>
                     </form>
                     <?php
-                        $brain = new \Patterns\Behavioral\Mediator\Brain($ear, $eie);
+                        $brain = new lib\Patterns\Behavioral\Mediator\Brain($ear, $eie);
                         $part = $_GET['body_part'];
                         $brain->somethingChangedWithBody($part);
                     ?>
@@ -129,9 +129,9 @@
                             <p>Step: <?php echo $step; ?></p>
                             <p>Direction: <?php echo $direction; ?></p>
                             <?php
-                                $myBook = new Patterns\Behavioral\TemplateMethod\Book($name, $number);
-                                $cookTemplate = new Patterns\Behavioral\TemplateMethod\CookBookTemplate();
-                                $medicalTemplate = new Patterns\Behavioral\TemplateMethod\MedicalBookTemplate();
+                                $myBook = new lib\Patterns\Behavioral\TemplateMethod\Book($name, $number);
+                                $cookTemplate = new lib\Patterns\Behavioral\TemplateMethod\CookBookTemplate();
+                                $medicalTemplate = new lib\Patterns\Behavioral\TemplateMethod\MedicalBookTemplate();
 
                                 $pagesToLook = $cookTemplate->FlipTrough($myBook, $start, $step, $direction);
                                 echo '<h4>First book template - &#9818</h4>';
