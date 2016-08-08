@@ -2,6 +2,10 @@
 
 in this repo I do some cool stuff, implement patterns and practice with web-technologies! 
 
+**Update Composer**
+
+_php composer.phar update_
+
 **Patterns in this repo:**
 
 - Builder
