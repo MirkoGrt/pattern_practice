@@ -11,25 +11,24 @@ namespace lib;
 
 class MoPower {
 
-    private $moSpenderDB;
-    private $moCalendarDB;
-    private $dbUser;
-    private $dbPass;
-    private $host;
+    public $moSpenderDB;
+    public $moCalendarDB;
+    public $dbUser;
+    public $dbPass;
+    public $host;
 
     private $dbConnection;
 
     public function __construct() {
         $configFile = simplexml_load_file(__DIR__ . '/config.xml');
-
         if (!$configFile) {
             throw new \Exception('No configuration file');
         }
-        $this->host = $configFile->config->general->mysqlHost;
-        $this->dbPass = $configFile->config->general->password;
-        $this->dbUser = $configFile->config->general->user;
-        $this->moCalendarDB = $configFile->config->moCalendar->dbName;
-        $this->moSpenderDB = $configFile->config->moSpender->dbName;
+        $this->host = $configFile->general->mysqlHost;
+        $this->dbPass = $configFile->general->password;
+        $this->dbUser = $configFile->general->user;
+        $this->moCalendarDB = $configFile->moCalendar->dbName;
+        $this->moSpenderDB = $configFile->moSpender->dbName;
     }
 
     protected function setMoSpenderConnection () {
