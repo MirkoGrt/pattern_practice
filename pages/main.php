@@ -10,9 +10,7 @@
                     <h5>How it works?</h5>
                     <hr>
                     <u>Autoloader</u> <br>
-                    The one entry point on site is the index.php file. In this file bootstrap.php is included.
-                    In the bootstrap.php we register the autoload static method (Autoloader::load()). The autoloader
-                    class location: <strong> 'lib/Autoloader.php'</strong>.Autoloader loads classes with namespaces.
+                    Works via Composer.
                     <hr>
                     <u>Routing</u> <br>
                     As <i>index.php</i> is one entry point, we declare all routes and all needed objects to routing in

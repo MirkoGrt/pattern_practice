@@ -9,6 +9,8 @@ class BaseController extends lib\MoPower {
     protected $view;
 
     public function __construct(View $view = null) {
+        parent::__construct();
+
         $this->view = $view ?: new View();
     }
 

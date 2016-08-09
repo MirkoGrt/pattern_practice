@@ -1,0 +1,17 @@
+<config>
+    <general>
+        <mysqlHost>localhost</mysqlHost>
+        <user>root</user>
+        <password>root</password>
+    </general>
+
+    <moSpender>
+        <dbName>moSpender</dbName>
+    </moSpender>
+
+    <moCalendar>
+        <dbName>practice_calendar</dbName>
+    </moCalendar>
+
+</config>
+
