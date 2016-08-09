@@ -12,7 +12,7 @@
                 <div class="mdl-card__supporting-text">
                     <p>
                         You need to set your MySQL connection in the
-                        <strong>"lib/MoPower.php" variables </strong>.
+                        <strong>"lib/config.xml" </strong>.
                     </p>
                     <p>
                         Event handler (moSpender class) file: <strong>"lib/Pages/MoSpenderController.php"</strong>

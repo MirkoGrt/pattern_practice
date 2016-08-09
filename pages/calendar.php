@@ -15,7 +15,7 @@
                 <div class="mdl-card__supporting-text">
                     <p>
                         You need to set your MySQL connection in the
-                        <strong>"lib/MoPower.php" variables </strong>.
+                        <strong>"lib/config.xml" </strong>.
                     </p>
                     <p>
                         Event handler (Calendar class) file: <strong>"lib/Pages/Calendar.php"</strong>
