@@ -1,3 +1,10 @@
+<?php
+    use lib\Patterns\Structural\Composite;
+    use lib\Patterns\Structural\Facade;
+    use lib\Patterns\Structural\Decorator;
+    use lib\Patterns\Structural\Proxy;
+?>
+
 <main class="android-content mdl-layout__content">
     <div class="mdl-grid">
         <div class="mdl-cell--2-col"></div>
@@ -21,6 +28,81 @@
                 </div>
             </div>
 
+            <div class="lesson-block-card composite-pattern mdl-card mdl-shadow--2dp">
+                <div class="mdl-card__title">
+                    <h2 class="mdl-card__title-text">Country Composite <span class="subtitle">lib/Patterns/Structural/Composite</span></h2>
+                </div>
+                <div class="mdl-card__supporting-text">
+                    <p class="description">
+                        Compose objects into tree structures to represent part-whole hierarchies. Composite
+                        lets clients treat individual objects and compositions of objects uniformly
+                    </p>
+                    <p class="small-description">
+                        Lets create the country. Enter the country name, add regions and cities. You'll see the
+                        country structure in classes. We have "Country", "Region" and "City" classes to do this.
+                        We just put city into region and region with this city into country.
+                    </p>
+                    <hr>
+
+                    <script src="/js/structuralPatterns/compositePatternFunctions.js"></script>
+
+                    <button class="mdl-button mdl-js-button mdl-button--accent" onclick="generateCompositeInput('country')">
+                        Add Country!
+                    </button>
+                    <button class="mdl-button mdl-js-button mdl-button--accent" onclick="generateCompositeInput('region')">
+                        Add Region!
+                    </button>
+                    <button class="mdl-button mdl-js-button mdl-button--accent" onclick="generateCompositeInput('city')">
+                        Add City!
+                    </button>
+                    <form method="get" id="country-composite-form">
+
+                        <div class="clearfix"></div>
+                        <hr>
+                        <button type="submit" class="mdl-button mdl-js-button mdl-button--raised">
+                            Compose Country!
+                        </button>
+                    </form>
+
+                    <?php
+                        if ($_GET) {
+                            foreach ($_GET as $key => $value) {
+                                list($type, $id) = explode('-', $key, 2);
+                                if ($type == 'country') {
+                                    $country = new Composite\CountryComponent($value);
+                                } else if ($type == 'region') {
+                                    $region = new Composite\RegionComponent($value);
+                                    $country->add($region);
+                                } else if ($type == 'city') {
+                                    $city = new Composite\CityComponent($value);
+                                    $region->add($city);
+                                } else {
+                                    $country = new Composite\CountryComponent('default Country');
+                                    $region = new Composite\RegionComponent('default Region');
+                                    $city = new Composite\CityComponent('default City');
+                                }
+                            }
+                            $country->display();
+                        }
+                    ?>
+
+                </div>
+                <div class="mdl-card__actions mdl-card--border">
+                    <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect"
+                       onclick="togglePatternDiagram('composite', this)">
+                        Show/Hide UML Diagram
+                    </a>
+                </div>
+                <div class="mdl-card__menu">
+                    <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
+                        <i class="material-icons">share</i>
+                    </button>
+                </div>
+                <div class="pattern-diagram-wrapper composite-diagram">
+                    <img src="/images/patterns_uml_diagrams/diagram_composite.png" alt="composite_uml_diagram" />
+                </div>
+            </div>
+
             <div class="lesson-block-card facade-pattern mdl-card mdl-shadow--2dp">
                 <div class="mdl-card__title">
                     <h2 class="mdl-card__title-text">Ski Facade <span class="subtitle">lib/Patterns/Structural/Facade</span></h2>
@@ -40,7 +122,7 @@
                     </p>
                     <hr>
                     <?php
-                        $skiFacade = new lib\Patterns\Structural\Facade\SkiResortFacade();
+                        $skiFacade = new Facade\SkiResortFacade();
                         echo "<p>Price for Good Rest: " . $skiFacade->haveGoodRest(180,65,40,5,5) . "</p>";
                         echo "<p>Price for Rest with own ski: " . $skiFacade->restWithOwnSki(5) . "</p>";
                     ?>
@@ -79,23 +161,23 @@
                     <hr>
                     <?php
                         echo '<strong>Declaring Toyota (default car):</strong>';
-                        $car = new lib\Patterns\Structural\Decorator\Car("Toyota");
+                        $car = new Decorator\Car("Toyota");
                         $car->go();
 
                         echo '<strong>Declaring Medical Toyota:</strong> <br>';
-                        $car = new lib\Patterns\Structural\Decorator\Car("Toyota");
-                        $medicalCar = new lib\Patterns\Structural\Decorator\MedicalCar($car);
+                        $car = new Decorator\Car("Toyota");
+                        $medicalCar = new Decorator\MedicalCar($car);
                         $medicalCar->go();
 
                         echo '<strong>Declaring Police Toyota:</strong> <br>';
-                        $car = new lib\Patterns\Structural\Decorator\Car("Toyota");
-                        $policeCar = new lib\Patterns\Structural\Decorator\PoliceCar($car);
+                        $car = new Decorator\Car("Toyota");
+                        $policeCar = new Decorator\PoliceCar($car);
                         $policeCar->go();
 
                         echo '<strong>Declaring Police and Medical Toyota (all in one):</strong> <br>';
-                        $car = new lib\Patterns\Structural\Decorator\Car("Toyota");
-                        $policeCar = new lib\Patterns\Structural\Decorator\PoliceCar($car);
-                        $allInOneCar = new lib\Patterns\Structural\Decorator\MedicalCar($policeCar);
+                        $car = new Decorator\Car("Toyota");
+                        $policeCar = new Decorator\PoliceCar($car);
+                        $allInOneCar = new Decorator\MedicalCar($policeCar);
                         $allInOneCar->go();
 
                     ?>
@@ -167,7 +249,7 @@
                     <hr>
                     <p>Robot starts his operation:</p>
                     <?php
-                        $robot = new lib\Patterns\Structural\Proxy\RobotDefuserProxy(107);
+                        $robot = new Proxy\RobotDefuserProxy(107);
                         for ($t = 0; $t < count($randomWayArray); $t++) {
                             if ($robot->isBoomed) {
                                 continue;
