@@ -3,6 +3,7 @@
     use lib\Patterns\Structural\Facade;
     use lib\Patterns\Structural\Decorator;
     use lib\Patterns\Structural\Proxy;
+    use lib\Patterns\Structural\Flyweight;
 ?>
 
 <main class="android-content mdl-layout__content">
@@ -25,6 +26,76 @@
                     <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
                         <i class="material-icons">share</i>
                     </button>
+                </div>
+            </div>
+
+            <div class="lesson-block-card flyweight-pattern mdl-card mdl-shadow--2dp">
+                <div class="mdl-card__title">
+                    <h2 class="mdl-card__title-text">Text Flyweight <span class="subtitle">lib/Patterns/Structural/Flyweight</span></h2>
+                </div>
+                <div class="mdl-card__supporting-text">
+                    <p class="description">
+                        Use sharing to support large numbers of fine-grained objects efficiently.
+                    </p>
+                    <p class="small-description">
+                        Here we have the simple sample of this pattern. We have "CharacterFactory" class, abstract
+                        "Character" class and character classes like "CharacterA" or "CharacterB". So what is the
+                        "CharacterFactory" class? We use this class to put objects into array. <br> This way some object will
+                        be stored in the array for next use. Here we have just letters. But in the array or another "storage"
+                        may be some big objects or pictures. <br> This pattern allow us to create some thing once and then use it
+                        many times without creating again. <br>
+                        We defined only 4 classes for letters. So when you'll write some text you'll see that only
+                        <strong>a,b,c,d</strong> are taken from our "array-storage". But this is only the sample.
+                    </p>
+                    <hr>
+                    <form method="get" id="flyweight-icons-form">
+
+                        <div class="mdl-textfield mdl-js-textfield">
+                            <textarea class="mdl-textfield__input" type="text" rows= "3" name="text-for-flyweight-generator" id="flyweight-text-input" ></textarea>
+                            <label class="mdl-textfield__label" for="flyweight-text-input">Enter some text!!!</label>
+                        </div>
+                        <br>
+
+                        <button type="submit" class="mdl-button mdl-js-button mdl-button--raised">
+                            Run text generator!
+                        </button>
+                    </form>
+                    <hr>
+
+                    <?php
+                        if ($_GET['text-for-flyweight-generator']) {
+                            $text = strtolower(str_replace(' ', '', $_GET['text-for-flyweight-generator']));
+                            $textArray = str_split($text);
+                            
+                            $characterFactory = new Flyweight\CharacterFactory();
+
+                            foreach ($textArray as $letter) {
+                                $character = $characterFactory->getCharacter($letter);
+
+                                if (method_exists($character,'display')) {
+                                    $character->display();
+                                }
+                            }
+
+                            echo "<h4>All characters objects in factory (in accordance to text):</h4>";
+                            $characterFactory->displayAllFactoryCharacters();
+                        }
+                    ?>
+
+                </div>
+                <div class="mdl-card__actions mdl-card--border">
+                    <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect"
+                       onclick="togglePatternDiagram('flyweight', this)">
+                        Show/Hide UML Diagram
+                    </a>
+                </div>
+                <div class="mdl-card__menu">
+                    <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
+                        <i class="material-icons">share</i>
+                    </button>
+                </div>
+                <div class="pattern-diagram-wrapper flyweight-diagram">
+                    <img src="/images/patterns_uml_diagrams/diagram_flyweight.png" alt="flyweight_uml_diagram" />
                 </div>
             </div>
 
