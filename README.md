@@ -8,13 +8,9 @@ _php composer.phar update_
 
 **Patterns in this repo:**
 
-| Creational  || Structural  ||  Behavioral |
-|---|
-|  Builder ||  Decorator ||  Template Method |
-|  Abstract Factory ||  Facade ||  Mediator |
-|  Singleton ||  Proxy ||  |
-|   ||  Composite ||   |
-
+Creational - Builder, Abstract Factory, Singleton
+Structural - Decorator, Facade, Proxy, Composite, Flyweight
+Behavioral - Template Method, Mediator
 
 **Cool features here:**
 
