@@ -4,15 +4,7 @@
         <mysqlHost>localhost</mysqlHost>
         <user>root</user>
         <password>root</password>
+        <dbname>angry_practice</dbname>
     </general>
-
-    <moSpender>
-        <dbName>moSpender</dbName>
-    </moSpender>
-
-    <moCalendar>
-        <dbName>practice_calendar</dbName>
-    </moCalendar>
-
 </config>
 

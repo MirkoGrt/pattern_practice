@@ -13,9 +13,6 @@ class Calendar extends Mvc\BaseController {
 
     public function __construct() {
         parent::__construct();
-
-        // Set the connection to DB in "MoPower" class
-        $this->setMoCalendarConnection();
     }
 
     /**
