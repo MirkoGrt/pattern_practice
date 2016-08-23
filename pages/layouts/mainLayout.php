@@ -89,7 +89,7 @@
             <a class="mdl-navigation__link" href="/structural-patterns">Structural</a>
             <a class="mdl-navigation__link" href="/creational-patterns">Creational</a>
             <div class="android-drawer-separator"></div>
-            <span class="mdl-navigation__link" href="">Stuff</span>
+            <a class="mdl-navigation__link" href="/auth">Auth Test Page</a>
             <a class="mdl-navigation__link" href="">Stuff</a>
             <a class="mdl-navigation__link" href="">Stuff</a>
         </nav>

@@ -17,6 +17,7 @@
     $router->get('/mo-spender', ['lib\Pages\MoSpenderController', 'showMoSpender']);
     $router->get('/main-page', ['lib\Pages\MainPageController', 'showMainPage']);
     $router->get('/js-page', ['lib\Pages\JsPageController', 'showJsPage']);
+    $router->get('/auth', ['lib\Auth\RegisterController', 'showAuthPage']);
 
     $router->get('/behavioral-patterns', ['lib\Pages\BehavioralPageController', 'showBehavioralPage']);
     $router->get('/creational-patterns', ['lib\Pages\CreationalPageController', 'showCreationalPage']);

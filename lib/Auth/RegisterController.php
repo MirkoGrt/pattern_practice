@@ -11,5 +11,18 @@ namespace lib\Auth;
 use lib\mvc as Mvc;
 
 class RegisterController extends Mvc\BaseController {
+
+    public function registerUser () {
+        
+    }
     
+    public function loginUser () {
+        
+    }
+
+    public function showAuthPage () {
+        $result = $this->render('auth-page.php', []);
+        echo $result;
+    }
+
 }
