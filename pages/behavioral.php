@@ -1,3 +1,9 @@
+<?php
+    use lib\Patterns\Behavioral\Mediator;
+    use lib\Patterns\Behavioral\TemplateMethod;
+    use lib\Patterns\Behavioral\Memento;
+?>
+
 <main class="android-content mdl-layout__content">
     <div class="mdl-grid">
         <div class="mdl-cell--2-col"></div>
@@ -18,6 +24,85 @@
                     <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
                         <i class="material-icons">share</i>
                     </button>
+                </div>
+            </div>
+
+            <div class="lesson-block-card mediator-pattern mdl-card mdl-shadow--2dp">
+                <div class="mdl-card__title">
+                    <h2 class="mdl-card__title-text">Memento Game<span class="subtitle">lib/Patterns/Behavioral/Memento</span></h2>
+                </div>
+                <div class="mdl-card__supporting-text">
+                    <p class="description">
+                        Without violating encapsulation, capture and externalize an object's internal state
+                        so that the object can be restored to this state later.
+                    </p>
+                    <p class="small-description">
+                        Here we have the sample game imitation. We enter start level, end level and level
+                        on which we want to save in. <br>
+                        We have three classes to do this pattern. "Game", "GameLoader" and "Memento". <br>
+                        In the <strong>"Game"</strong> class we do the main game flow. <br>
+                        We use the <strong>"GameLoader"</strong> class to save the game. <br>
+                        And in the <strong>"Memento"</strong> class we store the saved info.
+                     </p>
+                    <form class="memento-game-form" method="get">
+                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                            <input class="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?" name="memento-start" id="memento-game-start-level">
+                            <label class="mdl-textfield__label" for="memento-game-start-level">Start Level</label>
+                            <span class="mdl-textfield__error">Input is not a number!</span>
+                        </div>
+                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                            <input class="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?" name="memento-end" id="memento-game-last-level">
+                            <label class="mdl-textfield__label" for="memento-game-last-level">Last Level</label>
+                            <span class="mdl-textfield__error">Input is not a number!</span>
+                        </div>
+                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                            <input class="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?" name="memento-save" id="memento-game-save-level">
+                            <label class="mdl-textfield__label" for="memento-game-save-level">Which level must be saved?</label>
+                            <span class="mdl-textfield__error">Input is not a number!</span>
+                        </div>
+                        <hr>
+                        <button type="submit" class="mdl-button mdl-button--colored mdl-js-button mdl-button--raised mdl-js-ripple-effect">
+                            Run Game!
+                        </button>
+                    </form>
+                    <?php
+                        if ($_GET['memento-start'] && $_GET['memento-end'] && $_GET['memento-save']) {
+                            $game = new Memento\Game();
+                            $gameLoader = new Memento\GameLoader();
+
+                            $firstLevel = $_GET['memento-start'];
+                            $lastLevel = $_GET['memento-end'];
+                            $levelToSave = $_GET['memento-save'];
+
+                            for ($i = $firstLevel; $i <= $lastLevel; $i++) {
+                                $game->setLevel($i);
+                                echo "<h6>playing level . . ." . $game->getlevel() ."</h6>";
+                                if ($i == $levelToSave) {
+                                    $gameLoader->setMemento($game->saveGame());
+                                    echo "<h6 style='color: red'>saving level . . ." . $i ." - SAVE</h6>";
+                                }
+                            }
+                            echo "<h6>LOADING SAVED LEVEL . . .</h6>";
+                            $game->loadGame($gameLoader->getMemento());
+                            var_dump($game->getlevel());
+                        } else {
+                            echo "<h5>start the Game!</h5>";
+                        }
+                    ?>
+                </div>
+                <div class="mdl-card__actions mdl-card--border">
+                    <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect"
+                       onclick="togglePatternDiagram('memento', this)">
+                        Show/Hide UML Diagram
+                    </a>
+                </div>
+                <div class="mdl-card__menu">
+                    <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
+                        <i class="material-icons">share</i>
+                    </button>
+                </div>
+                <div class="pattern-diagram-wrapper memento-diagram">
+                    <img src="/images/patterns_uml_diagrams/diagram_memento.png" alt="memento_uml_diagram" />
                 </div>
             </div>
 
@@ -47,7 +132,7 @@
                         </button>
                     </form>
                     <?php
-                        $brain = new lib\Patterns\Behavioral\Mediator\Brain($ear, $eie);
+                        $brain = new Mediator\Brain($ear, $eie);
                         $part = $_GET['body_part'];
                         $brain->somethingChangedWithBody($part);
                     ?>
@@ -129,9 +214,9 @@
                             <p>Step: <?php echo $step; ?></p>
                             <p>Direction: <?php echo $direction; ?></p>
                             <?php
-                                $myBook = new lib\Patterns\Behavioral\TemplateMethod\Book($name, $number);
-                                $cookTemplate = new lib\Patterns\Behavioral\TemplateMethod\CookBookTemplate();
-                                $medicalTemplate = new lib\Patterns\Behavioral\TemplateMethod\MedicalBookTemplate();
+                                $myBook = new TemplateMethod\Book($name, $number);
+                                $cookTemplate = new TemplateMethod\CookBookTemplate();
+                                $medicalTemplate = new TemplateMethod\MedicalBookTemplate();
 
                                 $pagesToLook = $cookTemplate->FlipTrough($myBook, $start, $step, $direction);
                                 echo '<h4>First book template - &#9818</h4>';

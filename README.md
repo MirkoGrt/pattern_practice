@@ -2,9 +2,12 @@
 
 in this repo I do some cool stuff, implement patterns and practice with web-technologies! 
 
-**Update Composer**
+**How to run**
 
+##### Update Composer #####
 _php composer.phar update_
+
+##### Run it on virtual host #####
 
 **Patterns in this repo:**
 
