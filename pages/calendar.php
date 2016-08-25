@@ -239,22 +239,22 @@
                     <form id="event-form" method="post">
                         <input type="hidden" name="event-timestamp" value="" />
                         <div class="mdl-textfield mdl-js-textfield">
-                            <input class="mdl-textfield__input" name="event-title" type="text">
-                            <label class="mdl-textfield__label" for="event-title">Title...</label>
+                            <input class="mdl-textfield__input" name="event_title" type="text">
+                            <label class="mdl-textfield__label" for="event_title">Title...</label>
                             <span class="mdl-textfield__error"></span>
                         </div>
                         <div class="mdl-textfield mdl-js-textfield">
-                            <textarea class="mdl-textfield__input" type="text" name="event-details" rows= "3"></textarea>
-                            <label class="mdl-textfield__label" for="event-details">Event details...</label>
+                            <textarea class="mdl-textfield__input" type="text" name="event_details" rows= "3"></textarea>
+                            <label class="mdl-textfield__label" for="event_details">Event details...</label>
                             <span class="mdl-textfield__error"></span>
                         </div>
                         <div id="event-adding-progress" class="mdl-progress mdl-js-progress mdl-progress__indeterminate"></div>
                         <br>
+                        <div class="mdl-dialog__actions">
+                            <button type="submit" class="mdl-button">Add Event</button>
+                            <button type="button" class="mdl-button close">Close</button>
+                        </div>
                     </form>
-                </div>
-                <div class="mdl-dialog__actions">
-                    <button type="button" onclick="saveEvent()" class="mdl-button">Add Event</button>
-                    <button type="button" class="mdl-button close">Close</button>
                 </div>
             </dialog>
 

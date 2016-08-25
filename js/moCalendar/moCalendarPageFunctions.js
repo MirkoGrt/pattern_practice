@@ -1,46 +1,45 @@
-/* Function to validate event form before saving */
-function validateEventForm () {
-    var eventTitle = $('#event-form input[name="event-title"]');
-    var eventDetails = $('#event-form textarea[name="event-details"]');
-
-    var titleValidation = validate(eventTitle, 0, 20, true);
-    var detailsValidation = validate(eventDetails, 0, 100, true);
-
-    if (titleValidation && detailsValidation) {
-        return true;
-    }
-}
-
-/* Function to save event to DB via aJax */
-function saveEvent () {
-    $('#event-adding-progress').css('display', 'block');
-
-    if (validateEventForm()) {
-        var eventTimestamp = $('dialog input[name="event-timestamp"]').val();
-        var eventTitle = $('dialog input[name="event-title"]').val();
-        var eventDetails = $('dialog textarea[name="event-details"]').val();
-
-        var data = 'timestamp=' + eventTimestamp + '&title=' + eventTitle + '&details=' + eventDetails;
-
-        /* We need the 'action' parameter for router definition */
-        var url = '/addEvent';
-        $.ajax({
-            url: url,
-            type: "POST",
-            data: data,
-            success: function (response) {
-                showMdlSnackbar(response, 'success', '#event-snackbar-success');
-                cleanForm('#event-form');
-                $('#event-adding-progress').css('display', 'none');
+$(document).ready(function () {
+    // validate and send registration form
+    $("#event-form").validate({
+        rules: {
+            event_title: {
+                required: true,
+                maxlength: 20
             },
-            error: function (response) {
-                showMdlSnackbar(response, 'error', '#event-snackbar-success');
-                cleanForm('#event-form');
-                $('#event-adding-progress').css('display', 'none');
+            event_details: {
+                required: true,
+                maxlength: 100
             }
-        });
-    }
-}
+        },
+        submitHandler: function(form) {
+            $('#event-adding-progress').css('display', 'block');
+
+            var eventTimestamp = $('dialog input[name="event-timestamp"]').val();
+            var eventTitle = $('dialog input[name="event_title"]').val();
+            var eventDetails = $('dialog textarea[name="event_details"]').val();
+
+            var data = 'timestamp=' + eventTimestamp + '&title=' + eventTitle + '&details=' + eventDetails;
+
+            /* We need the 'action' parameter for router definition */
+            var url = '/addEvent';
+            $.ajax({
+                url: url,
+                type: "POST",
+                data: data,
+                success: function (response) {
+                    showMdlSnackbar(response, 'success', '#event-snackbar-success');
+                    cleanForm('#event-form');
+                    $('#event-adding-progress').css('display', 'none');
+                },
+                error: function (response) {
+                    showMdlSnackbar(response, 'error', '#event-snackbar-success');
+                    cleanForm('#event-form');
+                    $('#event-adding-progress').css('display', 'none');
+                }
+            });
+        }
+    });
+});
 
 /* Function to transfer event data to dialog popup */
 function transferEventData (button) {
