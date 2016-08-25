@@ -60,5 +60,10 @@ class MoPower {
     public function moCalendarDelete () {
         return new DbWork\MoCalendar\DeleteData($this->dbConnection);
     }
+    
+    // Auth DB classes
+    public function authCreate () {
+        return new DbWork\Auth\CreateTables($this->dbConnection);
+    }
 
 }

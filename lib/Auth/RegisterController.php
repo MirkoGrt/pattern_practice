@@ -12,7 +12,13 @@ use lib\mvc as Mvc;
 
 class RegisterController extends Mvc\BaseController {
 
+    private $usersTableName = 'angry_users';
+
     public function registerUser () {
+        // if there is no table for users
+        if (!$this->generalFunctions()->checkIfTableExist($this->usersTableName)) {
+            $this->authCreate()->createUsersTable($this->usersTableName);
+        }
         
     }
     

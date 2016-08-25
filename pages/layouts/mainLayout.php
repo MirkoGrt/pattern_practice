@@ -25,6 +25,8 @@
     <!--JS Libs-->
     <script type="text/javascript" src="/js/jquery-2.1.4.js"></script>
     <script type="text/javascript" src="/js/processing.js"></script>
+    <script type="text/javascript" src="/js/jquery.validate.js"></script>
+
 
     <!--Custom JS-->
     <script type="text/javascript" src="/js/main.js"></script>

@@ -12,6 +12,7 @@
     $router->post('/deleteEvent', ['lib\Pages\Calendar', 'deleteEvent']);
     $router->post('/addSpenderItem', ['lib\Pages\MoSpenderController', 'addSpenderItem']);
     $router->post('/addMoneyIncome', ['lib\Pages\MoSpenderController', 'addMoneyIncome']);
+    $router->post('/register-user', ['lib\Auth\RegisterController', 'registerUser']);
 
     $router->get('/calendar', ['lib\Pages\Calendar', 'showCalendar']);
     $router->get('/mo-spender', ['lib\Pages\MoSpenderController', 'showMoSpender']);
