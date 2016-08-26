@@ -17,18 +17,34 @@ $(document).ready(function () {
                 equalTo: "#auth-register-pass"
             }
         },
-        submitHandler: function(form) {
-            $.ajax({
-                url: '/register-user',
-                data: JSON.stringify(data),
-                contentType: "application/json",
-                success: function (response) {
-                    console.log('ha-ha');
-                },
-                error: function (response) {
-                    console.log('he-he');
-                }
-            });
+        submitHandler: function() {
+            registerUser();
         }
     });
 });
+
+function registerUser() {
+    $("#user-registration-progress").css('display', 'block');
+    var data = {
+        nickname: $("#auth-register-nickname").val(),
+        email: $("#auth-register-email").val(),
+        pass: $("#auth-register-pass").val(),
+        slogan: $("#auth-register-slogan").val()
+    };
+    $.ajax({
+        type: "POST",
+        url: '/register-user',
+        data: data,
+        dataType: 'json',
+        success: function (response) {
+            $("#user-registration-progress").css('display', 'none');
+            cleanForm('#auth-page-register-form');
+            showMdlSnackbar(response, 'success', '#auth-page-snackbar');
+        },
+        error: function (response) {
+            $("#user-registration-progress").css('display', 'none');
+            cleanForm('#auth-page-register-form');
+            showMdlSnackbar(response, 'error', '#auth-page-snackbar');
+        }
+    });
+}

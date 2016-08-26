@@ -3,13 +3,7 @@
 /*=================*/
 
 /*===== helper classes =====*/
-@import "config/helpers";
-/*=================*/
-
-/*===== Helper classes =====*/
-    .element-hidden {
-        overflow: hidden;
-    }
+    @import "config/helpers";
 /*=================*/
 
 /*===== General styles on all pages =====*/
@@ -70,6 +64,12 @@
     }
 /*=================*/
 
+/*===== Auth page =====*/
+    /*------ Register form ------*/
+    @import "forms/register-form";
+    /*------------*/
+/*=================*/
+
 /*===== MoSpender page =====*/
     .mo-spender-title-card {
         .mdl-card__title {
@@ -98,10 +98,6 @@
     }
     .previous-date .mdl-checkbox {
         width: auto;
-    }
-    .mdl-textfield__error {
-        background-color: antiquewhite;
-        z-index: 3
     }
     /*------------*/
 

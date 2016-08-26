@@ -19,7 +19,22 @@ class RegisterController extends Mvc\BaseController {
         if (!$this->generalFunctions()->checkIfTableExist($this->usersTableName)) {
             $this->authCreate()->createUsersTable($this->usersTableName);
         }
-        
+
+        $passHash = hash('md5', $_POST['pass']);
+
+        $userAdd = $this->authInsert()->insertUserToDb(
+            $this->usersTableName,
+            $_POST['email'],
+            $_POST['nickname'],
+            $_POST['slogan'],
+            $passHash
+        );
+
+        if ($userAdd) {
+            echo json_encode('Success! You are now registered!');
+        } else {
+            echo json_encode('Error with registration! ');
+        }
     }
     
     public function loginUser () {

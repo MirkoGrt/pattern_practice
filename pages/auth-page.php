@@ -38,7 +38,7 @@
                             <h2 class="mdl-card__title-text">Register!</h2>
                         </div>
                         <div class="mdl-card__supporting-text">
-                            <form id="auth-page-register-form" novalidate="novalidate">
+                            <form id="auth-page-register-form">
                                 <div class="mdl-textfield mdl-js-textfield">
                                     <input class="mdl-textfield__input" name="auth_register_email" type="email" id="auth-register-email">
                                     <label class="mdl-textfield__label" for="auth-register-email">Email</label>
@@ -59,6 +59,8 @@
                                     <input class="mdl-textfield__input" name="auth_register_confirm_pass" type="password" id="auth-register-confirm-pass">
                                     <label class="mdl-textfield__label" for="auth-register-confirm-pass">Confirm Pass</label>
                                 </div>
+                                <div id="user-registration-progress" class="mdl-progress mdl-js-progress mdl-progress__indeterminate"></div>
+                                <br>
                                 <button type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">
                                     Register
                                 </button>
@@ -76,6 +78,11 @@
                         </div>
                     </div>
                 </div>
+            </div>
+
+            <div id="auth-page-snackbar" class="mdl-js-snackbar mdl-snackbar">
+                <div class="mdl-snackbar__text"></div>
+                <button class="mdl-snackbar__action" type="button">button</button>
             </div>
 
             <!--JAVASCRIPT FUNCTIONS-->
