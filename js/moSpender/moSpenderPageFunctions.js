@@ -6,6 +6,10 @@ $(document).ready(function () {
             var mdlErrorLabel = element.siblings('span.mdl-textfield__error');
             mdlErrorLabel.css("visibility", "visible").text(errorText);
         },
+        success: function (label, element) {
+            var mdlErrorLabel = $(element).siblings('span.mdl-textfield__error');
+            mdlErrorLabel.css("color", "green").text("OK!");
+        },
         rules: {
             spender_item_name: "required",
             spender_item_price: "required",
@@ -40,6 +44,10 @@ $(document).ready(function () {
             var errorText = error[0].innerText;
             var mdlErrorLabel = element.siblings('span.mdl-textfield__error');
             mdlErrorLabel.css("visibility", "visible").text(errorText);
+        },
+        success: function (label, element) {
+            var mdlErrorLabel = $(element).siblings('span.mdl-textfield__error');
+            mdlErrorLabel.css("color", "green").text("OK!");
         },
         rules: {
             money_income_reason: "required",

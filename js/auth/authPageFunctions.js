@@ -6,6 +6,10 @@ $(document).ready(function () {
             var mdlErrorLabel = element.siblings('span.mdl-textfield__error');
             mdlErrorLabel.css("visibility", "visible").text(errorText);
         },
+        success: function (label, element) {
+            var mdlErrorLabel = $(element).siblings('span.mdl-textfield__error');
+            mdlErrorLabel.css("color", "green").text("OK!");
+        },
         rules: {
             auth_register_nickname: "required",
             auth_register_email: {
