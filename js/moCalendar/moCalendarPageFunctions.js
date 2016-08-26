@@ -1,6 +1,14 @@
 $(document).ready(function () {
     // validate and send registration form
     $("#event-form").validate({
+        errorPlacement: function (error, element) {
+            var errorText = error[0].innerText;
+            var mdlErrorLabel = element.siblings('span.mdl-textfield__error');
+            mdlErrorLabel.css("visibility", "visible").text(errorText);
+        },
+        success: function (label) {
+            label.css("visibility", "hidden");
+        },
         rules: {
             event_title: {
                 required: true,

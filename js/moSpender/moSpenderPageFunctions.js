@@ -1,6 +1,11 @@
 $(document).ready(function () {
 
     $("#form-to-add-data-from-note").validate({
+        errorPlacement: function (error, element) {
+            var errorText = error[0].innerText;
+            var mdlErrorLabel = element.siblings('span.mdl-textfield__error');
+            mdlErrorLabel.css("visibility", "visible").text(errorText);
+        },
         rules: {
             spender_item_name: "required",
             spender_item_price: "required",
@@ -31,6 +36,11 @@ $(document).ready(function () {
     });
 
     $("#form-to-add-money-income").validate({
+        errorPlacement: function (error, element) {
+            var errorText = error[0].innerText;
+            var mdlErrorLabel = element.siblings('span.mdl-textfield__error');
+            mdlErrorLabel.css("visibility", "visible").text(errorText);
+        },
         rules: {
             money_income_reason: "required",
             money_income_quantity: "required",

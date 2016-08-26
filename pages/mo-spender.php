@@ -135,11 +135,6 @@
                                            value="<?php echo $category['name']; ?>"
                                         >
                                         <span class="mdl-checkbox__label"><?php echo $category['name']; ?></span>
-
-                                        <!-- Show field for error message only in the end of category list -->
-                                        <?php if ($i == $categoriesQuantity): ?>
-                                            <span class="mdl-textfield__error"></span>
-                                        <?php endif; ?>
                                     </label>
                                 <?php $i++; endforeach; ?>
                             <?php endif; ?>
@@ -148,6 +143,7 @@
                             <div class="mdl-textfield mdl-js-textfield">
                                 <input class="mdl-textfield__input" name="spender_item_new_category" type="text" onchange="uncheckCheckboxes('spender_item')" id="spender_item_new_category">
                                 <label class="mdl-textfield__label" for="spender_item_new_category">New Category</label>
+                                <span class="mdl-textfield__error"></span>
                             </div>
                             <div class="mdl-tooltip" for="spender_item_new_category">
                                 Enter the new category name<br>if there is no one
@@ -250,11 +246,6 @@
                                                name="money_income_category"
                                                value="<?php echo $category['name']; ?>">
                                         <span class="mdl-checkbox__label"><?php echo $category['name']; ?></span>
-
-                                        <!-- Show field for error message only in the end of category list -->
-                                        <?php if ($i == $moneyCategoriesQuantity): ?>
-                                            <span class="mdl-textfield__error"></span>
-                                        <?php endif; ?>
                                     </label>
                                 <?php $i++; endforeach; ?>
                             <?php endif; ?>
@@ -263,6 +254,7 @@
                             <div class="mdl-textfield mdl-js-textfield">
                                 <input class="mdl-textfield__input" type="text" name="money_income_new_category" onchange="uncheckCheckboxes('money_income')" id="money_income_new_category">
                                 <label class="mdl-textfield__label" for="money_income_new_category">New Money Category</label>
+                                <span class="mdl-textfield__error"></span>
                             </div>
                             <div class="mdl-tooltip" for="money_income_new_category">
                                 Enter the new category name<br>if there is no one

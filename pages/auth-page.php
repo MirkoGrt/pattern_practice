@@ -42,22 +42,27 @@
                                 <div class="mdl-textfield mdl-js-textfield">
                                     <input class="mdl-textfield__input" name="auth_register_email" type="email" id="auth-register-email">
                                     <label class="mdl-textfield__label" for="auth-register-email">Email</label>
+                                    <span class="mdl-textfield__error"></span>
                                 </div>
                                 <div class="mdl-textfield mdl-js-textfield">
                                     <input class="mdl-textfield__input" name="auth_register_nickname" type="text" id="auth-register-nickname">
                                     <label class="mdl-textfield__label" for="auth-register-nickname">Nickname</label>
+                                    <span class="mdl-textfield__error"></span>
                                 </div>
                                 <div class="mdl-textfield mdl-js-textfield">
                                     <textarea class="mdl-textfield__input" name="auth_register_slogan" id="auth-register-slogan"></textarea>
                                     <label class="mdl-textfield__label" for="auth-register-slogan">Slogan</label>
+                                    <span class="mdl-textfield__error"></span>
                                 </div>
                                 <div class="mdl-textfield mdl-js-textfield">
                                     <input class="mdl-textfield__input" name="auth_register_pass" type="password" id="auth-register-pass">
                                     <label class="mdl-textfield__label" for="auth-register-pass">Password</label>
+                                    <span class="mdl-textfield__error"></span>
                                 </div>
                                 <div class="mdl-textfield mdl-js-textfield">
                                     <input class="mdl-textfield__input" name="auth_register_confirm_pass" type="password" id="auth-register-confirm-pass">
                                     <label class="mdl-textfield__label" for="auth-register-confirm-pass">Confirm Pass</label>
+                                    <span class="mdl-textfield__error"></span>
                                 </div>
                                 <div id="user-registration-progress" class="mdl-progress mdl-js-progress mdl-progress__indeterminate"></div>
                                 <br>

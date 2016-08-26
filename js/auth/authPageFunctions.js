@@ -1,6 +1,11 @@
 $(document).ready(function () {
     // validate and send registration form
     $("#auth-page-register-form").validate({
+        errorPlacement: function (error, element) {
+            var errorText = error[0].innerText;
+            var mdlErrorLabel = element.siblings('span.mdl-textfield__error');
+            mdlErrorLabel.css("visibility", "visible").text(errorText);
+        },
         rules: {
             auth_register_nickname: "required",
             auth_register_email: {
