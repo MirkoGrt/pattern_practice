@@ -208,7 +208,7 @@
 
                         <div class="money_income_reason_wrapper">
                             <div class="mdl-textfield mdl-js-textfield ">
-                                <input class="mdl-textfield__input" type="text" name="Reason" id="money_income_reason">
+                                <input class="mdl-textfield__input" type="text" name="money_income_reason" id="money_income_reason">
                                 <label class="mdl-textfield__label" for="money_income_name">Money income reason</label>
                                 <span class="mdl-textfield__error"></span>
                             </div>
@@ -217,7 +217,7 @@
                         <!-- Quantity -->
                         <div class="money_income_quantity_wrapper">
                             <div class="mdl-textfield mdl-js-textfield ">
-                                <input class="mdl-textfield__input" type="text" name="Quantity" pattern="-?[0-9]*(\.[0-9]+)?" id="money_income_quantity">
+                                <input class="mdl-textfield__input" type="text" name="money_income_quantity" pattern="-?[0-9]*(\.[0-9]+)?" id="money_income_quantity">
                                 <label class="mdl-textfield__label" for="money_income_quantity">Quantity</label>
                                 <span class="mdl-textfield__error">Input is not a number!</span>
                             </div>
@@ -261,7 +261,7 @@
 
                             <!--/.New category-->
                             <div class="mdl-textfield mdl-js-textfield">
-                                <input class="mdl-textfield__input" type="text" name="new_category" onchange="uncheckCheckboxes('money_income')" id="money_income_new_category">
+                                <input class="mdl-textfield__input" type="text" name="money_income_new_category" onchange="uncheckCheckboxes('money_income')" id="money_income_new_category">
                                 <label class="mdl-textfield__label" for="money_income_new_category">New Money Category</label>
                             </div>
                             <div class="mdl-tooltip" for="money_income_new_category">
@@ -272,21 +272,21 @@
                         <div class="money_income_date_wrapper">
                             <!--Day-->
                             <div class="mdl-textfield mdl-js-textfield">
-                                <input class="mdl-textfield__input" type="text" name="Day" pattern="-?[0-9]*(\.[0-9]+)?" id="money_income_day">
+                                <input class="mdl-textfield__input" type="text" name="money_income_day" pattern="-?[0-9]*(\.[0-9]+)?" id="money_income_day">
                                 <label class="mdl-textfield__label" for="money_income_day">Day</label>
                                 <span class="mdl-textfield__error">Input is not a number!</span>
                             </div>
 
                             <!--Month-->
                             <div class="mdl-textfield mdl-js-textfield">
-                                <input class="mdl-textfield__input" type="text" name="Month" pattern="-?[0-9]*(\.[0-9]+)?" id="money_income_month">
+                                <input class="mdl-textfield__input" type="text" name="money_income_month" pattern="-?[0-9]*(\.[0-9]+)?" id="money_income_month">
                                 <label class="mdl-textfield__label" for="money_income_month">Month</label>
                                 <span class="mdl-textfield__error">Input is not a number!</span>
                             </div>
 
                             <!-- Year -->
                             <div class="mdl-textfield mdl-js-textfield">
-                                <input class="mdl-textfield__input" type="text" name="ear" pattern="-?[0-9]*(\.[0-9]+)?" id="money_income_year">
+                                <input class="mdl-textfield__input" type="text" name="money_income_year" pattern="-?[0-9]*(\.[0-9]+)?" id="money_income_year">
                                 <label class="mdl-textfield__label" for="money_income_year">Year</label>
                                 <span class="mdl-textfield__error">Input is not a number!</span>
                             </div>
@@ -309,12 +309,11 @@
                         </div><!--/.money_income_date_wrapper-->
                         <div id="money-income-adding-progress" class="mdl-progress mdl-js-progress mdl-progress__indeterminate"></div>
                         <br>
+                        <button type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
+                            Add Money!
+                        </button>
                     </form>
-                    <br>
-                    <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent"
-                            onclick="addMoney()">
-                        Add Money!
-                    </button>
+
                 </div><!--/#money-income-panel-->
 
                 <div class="mdl-tabs__panel" id="archive-panel">

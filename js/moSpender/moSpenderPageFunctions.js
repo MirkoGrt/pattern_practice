@@ -29,6 +29,36 @@ $(document).ready(function () {
             addSpenderItemToDB();
         }
     });
+
+    $("#form-to-add-money-income").validate({
+        rules: {
+            money_income_reason: "required",
+            money_income_quantity: "required",
+            money_income_new_category: {
+                required: function () {
+                    return !$(".money_income_category").is(":checked");
+                }
+            },
+            money_income_day: {
+                required: function () {
+                    return !($("#money-income-today-date").is(":checked") || $("#money-income-previous-date").is(":checked"));
+                }
+            },
+            money_income_month: {
+                required: function () {
+                    return !($("#money-income-today-date").is(":checked") || $("#money-income-previous-date").is(":checked"));
+                }
+            },
+            money_income_year: {
+                required: function () {
+                    return !($("#money-income-today-date").is(":checked") || $("#money-income-previous-date").is(":checked"));
+                }
+            }
+        },
+        submitHandler: function() {
+            addMoney();
+        }
+    });
 });
 
 /* Function to add money income to DB */
@@ -71,69 +101,31 @@ function addMoney () {
         moneyMonth = localStorage.getItem('itemMonth');
         moneyDay = localStorage.getItem('itemDay');
     }
+    var url = '/addMoneyIncome';
+    var data = 'moneyReason=' + moneyReason +
+        '&moneyQuantity=' + moneyQuantity +
+        '&moneyCurrency=' + moneyCurrency +
+        '&moneyCategory=' + moneyCategory +
+        '&moneyNewCategory=' + moneyNewCategory +
+        '&moneyDay=' + moneyDay +
+        '&moneyMonth=' + moneyMonth +
+        '&moneyYear=' + moneyYear;
 
-    if (validateMoneyForm(formToAddMoney, moneyNewCategory, TodayDate, PreviousDate)) {
-        var url = '/addMoneyIncome';
-        var data = 'moneyReason=' + moneyReason +
-            '&moneyQuantity=' + moneyQuantity +
-            '&moneyCurrency=' + moneyCurrency +
-            '&moneyCategory=' + moneyCategory +
-            '&moneyNewCategory=' + moneyNewCategory +
-            '&moneyDay=' + moneyDay +
-            '&moneyMonth=' + moneyMonth +
-            '&moneyYear=' + moneyYear;
-
-        $.ajax({
-            url: url,
-            type: "POST",
-            data: data,
-            success: function (response) {
-                showMdlSnackbar(response, 'success', '#mospender-snackbar');
-                $('#money-income-adding-progress').css('display', 'none');
-                cleanForm(formToAddMoney);
-            },
-            error: function (response) {
-                showMdlSnackbar(response, 'error', '#mospender-snackbar');
-                $('#money-income-adding-progress').css('display', 'none');
-                cleanForm(formToAddMoney);
-            }
-        });
-    }
-}
-
-function validateMoneyForm (form, newCategory, todayDate, previousDate) {
-
-    var moneyCategory = $(form + ' .money_income_category');
-    var reason = $(form + ' #money_income_reason');
-    var moneyQuantity = $(form + ' #money_income_quantity');
-    var moneyDay = $(form + ' #money_income_day');
-    var moneyMonth = $(form + ' #money_income_month');
-    var moneyYear = $(form + ' #money_income_year');
-
-    var categoryValidation = validate(moneyCategory, null, null, true);
-    var dayValidation = validate(moneyDay, null, null, true);
-    var monthValidation = validate(moneyMonth, null, null, true);
-    var yearValidation = validate(moneyYear, null, null, true);
-
-    // Don't validate the categories checkboxes when the new category is adding
-    if (newCategory) {
-        categoryValidation = validate(moneyCategory, null, null, false);
-    }
-
-    // Don't validate date inputs if today date is checked
-    if (todayDate || previousDate) {
-        dayValidation = validate(moneyDay, null, null, false);
-        monthValidation = validate(moneyMonth, null, null, false);
-        yearValidation = validate(moneyYear, null, null, false);
-    }
-
-    var reasonValidation = validate(reason, 0, 50, true);
-    var quantityValidation = validate(moneyQuantity, null, null, true);
-
-
-    if (categoryValidation && reasonValidation && quantityValidation && dayValidation && monthValidation && yearValidation) {
-        return true;
-    }
+    $.ajax({
+        url: url,
+        type: "POST",
+        data: data,
+        success: function (response) {
+            showMdlSnackbar(response, 'success', '#mospender-snackbar');
+            $('#money-income-adding-progress').css('display', 'none');
+            cleanForm(formToAddMoney);
+        },
+        error: function (response) {
+            showMdlSnackbar(response, 'error', '#mospender-snackbar');
+            $('#money-income-adding-progress').css('display', 'none');
+            cleanForm(formToAddMoney);
+        }
+    });
 }
 
 function addSpenderItemToDB () {

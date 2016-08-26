@@ -45,49 +45,6 @@ function togglePatternDiagram (pattern) {
     $('.' + pattern + '-diagram').toggle('display');
 }
 
-/* Function to custom validate BASE MDL form */
-function validate (field, min, max, setRequired) {
-    var defaultErrorLength = 23;
-    var fieldName = field.attr('name');
-
-    var mdlErrorMessage = field.siblings('.mdl-textfield__error');
-    var ErrorMessageText = mdlErrorMessage.text();
-
-    // validate checkbox
-    if (setRequired && field.attr('type') == 'checkbox' && field.is(':checked') == false) {
-        if (ErrorMessageText.length < defaultErrorLength) {
-            mdlErrorMessage.text(fieldName + ' is the required field!' + ' - ' + ErrorMessageText).css('visibility', 'visible');
-        }
-        return false;
-    }
-    // validate require
-    else if (setRequired && field.val() == 0) {
-        if (ErrorMessageText.length < defaultErrorLength) {
-            mdlErrorMessage.text(fieldName + ' is the required field!' + ' - ' + ErrorMessageText).css('visibility', 'visible');
-        }
-        return false;
-    }
-    // validate max
-    else if (max != null && field.val() > max) {
-        if (ErrorMessageText.length < defaultErrorLength) {
-            mdlErrorMessage.text('The maximum is ' + max + ' characters!' + ' - ' + ErrorMessageText).css('visibility', 'visible');
-        }
-        return false;
-    }
-    // validate min
-    else if (min != null && field.val() < min) {
-        if (ErrorMessageText.length < defaultErrorLength) {
-            mdlErrorMessage.text('The minimum is ' + min + ' characters!' + ' - ' + ErrorMessageText).css('visibility', 'visible');
-        }
-        return false;
-    }
-    // validation success
-    else {
-        mdlErrorMessage.text('').css('visibility', 'hidden');
-        return true;
-    }
-}
-
 /* Function to clean MDL form after action */
 function cleanForm (form) {
     $(form).trigger('reset');
