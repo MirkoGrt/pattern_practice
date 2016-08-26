@@ -80,7 +80,7 @@
                         <!--Name-->
                         <div class="spender_item_name_wrapper">
                             <div class="mdl-textfield mdl-js-textfield ">
-                                <input class="mdl-textfield__input" name="Name" type="text" id="spender_item_name">
+                                <input class="mdl-textfield__input" name="spender_item_name" type="text" id="spender_item_name">
                                 <label class="mdl-textfield__label" for="spender_item_name">Item Name</label>
                                 <span class="mdl-textfield__error"></span>
                             </div>
@@ -89,7 +89,7 @@
                         <!--Price-->
                         <div class="spender_item_price_wrapper">
                             <div class="mdl-textfield mdl-js-textfield ">
-                                <input class="mdl-textfield__input" type="text" name="Price" pattern="-?[0-9]*(\.[0-9]+)?" id="spender_item_price">
+                                <input class="mdl-textfield__input" type="text" name="spender_item_price" pattern="-?[0-9]*(\.[0-9]+)?" id="spender_item_price">
                                 <label class="mdl-textfield__label" for="spender_item_price">Price</label>
                                 <span class="mdl-textfield__error">Input is not a number!</span>
                             </div>
@@ -146,7 +146,7 @@
 
                             <!--/.New category-->
                             <div class="mdl-textfield mdl-js-textfield">
-                                <input class="mdl-textfield__input" name="New_Category" type="text" onchange="uncheckCheckboxes('spender_item')" id="spender_item_new_category">
+                                <input class="mdl-textfield__input" name="spender_item_new_category" type="text" onchange="uncheckCheckboxes('spender_item')" id="spender_item_new_category">
                                 <label class="mdl-textfield__label" for="spender_item_new_category">New Category</label>
                             </div>
                             <div class="mdl-tooltip" for="spender_item_new_category">
@@ -157,21 +157,21 @@
                         <div class="spender_item_date_wrapper">
                             <!--Day-->
                             <div class="mdl-textfield mdl-js-textfield">
-                                <input class="mdl-textfield__input" type="text" name="Day" pattern="-?[0-9]*(\.[0-9]+)?" id="spender_item_day">
+                                <input class="mdl-textfield__input" type="text" name="spender_item_day" pattern="-?[0-9]*(\.[0-9]+)?" id="spender_item_day">
                                 <label class="mdl-textfield__label" for="spender_item_day">Day</label>
                                 <span class="mdl-textfield__error">Input is not a number!</span>
                             </div>
 
                             <!--Month-->
                             <div class="mdl-textfield mdl-js-textfield">
-                                <input class="mdl-textfield__input" type="text" name="Month" pattern="-?[0-9]*(\.[0-9]+)?" id="spender_item_month">
+                                <input class="mdl-textfield__input" type="text" name="spender_item_month" pattern="-?[0-9]*(\.[0-9]+)?" id="spender_item_month">
                                 <label class="mdl-textfield__label" for="spender_item_month">Month</label>
                                 <span class="mdl-textfield__error">Input is not a number!</span>
                             </div>
 
                             <!-- Year -->
                             <div class="mdl-textfield mdl-js-textfield">
-                                <input class="mdl-textfield__input" type="text" name="Year" pattern="-?[0-9]*(\.[0-9]+)?" id="spender_item_year">
+                                <input class="mdl-textfield__input" type="text" name="spender_item_year" pattern="-?[0-9]*(\.[0-9]+)?" id="spender_item_year">
                                 <label class="mdl-textfield__label" for="spender_item_year">Year</label>
                                 <span class="mdl-textfield__error">Input is not a number!</span>
                             </div>
@@ -179,7 +179,7 @@
                             <!-- Today Date -->
                             <div class="today-date">
                                 <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="spender-today-date">
-                                    <input type="checkbox" id="spender-today-date" class="mdl-checkbox__input">
+                                    <input type="checkbox" id="spender-today-date" name="spender-today-date" class="mdl-checkbox__input">
                                     <span class="mdl-checkbox__label">Today Date</span>
                                 </label>
                             </div>
@@ -187,7 +187,7 @@
                             <!-- Previous Date -->
                             <div class="previous-date">
                                 <label class="mdl-checkbox mdl-js-checkbox mdl-js-ripple-effect" for="spender-previous-date">
-                                    <input type="checkbox" id="spender-previous-date" class="mdl-checkbox__input">
+                                    <input type="checkbox" id="spender-previous-date" name="spender-previous-date" class="mdl-checkbox__input">
                                     <span class="mdl-checkbox__label" id="spender-previous-date-label"></span>
                                 </label>
                             </div>
@@ -195,12 +195,11 @@
 
                         <div id="sender-item-adding-progress" class="mdl-progress mdl-js-progress mdl-progress__indeterminate"></div>
                         <br>
+                        <button type="submit" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
+                            Add MoSpender Item!
+                        </button>
                     </form>
-                    <br>
-                    <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent"
-                            onclick="addSpenderItemToDB()">
-                        Add MoSpender Item!
-                    </button>
+
                 </div><!--/#transform-form-panel-->
 
                 <div class="mdl-tabs__panel" id="money-income-panel">

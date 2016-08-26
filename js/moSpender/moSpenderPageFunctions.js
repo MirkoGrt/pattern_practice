@@ -1,3 +1,36 @@
+$(document).ready(function () {
+
+    $("#form-to-add-data-from-note").validate({
+        rules: {
+            spender_item_name: "required",
+            spender_item_price: "required",
+            spender_item_new_category: {
+                required: function () {
+                    return !$(".spender_item_category").is(":checked");
+                }
+            },
+            spender_item_day: {
+                required: function () {
+                    return !($("#spender-today-date").is(":checked") || $("#spender-previous-date").is(":checked"));
+                }
+            },
+            spender_item_month: {
+                required: function () {
+                    return !($("#spender-today-date").is(":checked") || $("#spender-previous-date").is(":checked"));
+                }
+            },
+            spender_item_year: {
+                required: function () {
+                    return !($("#spender-today-date").is(":checked") || $("#spender-previous-date").is(":checked"));
+                }
+            }
+        },
+        submitHandler: function() {
+            addSpenderItemToDB();
+        }
+    });
+});
+
 /* Function to add money income to DB */
 function addMoney () {
     $('#money-income-adding-progress').css('display', 'block');
@@ -144,71 +177,32 @@ function addSpenderItemToDB () {
         ItemDay = localStorage.getItem('itemDay');
     }
 
-    if (validateMoSpenderForm(ItemNewCategory, TodayDate, PreviousDate)) {
+    var url = '/addSpenderItem';
+    var data = 'itemName=' + ItemName +
+        '&itemPrice=' + ItemPrice +
+        '&itemPriceCurrency=' + ItemPriceCurrency +
+        '&itemTags=' + ItemTags +
+        '&itemCategories=' + ItemCategories +
+        '&itemNewCategory=' + ItemNewCategory +
+        '&itemDay=' + ItemDay +
+        '&itemMonth=' + ItemMonth +
+        '&itemYear=' + ItemYear;
 
-        var url = '/addSpenderItem';
-        var data = 'itemName=' + ItemName +
-            '&itemPrice=' + ItemPrice +
-            '&itemPriceCurrency=' + ItemPriceCurrency +
-            '&itemTags=' + ItemTags +
-            '&itemCategories=' + ItemCategories +
-            '&itemNewCategory=' + ItemNewCategory +
-            '&itemDay=' + ItemDay +
-            '&itemMonth=' + ItemMonth +
-            '&itemYear=' + ItemYear;
-
-        $.ajax({
-            url: url,
-            type: "POST",
-            data: data,
-            success: function (response) {
-                showMdlSnackbar(response, 'success', '#mospender-snackbar');
-                $('#sender-item-adding-progress').css('display', 'none');
-                cleanForm(formToAddItems);
-            },
-            error: function (response) {
-                showMdlSnackbar(response, 'error', '#mospender-snackbar');
-                $('#sender-item-adding-progress').css('display', 'none');
-                cleanForm(formToAddItems);
-            }
-        });
-    }
-}
-
-/* Function to validate moSpender form before saving */
-function validateMoSpenderForm (newCategory, todayDate, previousDate) {
-    var formToAddItems = '#form-to-add-data-from-note';
-
-    var spenderName = $(formToAddItems + ' #spender_item_name');
-    var spenderPrice = $(formToAddItems + ' #spender_item_price');
-    var spenderDay = $(formToAddItems + ' #spender_item_day');
-    var spenderMonth = $(formToAddItems + ' #spender_item_month');
-    var spenderYear = $(formToAddItems + ' #spender_item_year');
-
-    var nameValidation = validate(spenderName, 0, 50, true);
-    var priceValidation = validate(spenderPrice, null, null, true);
-    var dayValidation = validate(spenderDay, null, null, true);
-    var monthValidation = validate(spenderMonth, null, null, true);
-    var yearValidation = validate(spenderYear, null, null, true);
-
-    var spenderCategory = $(formToAddItems + ' .spender_item_category');
-    var categoryValidation = validate(spenderCategory, null, null, true);
-
-    // Don't validate the categories checkboxes when the new category is adding
-    if (newCategory) {
-        categoryValidation = validate(spenderCategory, null, null, false);
-    }
-
-    // Don't validate date inputs if today date or previous is checked
-    if (todayDate || previousDate) {
-        dayValidation = validate(spenderDay, null, null, false);
-        monthValidation = validate(spenderMonth, null, null, false);
-        yearValidation = validate(spenderYear, null, null, false);
-    }
-
-    if (nameValidation && priceValidation && dayValidation && monthValidation && yearValidation && categoryValidation) {
-        return true;
-    }
+    $.ajax({
+        url: url,
+        type: "POST",
+        data: data,
+        success: function (response) {
+            showMdlSnackbar(response, 'success', '#mospender-snackbar');
+            $('#sender-item-adding-progress').css('display', 'none');
+            cleanForm(formToAddItems);
+        },
+        error: function (response) {
+            showMdlSnackbar(response, 'error', '#mospender-snackbar');
+            $('#sender-item-adding-progress').css('display', 'none');
+            cleanForm(formToAddItems);
+        }
+    });
 }
 
 /* Functions for showing previous dates from local storage in checkbox labels when page is loaded */

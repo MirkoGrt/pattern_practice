@@ -25,7 +25,7 @@
     <!--JS Libs-->
     <script type="text/javascript" src="/js/jquery-2.1.4.js"></script>
     <script type="text/javascript" src="/js/processing.js"></script>
-    <script type="text/javascript" src="/js/jquery.validate.js"></script>
+
 
 
     <!--Custom JS-->
@@ -102,7 +102,7 @@
     ?>
 
     <footer>
-
+        <script type="text/javascript" src="/js/jquery.validate.js"></script>
     </footer>
 </div><!--/.mdl-layout .mdl-js-layout .mdl-layout--fixed-header-->
 
