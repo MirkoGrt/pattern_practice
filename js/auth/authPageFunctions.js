@@ -47,8 +47,13 @@ function registerUser() {
         dataType: 'json',
         success: function (response) {
             $("#user-registration-progress").css('display', 'none');
-            cleanForm('#auth-page-register-form');
-            showMdlSnackbar(response, 'success', '#auth-page-snackbar');
+
+            if (response.status == 'error') {
+                showMdlSnackbar(response.message, 'error', '#auth-page-snackbar');
+            } else {
+                showMdlSnackbar(response, 'success', '#auth-page-snackbar');
+                cleanForm('#auth-page-register-form');
+            }
         },
         error: function (response) {
             $("#user-registration-progress").css('display', 'none');

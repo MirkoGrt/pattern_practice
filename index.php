@@ -12,13 +12,13 @@
     $router->post('/deleteEvent', ['lib\Pages\Calendar', 'deleteEvent']);
     $router->post('/addSpenderItem', ['lib\Pages\MoSpenderController', 'addSpenderItem']);
     $router->post('/addMoneyIncome', ['lib\Pages\MoSpenderController', 'addMoneyIncome']);
-    $router->post('/register-user', ['lib\Auth\RegisterController', 'registerUser']);
+    $router->post('/register-user', ['lib\Auth\AuthController', 'registerUser']);
 
     $router->get('/calendar', ['lib\Pages\Calendar', 'showCalendar']);
     $router->get('/mo-spender', ['lib\Pages\MoSpenderController', 'showMoSpender']);
     $router->get('/main-page', ['lib\Pages\MainPageController', 'showMainPage']);
     $router->get('/js-page', ['lib\Pages\JsPageController', 'showJsPage']);
-    $router->get('/auth', ['lib\Auth\RegisterController', 'showAuthPage']);
+    $router->get('/auth', ['lib\Auth\AuthController', 'showAuthPage']);
 
     $router->get('/behavioral-patterns', ['lib\Pages\BehavioralPageController', 'showBehavioralPage']);
     $router->get('/creational-patterns', ['lib\Pages\CreationalPageController', 'showCreationalPage']);

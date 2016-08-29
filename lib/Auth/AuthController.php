@@ -10,7 +10,7 @@
 namespace lib\Auth;
 use lib\mvc as Mvc;
 
-class RegisterController extends Mvc\BaseController {
+class AuthController extends Mvc\BaseController {
 
     private $usersTableName = 'angry_users';
 
@@ -18,6 +18,15 @@ class RegisterController extends Mvc\BaseController {
         // if there is no table for users
         if (!$this->generalFunctions()->checkIfTableExist($this->usersTableName)) {
             $this->authCreate()->createUsersTable($this->usersTableName);
+        }
+
+        if ($this->authSelect()->checkIfUserExists($this->usersTableName, $_POST['email'])) {
+            $responseArray = [
+                'message' => 'There already is user with this email',
+                'status' => 'error'
+            ];
+            echo json_encode($responseArray);
+            exit;
         }
 
         $passHash = hash('md5', $_POST['pass']);

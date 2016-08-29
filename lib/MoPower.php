@@ -69,4 +69,8 @@ class MoPower {
     public function authInsert () {
         return new DbWork\Auth\AuthInsertData($this->dbConnection);
     }
+
+    public function authSelect () {
+        return new DbWork\Auth\AuthSelectData($this->dbConnection);
+    }
 }
