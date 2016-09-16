@@ -26,8 +26,6 @@
     <script type="text/javascript" src="/js/jquery-2.1.4.js"></script>
     <script type="text/javascript" src="/js/processing.js"></script>
 
-
-
     <!--Custom JS-->
     <script type="text/javascript" src="/js/main.js"></script>
 
@@ -60,14 +58,31 @@
                 </div>
             </div>
             <!-- Navigation -->
-            <div class="android-navigation-container">
-                <nav class="android-navigation mdl-navigation">
-                    <a class="mdl-navigation__link mdl-typography--text-uppercase" href="/main-page">Main</a>
-                    <a class="mdl-navigation__link mdl-typography--text-uppercase" href="/js-page">JS</a>
-                    <a class="mdl-navigation__link mdl-typography--text-uppercase" href="/calendar">MoCalendar</a>
-                    <a class="mdl-navigation__link mdl-typography--text-uppercase" href="/mo-spender">MoSpender</a>
-                </nav>
-            </div>
+            <?php $loggedUser = $_SESSION['logged_user']; ?>
+            <?php if ($loggedUser): ?>
+                <div class="header__user-icon">
+                    <span class="mdl-chip mdl-chip--contact mdl-chip--deletable">
+                        <img class="mdl-chip__contact" src="/images/logo.png" />
+                        <span class="mdl-chip__text">Hi, <?php echo $loggedUser['nickname']?></span>
+                        <a title="Logout" onclick="logout()" class="mdl-chip__action"><i class="material-icons">directions_run</i></a>
+                    </span>
+                </div>
+                <div class="android-navigation-container">
+                    <nav class="android-navigation mdl-navigation">
+                        <a class="mdl-navigation__link mdl-typography--text-uppercase" href="/main-page">Main</a>
+                        <a class="mdl-navigation__link mdl-typography--text-uppercase" href="/js-page">JS</a>
+                        <a class="mdl-navigation__link mdl-typography--text-uppercase" href="/calendar">MoCalendar</a>
+                        <a class="mdl-navigation__link mdl-typography--text-uppercase" href="/mo-spender">MoSpender</a>
+                    </nav>
+                </div>
+            <?php else: ?>
+                <div class="android-navigation-container">
+                    <nav class="android-navigation mdl-navigation">
+                        <a class="mdl-navigation__link mdl-typography--text-uppercase" href="/auth">Login</a>
+                    </nav>
+                </div>
+            <?php endif; ?>
+
           <span class="android-mobile-title mdl-layout-title">
             <img class="android-logo-image" src="/images/logo_small.png">
           </span>
@@ -75,26 +90,29 @@
                 <i class="material-icons">more_vert</i>
             </button>
             <ul class="mdl-menu mdl-js-menu mdl-menu--bottom-right mdl-js-ripple-effect" for="more-button">
-                <li class="mdl-menu__item">Stuff</li>
-                <li class="mdl-menu__item">Stuff</li>
+
                 <li disabled class="mdl-menu__item">Stuff</li>
-                <li class="mdl-menu__item">Stuff</li>
+                <li class="mdl-menu__item" onclick="logout()">Logout</li>
             </ul>
         </div>
     </header>
     <div class="android-drawer mdl-layout__drawer">
         <span class="mdl-layout-title">
-          <img class="android-logo-image" src="/images/logo_small.png">
+          <img class="android-logo-image" src="/images/logo.png">
         </span>
-        <nav class="mdl-navigation">
-            <a class="mdl-navigation__link" href="/behavioral-patterns">Behavioral</a>
-            <a class="mdl-navigation__link" href="/structural-patterns">Structural</a>
-            <a class="mdl-navigation__link" href="/creational-patterns">Creational</a>
-            <div class="android-drawer-separator"></div>
-            <a class="mdl-navigation__link" href="/auth">Auth Test Page</a>
-            <a class="mdl-navigation__link" href="">Stuff</a>
-            <a class="mdl-navigation__link" href="">Stuff</a>
-        </nav>
+        <?php if ($loggedUser): ?>
+            <nav class="mdl-navigation">
+                <a class="mdl-navigation__link" href="/behavioral-patterns">Behavioral</a>
+                <a class="mdl-navigation__link" href="/structural-patterns">Structural</a>
+                <a class="mdl-navigation__link" href="/creational-patterns">Creational</a>
+                <div class="android-drawer-separator"></div>
+                <a class="mdl-navigation__link" href="/auth">My account</a>
+                <a class="mdl-navigation__link" href="">Stuff</a>
+                <a class="mdl-navigation__link" href="">Stuff</a>
+            </nav>
+        <?php else: ?>
+            <p>Please <a href="/auth">Login</a> to see site content.</p>
+        <?php endif; ?>
     </div>
 
     <?php

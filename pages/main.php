@@ -69,10 +69,10 @@
                     <h5>Where is the layout files?</h5>
                     <p>The layout files: <stong>pages/layouts</stong> directory</p>
 
-                    <h5>How main page is shown by default?</h5>
+                    <h5>How auth page is shown by default?</h5>
                     <p>
                         In the <strong>'lib\Routing'</strong> folder and 'Router->match()' method we check if the router path exists. If no - make it
-                        as main page route.
+                        as auth page route.
                     </p>
 
                     <h5>How to get variables from controller in the view file?</h5>

@@ -29,4 +29,19 @@ class AuthSelectData {
             return false;
         }
     }
+
+    public function getUserByPassAndEmail ($table, $email, $pass) {
+        $insertQuery = $this->dbConnection->prepare(
+            'SELECT * FROM ' . $table . ' WHERE email = :email AND password = :password'
+        );
+
+        $insertQuery->bindParam(':email', $email);
+        $insertQuery->bindParam(':password', $pass);
+
+        if ($insertQuery->execute()) {
+            return $insertQuery->fetch();
+        } else {
+            return false;
+        }
+    }
 }

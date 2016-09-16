@@ -12,7 +12,10 @@
     $router->post('/deleteEvent', ['lib\Pages\Calendar', 'deleteEvent']);
     $router->post('/addSpenderItem', ['lib\Pages\MoSpenderController', 'addSpenderItem']);
     $router->post('/addMoneyIncome', ['lib\Pages\MoSpenderController', 'addMoneyIncome']);
+
     $router->post('/register-user', ['lib\Auth\AuthController', 'registerUser']);
+    $router->post('/login-user', ['lib\Auth\AuthController', 'loginUser']);
+    $router->post('/logout', ['lib\Auth\AuthController', 'logOut']);
 
     $router->get('/calendar', ['lib\Pages\Calendar', 'showCalendar']);
     $router->get('/mo-spender', ['lib\Pages\MoSpenderController', 'showMoSpender']);
@@ -25,6 +28,9 @@
     $router->get('/structural-patterns', ['lib\Pages\StructuralPageController', 'showStructuralPage']);
 
     try {
+
+        session_start();
+
         $dispatcher = new lib\Routing\Dispatcher($router);
         /*
             Handling the current route. If match - run:

@@ -100,3 +100,24 @@ function uncheckCheckboxes (className) {
         $(this).attr('checked', false);
     });
 }
+
+/*
+* Function for logout user
+* */
+
+function logout () {
+    var data = {
+    };
+    $.ajax({
+        type: "POST",
+        url: '/logout',
+        data: data,
+        dataType: 'json',
+        success: function (response) {
+            window.location.href = window.location.origin;
+        },
+        error: function () {
+
+        }
+    });
+}

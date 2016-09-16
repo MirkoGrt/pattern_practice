@@ -45,7 +45,11 @@ class Router {
         $path = $request->getPath();
 
         if ($path == '/') {
-            $path = '/main-page';
+            if ($_SESSION['logged_user']) {
+                $path = '/main-page';
+            } else {
+                $path = '/auth';
+            }
         }
 
         foreach ($this->routes[$method] as $pattern => $handler) {

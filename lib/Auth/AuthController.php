@@ -41,13 +41,36 @@ class AuthController extends Mvc\BaseController {
 
         if ($userAdd) {
             echo json_encode('Success! You are now registered!');
+            exit;
         } else {
             echo json_encode('Error with registration! ');
+            exit;
         }
     }
     
     public function loginUser () {
-        
+        $pass = hash('md5', $_POST['pass']);
+
+        $user = $this->authSelect()->getUserByPassAndEmail($this->usersTableName, $_POST['email'], $pass);
+
+        if ($user) {
+            $_SESSION['logged_user'] = $user;
+            echo json_encode('Success! You are in the system!');
+            exit;
+        } else {
+            $responseArray = [
+                'message' => 'Wrong password or email..  Please try again',
+                'status' => 'error'
+            ];
+            echo json_encode($responseArray);
+            exit;
+        }
+    }
+
+    public function logOut () {
+        session_unset();
+        echo json_encode('logout...');
+        exit;
     }
 
     public function showAuthPage () {
