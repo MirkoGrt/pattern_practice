@@ -102,13 +102,16 @@
         </span>
         <?php if ($loggedUser): ?>
             <nav class="mdl-navigation">
+                <a class="mdl-navigation__link" href="/auth">My account</a>
+                <div class="android-drawer-separator"></div>
+                <a class="mdl-navigation__link" href="/main-page">Main</a>
+                <a class="mdl-navigation__link" href="/js-page">JS</a>
+                <a class="mdl-navigation__link" href="/calendar">MoCalendar</a>
+                <a class="mdl-navigation__link" href="/mo-spender">MoSpender</a>
+                <div class="android-drawer-separator"></div>
                 <a class="mdl-navigation__link" href="/behavioral-patterns">Behavioral</a>
                 <a class="mdl-navigation__link" href="/structural-patterns">Structural</a>
                 <a class="mdl-navigation__link" href="/creational-patterns">Creational</a>
-                <div class="android-drawer-separator"></div>
-                <a class="mdl-navigation__link" href="/auth">My account</a>
-                <a class="mdl-navigation__link" href="">Stuff</a>
-                <a class="mdl-navigation__link" href="">Stuff</a>
             </nav>
         <?php else: ?>
             <p>Please <a href="/auth">Login</a> to see site content.</p>
