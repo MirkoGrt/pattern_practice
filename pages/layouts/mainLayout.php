@@ -60,13 +60,7 @@
             <!-- Navigation -->
             <?php $loggedUser = $_SESSION['logged_user']; ?>
             <?php if ($loggedUser): ?>
-                <div class="header__user-icon">
-                    <span class="mdl-chip mdl-chip--contact mdl-chip--deletable">
-                        <img class="mdl-chip__contact" src="/images/logo.png" />
-                        <span class="mdl-chip__text">Hi, <?php echo $loggedUser['nickname']?></span>
-                        <a title="Logout" onclick="logout()" class="mdl-chip__action"><i class="material-icons">directions_run</i></a>
-                    </span>
-                </div>
+
                 <div class="android-navigation-container">
                     <nav class="android-navigation mdl-navigation">
                         <a class="mdl-navigation__link mdl-typography--text-uppercase" href="/main-page">Main</a>
@@ -95,10 +89,19 @@
                 <li class="mdl-menu__item" onclick="logout()">Logout</li>
             </ul>
         </div>
+        <?php if ($loggedUser): ?>
+            <div class="header__user-icon">
+                <span class="mdl-chip mdl-chip--contact mdl-chip--deletable">
+                    <img class="mdl-chip__contact" src="/images/logo.png" />
+                    <span class="mdl-chip__text">Hi, <?php echo $loggedUser['nickname']?></span>
+                    <a title="Logout" onclick="logout()" class="mdl-chip__action"><i class="material-icons">directions_run</i></a>
+                </span>
+            </div>
+        <?php endif; ?>
     </header>
     <div class="android-drawer mdl-layout__drawer">
         <span class="mdl-layout-title">
-          <img class="android-logo-image" src="/images/logo.png">
+          <img class="android-logo-image" src="/images/logo_small.png">
         </span>
         <?php if ($loggedUser): ?>
             <nav class="mdl-navigation">
@@ -114,7 +117,12 @@
                 <a class="mdl-navigation__link" href="/creational-patterns">Creational</a>
             </nav>
         <?php else: ?>
-            <p>Please <a href="/auth">Login</a> to see site content.</p>
+            <div class="please-login_button">
+                <p>Please login to see site content.</p>
+                <a href="/auth" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">
+                    Login
+                </a>
+            </div>
         <?php endif; ?>
     </div>
 

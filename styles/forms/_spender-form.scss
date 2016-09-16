@@ -19,6 +19,11 @@
     }
     .spender_item_category_wrapper {
         width: 100%;
+        @media (max-width: 768px) {
+            .mdl-textfield {
+                width: 100%;
+            }
+        }
     }
     .spender_item_date_wrapper {
         width: 100%;

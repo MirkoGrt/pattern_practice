@@ -7,8 +7,17 @@
 /*=================*/
 
 /*===== General styles on all pages =====*/
+    @media (max-width: 900px) {
+        .android-mobile-title {
+            left: calc(40% - 70px);
+        }
+    }
     .android-logo-image {
-        height: 50px;
+        max-height: 40px;
+    }
+    .please-login_button {
+        padding: 20px;
+        text-align: center;
     }
     .page-title-card {
         width: 100%;
@@ -27,6 +36,40 @@
             width: 100%;
         }
     }
+    .header__user-icon {
+        text-align: right;
+        padding: 10px 40px;
+        .mdl-chip__text {
+            margin-right: 20px;
+        }
+    }
+    .lesson-block-card {
+        width: 100%;
+        margin-bottom: 20px;
+        .subtitle {
+            font-size: 14px;
+            margin-left: 10px;
+        }
+        canvas {
+            border: 1px solid black;
+        }
+        .description {
+            font-style: italic;
+            background-color: #dddddd;
+            padding: 5px;
+            display: inline-block;
+        }
+        .mdl-card__title-text {
+            @media (max-width: 768px) {
+                font-size: 18px;
+                display: block;
+                .subtitle {
+                    display: block;
+                    margin-left: 0;
+                }
+            }
+        }
+    }
 /*=================*/
 
 /*===== Main page =====*/
@@ -34,6 +77,9 @@
         .mdl-card__title {
             background: url('/images/main-page-title-background.png') center / cover;
             color: dimgray;
+        }
+        img {
+            width: 100%;
         }
     }
 /*=================*/
@@ -100,8 +146,15 @@
             padding: 20px 0;
         }
     }
-    .previous-date .mdl-checkbox {
-        width: auto;
+    .previous-date {
+        .mdl-checkbox {
+            width: auto;
+        }
+        @media (max-width: 768px) {
+            width: 60%;
+            display: inline-block;
+            text-align: left;
+        }
     }
     /*------------*/
 
@@ -118,23 +171,6 @@
     .js-page-title-card {
         .mdl-card__title {
             background: url('/images/javascript-page-title-background.jpg') center / cover;
-        }
-    }
-    .lesson-block-card {
-        width: 100%;
-        margin-bottom: 20px;
-        .subtitle {
-            font-size: 14px;
-            margin-left: 10px;
-        }
-        canvas {
-            border: 1px solid black;
-        }
-        .description {
-            font-style: italic;
-            background-color: #dddddd;
-            padding: 5px;
-            display: inline-block;
         }
     }
     .animated-image {

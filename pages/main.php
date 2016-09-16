@@ -48,15 +48,14 @@
                     <hr>
 
                     <u>Pages</u> <br>
-                    Pages Controllers to render pages views and do some functionality on its views.
+                    There are Pages Controllers to render pages views and do some functionality on its views.
                     All SQL code is in the <strong>lib/DbWork</strong> folder.
-                    There is the <strong>MoPower</strong> class to work with db and returning the needed objects.
-                     You should input Db names, user and pass (for db connections) in the MoPower class. In the pages
-                    <strong>construct</strong> methods we set the needed connection for current page.
+                    There is the <strong>MoPower</strong> class to work with db and returning the needed objects. <br>
+                    All pages controllers are extended from MoPower class.
                     <hr>
                     <img src="/images/diagram_pages_24-06-16.png" alt="Pages diagram">
                     <hr />
-                    <h1>FAQ</h1>
+                    <h4>FAQ</h4>
                     <h5>How to add new page?</h5>
                     <p>
                         To add new page you need to create the view file (test.php) in 'pages' directory. Then create the

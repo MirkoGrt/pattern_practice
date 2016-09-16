@@ -17,6 +17,11 @@
     }
     .money_income_category_wrapper {
         width: 100%;
+        @media (max-width: 768px) {
+            .mdl-textfield {
+                width: 100%;
+            }
+        }
     }
     .money_income_date_wrapper {
         width: 100%;
