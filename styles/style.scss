@@ -12,6 +12,11 @@
             left: calc(40% - 70px);
         }
     }
+    .mdl-layout__drawer > .mdl-layout-title {
+        @media (min-width: 768px) {
+            padding-left: 10px;
+        }
+    }
     .android-logo-image {
         max-height: 40px;
     }

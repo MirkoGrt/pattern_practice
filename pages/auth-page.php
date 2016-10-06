@@ -6,6 +6,9 @@
                 <?php if ($_SESSION['logged_user']): ?>
                     <h3>You are already here!</h3>
                 <?php else: ?>
+                    <div class="mdl-cell--12-col">
+                        <h5>Please Login to see site content.</h5>
+                    </div>
                     <div class="mdl-cell--6-col">
                         <div class="login-page-card mdl-card mdl-shadow--2dp">
                             <div class="mdl-card__title">

@@ -84,9 +84,10 @@
                 <i class="material-icons">more_vert</i>
             </button>
             <ul class="mdl-menu mdl-js-menu mdl-menu--bottom-right mdl-js-ripple-effect" for="more-button">
-
                 <li disabled class="mdl-menu__item">Stuff</li>
-                <li class="mdl-menu__item" onclick="logout()">Logout</li>
+                <?php if ($loggedUser): ?>
+                    <li class="mdl-menu__item" onclick="logout()">Logout</li>
+                <?php endif; ?>
             </ul>
         </div>
         <?php if ($loggedUser): ?>
