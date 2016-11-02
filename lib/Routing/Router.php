@@ -52,9 +52,9 @@ class Router {
             }
         }
 
-        if (!$_SESSION['logged_user'] && $path != "/auth") {
-            $path = '/auth';
-        }
+//        if (!$_SESSION['logged_user'] && $path != "/auth") {
+//            $path = '/auth';
+//        }
 
         foreach ($this->routes[$method] as $pattern => $handler) {
             if ($pattern === $path) {
