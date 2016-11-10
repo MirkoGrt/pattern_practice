@@ -32,8 +32,11 @@ class CreateTables {
                   eventDate varchar(10) NOT NULL,
                   dateAdded date NOT NULL,
                   eventStatus tinyint(1) NOT NULL,
-                  PRIMARY KEY (id)
-                ) ENGINE=InnoDB;';
+                  PRIMARY KEY (id),
+                  
+                ) ENGINE=InnoDB,
+                CHARACTER SET utf8 COLLATE utf8_general_ci
+                ;';
 
         $PDO_Connection->exec($sql);
     }

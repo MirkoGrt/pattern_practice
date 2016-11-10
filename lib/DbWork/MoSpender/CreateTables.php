@@ -36,7 +36,8 @@ class CreateTables {
                   moneyYear int(11),
                   moneyTimestamp varchar(10),
                   PRIMARY KEY (id)
-                ) ENGINE=InnoDB;';
+                  
+                ) DEFAULT CHARSET=utf8 ENGINE=InnoDB;';
 
         $PDO_Connection->exec($sql);
     }
@@ -53,7 +54,8 @@ class CreateTables {
                   id int(11) NOT NULL AUTO_INCREMENT,
                   categoryName varchar(255),
                   PRIMARY KEY (id)
-                ) ENGINE=InnoDB;';
+                  
+                ) DEFAULT CHARSET=utf8 ENGINE=InnoDB;';
 
         $PDO_Connection->exec($sql);
     }
@@ -77,7 +79,8 @@ class CreateTables {
                   itemMonth int(11),
                   itemTimestamp varchar(10),
                   PRIMARY KEY (id)
-                ) ENGINE=InnoDB;';
+                  
+                ) DEFAULT CHARSET=utf8 ENGINE=InnoDB;';
 
         $PDO_Connection->exec($sql);
     }

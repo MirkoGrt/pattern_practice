@@ -89,9 +89,9 @@
                         <!--Price-->
                         <div class="spender_item_price_wrapper">
                             <div class="mdl-textfield mdl-js-textfield ">
-                                <input class="mdl-textfield__input" type="text" name="spender_item_price" pattern="-?[0-9]*(\.[0-9]+)?" id="spender_item_price">
+                                <input class="mdl-textfield__input" type="number" name="spender_item_price" id="spender_item_price">
                                 <label class="mdl-textfield__label" for="spender_item_price">Price</label>
-                                <span class="mdl-textfield__error">Input is not a number!</span>
+                                <span class="mdl-textfield__error"></span>
                             </div>
 
                             <!--Currency radio buttons-->
@@ -153,23 +153,23 @@
                         <div class="spender_item_date_wrapper">
                             <!--Day-->
                             <div class="mdl-textfield mdl-js-textfield">
-                                <input class="mdl-textfield__input" type="text" name="spender_item_day" pattern="-?[0-9]*(\.[0-9]+)?" id="spender_item_day">
+                                <input class="mdl-textfield__input" type="number" name="spender_item_day" max="31" id="spender_item_day">
                                 <label class="mdl-textfield__label" for="spender_item_day">Day</label>
-                                <span class="mdl-textfield__error">Input is not a number!</span>
+                                <span class="mdl-textfield__error"></span>
                             </div>
 
                             <!--Month-->
                             <div class="mdl-textfield mdl-js-textfield">
-                                <input class="mdl-textfield__input" type="text" name="spender_item_month" pattern="-?[0-9]*(\.[0-9]+)?" id="spender_item_month">
+                                <input class="mdl-textfield__input" type="number" name="spender_item_month" max="12" id="spender_item_month">
                                 <label class="mdl-textfield__label" for="spender_item_month">Month</label>
-                                <span class="mdl-textfield__error">Input is not a number!</span>
+                                <span class="mdl-textfield__error"></span>
                             </div>
 
                             <!-- Year -->
                             <div class="mdl-textfield mdl-js-textfield">
-                                <input class="mdl-textfield__input" type="text" name="spender_item_year" pattern="-?[0-9]*(\.[0-9]+)?" id="spender_item_year">
+                                <input class="mdl-textfield__input" type="number" name="spender_item_year" min="2014" max="2050" id="spender_item_year">
                                 <label class="mdl-textfield__label" for="spender_item_year">Year</label>
-                                <span class="mdl-textfield__error">Input is not a number!</span>
+                                <span class="mdl-textfield__error"></span>
                             </div>
 
                             <!-- Today Date -->
@@ -213,9 +213,9 @@
                         <!-- Quantity -->
                         <div class="money_income_quantity_wrapper">
                             <div class="mdl-textfield mdl-js-textfield ">
-                                <input class="mdl-textfield__input" type="text" name="money_income_quantity" pattern="-?[0-9]*(\.[0-9]+)?" id="money_income_quantity">
+                                <input class="mdl-textfield__input" type="number" name="money_income_quantity" id="money_income_quantity">
                                 <label class="mdl-textfield__label" for="money_income_quantity">Quantity</label>
-                                <span class="mdl-textfield__error">Input is not a number!</span>
+                                <span class="mdl-textfield__error"></span>
                             </div>
 
                             <!--Currency radio buttons-->
@@ -264,23 +264,23 @@
                         <div class="money_income_date_wrapper">
                             <!--Day-->
                             <div class="mdl-textfield mdl-js-textfield">
-                                <input class="mdl-textfield__input" type="text" name="money_income_day" pattern="-?[0-9]*(\.[0-9]+)?" id="money_income_day">
+                                <input class="mdl-textfield__input" type="number" max="31" name="money_income_day" id="money_income_day">
                                 <label class="mdl-textfield__label" for="money_income_day">Day</label>
-                                <span class="mdl-textfield__error">Input is not a number!</span>
+                                <span class="mdl-textfield__error"></span>
                             </div>
 
                             <!--Month-->
                             <div class="mdl-textfield mdl-js-textfield">
-                                <input class="mdl-textfield__input" type="text" name="money_income_month" pattern="-?[0-9]*(\.[0-9]+)?" id="money_income_month">
+                                <input class="mdl-textfield__input" type="number" max="12" name="money_income_month" id="money_income_month">
                                 <label class="mdl-textfield__label" for="money_income_month">Month</label>
-                                <span class="mdl-textfield__error">Input is not a number!</span>
+                                <span class="mdl-textfield__error"></span>
                             </div>
 
                             <!-- Year -->
                             <div class="mdl-textfield mdl-js-textfield">
-                                <input class="mdl-textfield__input" type="text" name="money_income_year" pattern="-?[0-9]*(\.[0-9]+)?" id="money_income_year">
+                                <input class="mdl-textfield__input" type="number" min="2014" max="2050" name="money_income_year" id="money_income_year">
                                 <label class="mdl-textfield__label" for="money_income_year">Year</label>
-                                <span class="mdl-textfield__error">Input is not a number!</span>
+                                <span class="mdl-textfield__error"></span>
                             </div>
 
                             <!-- Today Date -->
